@@ -817,5 +817,824 @@
     "rating": 4.5,
     "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
     "link": "https://example.com/books/subtle-art.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "Biography",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "hello",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Fiction",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "link": "https://example.com/books/the-alchemist.pdf"
+  },
+  {
+    "id": "b003",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "History",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "link": "https://example.com/books/sapiens.pdf"
+  },
+  {
+    "id": "b004",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "category": "Finance",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+  },
+  {
+    "id": "b005",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self Help",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "link": "https://example.com/books/atomic-habits.pdf"
+  },
+  {
+    "id": "b006",
+    "title": "You Can Win",
+    "author": "Shiv Khera",
+    "category": "Motivational",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "link": "https://example.com/books/you-can-win.pdf"
+  },
+  {
+    "id": "b007",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "category": "Spirituality",
+    "rating": 4.4,
+    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "link": "https://example.com/books/the-power-of-now.pdf"
+  },
+  {
+    "id": "b008",
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Dystopian",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "link": "https://example.com/books/1984.pdf"
+  },
+  {
+    "id": "b009",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "link": "https://example.com/books/theory-of-everything.pdf"
+  },
+  {
+    "id": "b010",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Motivational",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "link": "https://example.com/books/think-and-grow-rich.pdf"
+  },
+  {
+    "id": "b011",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "category": "Self Help",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "link": "https://example.com/books/the-monk.pdf"
+  },
+  {
+    "id": "b012",
+    "title": "The Bhagavad Gita",
+    "author": "Vyasa",
+    "category": "Spirituality",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "link": "https://example.com/books/gita.pdf"
+  },
+  {
+    "id": "b013",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Classic",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "link": "https://example.com/books/crime-punishment.pdf"
+  },
+  {
+    "id": "b014",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "link": "https://example.com/books/meditations.pdf"
+  },
+  {
+    "id": "b015",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "category": "Self Help",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "link": "https://example.com/books/subtle-art.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "Biography",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Fiction",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "link": "https://example.com/books/the-alchemist.pdf"
+  },
+  {
+    "id": "b003",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "History",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "link": "https://example.com/books/sapiens.pdf"
+  },
+  {
+    "id": "b004",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "category": "Finance",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+  },
+  {
+    "id": "b005",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self Help",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "link": "https://example.com/books/atomic-habits.pdf"
+  },
+  {
+    "id": "b006",
+    "title": "You Can Win",
+    "author": "Shiv Khera",
+    "category": "Motivational",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "link": "https://example.com/books/you-can-win.pdf"
+  },
+  {
+    "id": "b007",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "category": "Spirituality",
+    "rating": 4.4,
+    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "link": "https://example.com/books/the-power-of-now.pdf"
+  },
+  {
+    "id": "b008",
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Dystopian",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "link": "https://example.com/books/1984.pdf"
+  },
+  {
+    "id": "b009",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "link": "https://example.com/books/theory-of-everything.pdf"
+  },
+  {
+    "id": "b010",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Motivational",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "link": "https://example.com/books/think-and-grow-rich.pdf"
+  },
+  {
+    "id": "b011",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "category": "Self Help",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "link": "https://example.com/books/the-monk.pdf"
+  },
+  {
+    "id": "b012",
+    "title": "The Bhagavad Gita",
+    "author": "Vyasa",
+    "category": "Spirituality",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "link": "https://example.com/books/gita.pdf"
+  },
+  {
+    "id": "b013",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Classic",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "link": "https://example.com/books/crime-punishment.pdf"
+  },
+  {
+    "id": "b014",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "link": "https://example.com/books/meditations.pdf"
+  },
+  {
+    "id": "b015",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "category": "Self Help",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "link": "https://example.com/books/subtle-art.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "Biography",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Fiction",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "link": "https://example.com/books/the-alchemist.pdf"
+  },
+  {
+    "id": "b003",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "History",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "link": "https://example.com/books/sapiens.pdf"
+  },
+  {
+    "id": "b004",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "category": "Finance",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+  },
+  {
+    "id": "b005",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self Help",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "link": "https://example.com/books/atomic-habits.pdf"
+  },
+  {
+    "id": "b006",
+    "title": "You Can Win",
+    "author": "Shiv Khera",
+    "category": "Motivational",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "link": "https://example.com/books/you-can-win.pdf"
+  },
+  {
+    "id": "b007",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "category": "Spirituality",
+    "rating": 4.4,
+    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "link": "https://example.com/books/the-power-of-now.pdf"
+  },
+  {
+    "id": "b008",
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Dystopian",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "link": "https://example.com/books/1984.pdf"
+  },
+  {
+    "id": "b009",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "link": "https://example.com/books/theory-of-everything.pdf"
+  },
+  {
+    "id": "b010",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Motivational",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "link": "https://example.com/books/think-and-grow-rich.pdf"
+  },
+  {
+    "id": "b011",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "category": "Self Help",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "link": "https://example.com/books/the-monk.pdf"
+  },
+  {
+    "id": "b012",
+    "title": "The Bhagavad Gita",
+    "author": "Vyasa",
+    "category": "Spirituality",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "link": "https://example.com/books/gita.pdf"
+  },
+  {
+    "id": "b013",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Classic",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "link": "https://example.com/books/crime-punishment.pdf"
+  },
+  {
+    "id": "b014",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "link": "https://example.com/books/meditations.pdf"
+  },
+  {
+    "id": "b015",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "category": "Self Help",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "link": "https://example.com/books/subtle-art.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "Biography",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Fiction",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "link": "https://example.com/books/the-alchemist.pdf"
+  },
+  {
+    "id": "b003",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "History",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "link": "https://example.com/books/sapiens.pdf"
+  },
+  {
+    "id": "b004",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "category": "Finance",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+  },
+  {
+    "id": "b005",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self Help",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "link": "https://example.com/books/atomic-habits.pdf"
+  },
+  {
+    "id": "b006",
+    "title": "You Can Win",
+    "author": "Shiv Khera",
+    "category": "Motivational",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "link": "https://example.com/books/you-can-win.pdf"
+  },
+  {
+    "id": "b007",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "category": "Spirituality",
+    "rating": 4.4,
+    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "link": "https://example.com/books/the-power-of-now.pdf"
+  },
+  {
+    "id": "b008",
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Dystopian",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "link": "https://example.com/books/1984.pdf"
+  },
+  {
+    "id": "b009",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "link": "https://example.com/books/theory-of-everything.pdf"
+  },
+  {
+    "id": "b010",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Motivational",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "link": "https://example.com/books/think-and-grow-rich.pdf"
+  },
+  {
+    "id": "b011",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "category": "Self Help",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "link": "https://example.com/books/the-monk.pdf"
+  },
+  {
+    "id": "b012",
+    "title": "The Bhagavad Gita",
+    "author": "Vyasa",
+    "category": "Spirituality",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "link": "https://example.com/books/gita.pdf"
+  },
+  {
+    "id": "b013",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Classic",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "link": "https://example.com/books/crime-punishment.pdf"
+  },
+  {
+    "id": "b014",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "link": "https://example.com/books/meditations.pdf"
+  },
+  {
+    "id": "b015",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "category": "Self Help",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "link": "https://example.com/books/subtle-art.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "Biography",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Fiction",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "link": "https://example.com/books/the-alchemist.pdf"
+  },
+  {
+    "id": "b003",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "History",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "link": "https://example.com/books/sapiens.pdf"
+  },
+  {
+    "id": "b004",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "category": "Finance",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+  },
+  {
+    "id": "b005",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self Help",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "link": "https://example.com/books/atomic-habits.pdf"
+  },
+  {
+    "id": "b006",
+    "title": "You Can Win",
+    "author": "Shiv Khera",
+    "category": "Motivational",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "link": "https://example.com/books/you-can-win.pdf"
+  },
+  {
+    "id": "b007",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "category": "Spirituality",
+    "rating": 4.4,
+    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "link": "https://example.com/books/the-power-of-now.pdf"
+  },
+  {
+    "id": "b008",
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Dystopian",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "link": "https://example.com/books/1984.pdf"
+  },
+  {
+    "id": "b009",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "link": "https://example.com/books/theory-of-everything.pdf"
+  },
+  {
+    "id": "b010",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Motivational",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "link": "https://example.com/books/think-and-grow-rich.pdf"
+  },
+  {
+    "id": "b011",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "category": "Self Help",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "link": "https://example.com/books/the-monk.pdf"
+  },
+  {
+    "id": "b012",
+    "title": "The Bhagavad Gita",
+    "author": "Vyasa",
+    "category": "Spirituality",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "link": "https://example.com/books/gita.pdf"
+  },
+  {
+    "id": "b013",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Classic",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "link": "https://example.com/books/crime-punishment.pdf"
+  },
+  {
+    "id": "b014",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "link": "https://example.com/books/meditations.pdf"
+  },
+  {
+    "id": "b015",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "category": "Self Help",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "link": "https://example.com/books/subtle-art.pdf"
+  },
+  {
+    "id": "b001",
+    "title": "Wings of Fire",
+    "author": "A.P.J. Abdul Kalam",
+    "category": "Biography",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "link": "https://example.com/books/wings-of-fire.pdf"
+  },
+  {
+    "id": "b002",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Fiction",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "link": "https://example.com/books/the-alchemist.pdf"
+  },
+  {
+    "id": "b003",
+    "title": "Sapiens",
+    "author": "Yuval Noah Harari",
+    "category": "History",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "link": "https://example.com/books/sapiens.pdf"
+  },
+  {
+    "id": "b004",
+    "title": "Rich Dad Poor Dad",
+    "author": "Robert Kiyosaki",
+    "category": "Finance",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+  },
+  {
+    "id": "b005",
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Self Help",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "link": "https://example.com/books/atomic-habits.pdf"
+  },
+  {
+    "id": "b006",
+    "title": "You Can Win",
+    "author": "Shiv Khera",
+    "category": "Motivational",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "link": "https://example.com/books/you-can-win.pdf"
+  },
+  {
+    "id": "b007",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "category": "Spirituality",
+    "rating": 4.4,
+    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "link": "https://example.com/books/the-power-of-now.pdf"
+  },
+  {
+    "id": "b008",
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Dystopian",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "link": "https://example.com/books/1984.pdf"
+  },
+  {
+    "id": "b009",
+    "title": "The Theory of Everything",
+    "author": "Stephen Hawking",
+    "category": "Science",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "link": "https://example.com/books/theory-of-everything.pdf"
+  },
+  {
+    "id": "b010",
+    "title": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "category": "Motivational",
+    "rating": 4.6,
+    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "link": "https://example.com/books/think-and-grow-rich.pdf"
+  },
+  {
+    "id": "b011",
+    "title": "The Monk Who Sold His Ferrari",
+    "author": "Robin Sharma",
+    "category": "Self Help",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "link": "https://example.com/books/the-monk.pdf"
+  },
+  {
+    "id": "b012",
+    "title": "The Bhagavad Gita",
+    "author": "Vyasa",
+    "category": "Spirituality",
+    "rating": 4.9,
+    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "link": "https://example.com/books/gita.pdf"
+  },
+  {
+    "id": "b013",
+    "title": "Crime and Punishment",
+    "author": "Fyodor Dostoevsky",
+    "category": "Classic",
+    "rating": 4.7,
+    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "link": "https://example.com/books/crime-punishment.pdf"
+  },
+  {
+    "id": "b014",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "category": "Philosophy",
+    "rating": 4.8,
+    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "link": "https://example.com/books/meditations.pdf"
+  },
+  {
+    "id": "b015",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "category": "Self Help",
+    "rating": 4.5,
+    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "link": "https://example.com/books/subtle-art.pdf"
   }
 ]
