@@ -6,16 +6,7 @@
     "category": "Biography",
     "rating": 4.8,
     "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
-    "link": "https://example.com/books/wings-of-fire.pdf"
-  },
-  {
-    "id": "b001",
-    "title": "Wings of Fire",
-    "author": "A.P.J. Abdul Kalam",
-    "category": "hello",
-    "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
-    "link": "https://example.com/books/wings-of-fire.pdf"
+    "link": "https://drive.google.com/file/d/1WGRl40GiBMEFQ6S19ngM07St3XpwE7x5/preview"
   },
   {
     "id": "b002",
@@ -24,7 +15,7 @@
     "category": "Fiction",
     "rating": 4.7,
     "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
-    "link": "https://example.com/books/the-alchemist.pdf"
+    "link": "https://drive.google.com/file/d/1jwPCwMbK5TWQ0KsVIdRTvoVDDYaI4egG/preview"
   },
   {
     "id": "b003",
@@ -33,7 +24,7 @@
     "category": "History",
     "rating": 4.9,
     "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
-    "link": "https://example.com/books/sapiens.pdf"
+    "link": "https://drive.google.com/file/d/1YAlW-d3O4uRKG4bpQ2fejpZzNG5f2jIL/preview"
   },
   {
     "id": "b004",

@@ -134,6 +134,7 @@ function openModal(bookId) {
   document.getElementById("modalViewer").src = book.link;
   document.getElementById("modalDownload").href = book.link;
   document.getElementById("modalDownload").download = `${book.title}.pdf`;
+
   document.getElementById("bookModal").style.display = "flex";
 }
 
@@ -150,6 +151,9 @@ function toggleFullScreen() {
 function toggleHighlight() {
   alert("Highlight feature coming soon!");
 }
+
+
+
 
 function toggleTheme() {
       document.body.classList.toggle('night-mode');
