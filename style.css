@@ -104,6 +104,10 @@ header {
   object-fit: cover;
 }
 
+.theme-toggle {
+  font-size:1.5rem;
+}
+
 .site-title {
   font-size: 1.5rem;
   font-weight: bold;
