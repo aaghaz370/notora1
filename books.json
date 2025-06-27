@@ -28,101 +28,101 @@
   },
   {
     "id": "b004",
-    "title": "Rich Dad Poor Dad",
-    "author": "Robert Kiyosaki",
-    "category": "Finance",
-    "rating": 4.6,
-    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
-    "link": "https://example.com/books/rich-dad-poor-dad.pdf"
+    "title": "Moby Dick",
+    "author": "Herman Melville",
+    "rating": "4.3",
+    "category": "Fiction",
+    "image": "https://m.media-amazon.com/images/I/91xNmlf86yL._UF1000,1000_QL80_.jpg",
+    "link": "https://www.gutenberg.org/files/2701/2701-h/2701-h.htm"
   },
   {
     "id": "b005",
-    "title": "Atomic Habits",
-    "author": "James Clear",
-    "category": "Self Help",
-    "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
-    "link": "https://example.com/books/atomic-habits.pdf"
+    "title": "The Picture of Dorian Gray",
+    "author": "Oscar Wilde",
+    "rating": "4.1",
+    "category": "Fiction",
+    "image": "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781476788128/the-picture-of-dorian-gray-9781476788128_hr.jpg",
+    "link": "https://www.gutenberg.org/files/174/174-h/174-h.htm"
   },
   {
     "id": "b006",
-    "title": "You Can Win",
-    "author": "Shiv Khera",
-    "category": "Motivational",
-    "rating": 4.5,
-    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
-    "link": "https://example.com/books/you-can-win.pdf"
+    "title": "A Room with a View",
+    "author": "E. M. Forster",
+    "rating": "4.0",
+    "category": "Classic",
+    "image": "https://upload.wikimedia.org/wikipedia/en/8/8e/A_Room_with_a_View.jpg",
+    "link": "https://www.gutenberg.org/files/470/470-h/470-h.htm"
   },
   {
     "id": "b007",
-    "title": "The Power of Now",
-    "author": "Eckhart Tolle",
-    "category": "Spirituality",
-    "rating": 4.4,
-    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
-    "link": "https://example.com/books/the-power-of-now.pdf"
+    "title": "Rip Van Winkle",
+    "author": "Washington Irving",
+    "rating": "3.9",
+    "category": "Short Stories",
+    "image": "https://m.media-amazon.com/images/I/71ACd0mI9SL._UF1000,1000_QL80_.jpg",
+    "link": "https://www.gutenberg.org/files/41/41-h/41-h.htm"
   },
   {
     "id": "b008",
-    "title": "1984",
-    "author": "George Orwell",
-    "category": "Dystopian",
-    "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
-    "link": "https://example.com/books/1984.pdf"
+    "title": "The Jungle Book",
+    "author": "Rudyard Kipling",
+    "rating": "4.2",
+    "category": "Children",
+    "image": "https://lumiere-a.akamaihd.net/v1/images/p_thejunglebook1967_19869_f10b5016.jpeg",
+    "link": "https://www.gutenberg.org/files/236/236-h/236-h.htm"
   },
   {
     "id": "b009",
-    "title": "The Theory of Everything",
-    "author": "Stephen Hawking",
-    "category": "Science",
-    "rating": 4.9,
-    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "title": "We",
+    "author": "Yevgeny Zamyatin",
+    "category": "Fiction",
+    "rating":"4.0",
+    "image": "https://m.media-amazon.com/images/I/61mQJkwVw5L._UF1000,1000_QL80_.jpg",
     "link": "https://example.com/books/theory-of-everything.pdf"
   },
   {
     "id": "b010",
-    "title": "Think and Grow Rich",
-    "author": "Napoleon Hill",
-    "category": "Motivational",
-    "rating": 4.6,
-    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "title": "Mansfield Park",
+    "author": "Jane Austen",
+    "category": "Fiction",
+    "rating":" 4.0",
+    "image": "https://m.media-amazon.com/images/I/911LRD5GN2L.jpg",
     "link": "https://example.com/books/think-and-grow-rich.pdf"
   },
   {
     "id": "b011",
-    "title": "The Monk Who Sold His Ferrari",
-    "author": "Robin Sharma",
-    "category": "Self Help",
-    "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "title": "The Railway Children",
+    "author": "E. Nesbit",
+    "category": "Children",
+    "rating": 4.1,
+    "image": "https://m.media-amazon.com/images/I/918bkZxlwcL._UF1000,1000_QL80_.jpg",
     "link": "https://example.com/books/the-monk.pdf"
   },
   {
     "id": "b012",
-    "title": "The Bhagavad Gita",
-    "author": "Vyasa",
-    "category": "Spirituality",
-    "rating": 4.9,
-    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "title": "The Yellow Wallpaper",
+    "author": "Charlotte Perkins Gilman",
+    "category": "Fiction",
+    "rating": 3.8,
+    "image": "https://covers.shakespeareandcompany.com/97819137/9781913724160.jpg",
     "link": "https://example.com/books/gita.pdf"
   },
   {
     "id": "b013",
-    "title": "Crime and Punishment",
-    "author": "Fyodor Dostoevsky",
-    "category": "Classic",
-    "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "title": "A Christmas Carol",
+    "author": "Charles Dickens",
+    "category": "Fiction",
+    "rating": 4.2,
+    "image": "https://www.maplepress.co.in/cdn/shop/files/achristmascarole.jpg?v=1701169800",
     "link": "https://example.com/books/crime-punishment.pdf"
   },
   {
     "id": "b014",
-    "title": "Meditations",
-    "author": "Marcus Aurelius",
-    "category": "Philosophy",
-    "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "title": "Around the World in 80 Days",
+    "author": "Jules Verne",
+    "category": "Adventure",
+    "rating": 4.1,
+    "image": "https://d28hgpri8am2if.cloudfront.net/book_images/cvr9781416534723_9781416534723_hr.jpg",
     "link": "https://example.com/books/meditations.pdf"
   },
   {
@@ -131,7 +131,7 @@
     "author": "Mark Manson",
     "category": "Self Help",
     "rating": 4.5,
-    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "image": "",
     "link": "https://example.com/books/subtle-art.pdf"
   },
   {
@@ -140,7 +140,7 @@
     "author": "A.P.J. Abdul Kalam",
     "category": "Biography",
     "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "image": "",
     "link": "https://example.com/books/wings-of-fire.pdf"
   },
   {
@@ -149,7 +149,7 @@
     "author": "Paulo Coelho",
     "category": "Fiction",
     "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "image": "",
     "link": "https://example.com/books/the-alchemist.pdf"
   },
   {
@@ -158,7 +158,7 @@
     "author": "Yuval Noah Harari",
     "category": "History",
     "rating": 4.9,
-    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "image": "",
     "link": "https://example.com/books/sapiens.pdf"
   },
   {
@@ -167,7 +167,7 @@
     "author": "Robert Kiyosaki",
     "category": "Finance",
     "rating": 4.6,
-    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "image": "",
     "link": "https://example.com/books/rich-dad-poor-dad.pdf"
   },
   {
@@ -176,7 +176,7 @@
     "author": "James Clear",
     "category": "Self Help",
     "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "image": "",
     "link": "https://example.com/books/atomic-habits.pdf"
   },
   {
@@ -185,7 +185,7 @@
     "author": "Shiv Khera",
     "category": "Motivational",
     "rating": 4.5,
-    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "image": "",
     "link": "https://example.com/books/you-can-win.pdf"
   },
   {
@@ -194,7 +194,7 @@
     "author": "Eckhart Tolle",
     "category": "Spirituality",
     "rating": 4.4,
-    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "image": "",
     "link": "https://example.com/books/the-power-of-now.pdf"
   },
   {
@@ -203,7 +203,7 @@
     "author": "George Orwell",
     "category": "Dystopian",
     "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123463-M.jpg",
+    "image": "",
     "link": "https://example.com/books/1984.pdf"
   },
   {
@@ -212,7 +212,7 @@
     "author": "Stephen Hawking",
     "category": "Science",
     "rating": 4.9,
-    "image": "https://covers.openlibrary.org/b/id/123464-M.jpg",
+    "image": "",
     "link": "https://example.com/books/theory-of-everything.pdf"
   },
   {
@@ -221,7 +221,7 @@
     "author": "Napoleon Hill",
     "category": "Motivational",
     "rating": 4.6,
-    "image": "https://covers.openlibrary.org/b/id/123465-M.jpg",
+    "image": "",
     "link": "https://example.com/books/think-and-grow-rich.pdf"
   },
   {
@@ -230,7 +230,7 @@
     "author": "Robin Sharma",
     "category": "Self Help",
     "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123466-M.jpg",
+    "image": "",
     "link": "https://example.com/books/the-monk.pdf"
   },
   {
@@ -239,7 +239,7 @@
     "author": "Vyasa",
     "category": "Spirituality",
     "rating": 4.9,
-    "image": "https://covers.openlibrary.org/b/id/123467-M.jpg",
+    "image": "",
     "link": "https://example.com/books/gita.pdf"
   },
   {
@@ -248,7 +248,7 @@
     "author": "Fyodor Dostoevsky",
     "category": "Classic",
     "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123468-M.jpg",
+    "image": "",
     "link": "https://example.com/books/crime-punishment.pdf"
   },
   {
@@ -257,7 +257,7 @@
     "author": "Marcus Aurelius",
     "category": "Philosophy",
     "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123469-M.jpg",
+    "image": "",
     "link": "https://example.com/books/meditations.pdf"
   },
   {
@@ -266,7 +266,7 @@
     "author": "Mark Manson",
     "category": "Self Help",
     "rating": 4.5,
-    "image": "https://covers.openlibrary.org/b/id/123470-M.jpg",
+    "image": "",
     "link": "https://example.com/books/subtle-art.pdf"
   },
   {
@@ -275,7 +275,7 @@
     "author": "A.P.J. Abdul Kalam",
     "category": "Biography",
     "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123456-M.jpg",
+    "image": "",
     "link": "https://example.com/books/wings-of-fire.pdf"
   },
   {
@@ -284,7 +284,7 @@
     "author": "Paulo Coelho",
     "category": "Fiction",
     "rating": 4.7,
-    "image": "https://covers.openlibrary.org/b/id/123457-M.jpg",
+    "image": "",
     "link": "https://example.com/books/the-alchemist.pdf"
   },
   {
@@ -293,7 +293,7 @@
     "author": "Yuval Noah Harari",
     "category": "History",
     "rating": 4.9,
-    "image": "https://covers.openlibrary.org/b/id/123458-M.jpg",
+    "image": "",
     "link": "https://example.com/books/sapiens.pdf"
   },
   {
@@ -302,7 +302,7 @@
     "author": "Robert Kiyosaki",
     "category": "Finance",
     "rating": 4.6,
-    "image": "https://covers.openlibrary.org/b/id/123459-M.jpg",
+    "image": "",
     "link": "https://example.com/books/rich-dad-poor-dad.pdf"
   },
   {
@@ -311,7 +311,7 @@
     "author": "James Clear",
     "category": "Self Help",
     "rating": 4.8,
-    "image": "https://covers.openlibrary.org/b/id/123460-M.jpg",
+    "image": "",
     "link": "https://example.com/books/atomic-habits.pdf"
   },
   {
@@ -320,7 +320,7 @@
     "author": "Shiv Khera",
     "category": "Motivational",
     "rating": 4.5,
-    "image": "https://covers.openlibrary.org/b/id/123461-M.jpg",
+    "image": "",
     "link": "https://example.com/books/you-can-win.pdf"
   },
   {
@@ -329,7 +329,7 @@
     "author": "Eckhart Tolle",
     "category": "Spirituality",
     "rating": 4.4,
-    "image": "https://covers.openlibrary.org/b/id/123462-M.jpg",
+    "image": "",
     "link": "https://example.com/books/the-power-of-now.pdf"
   },
   {
