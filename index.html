@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notora - Book Library</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+  <header id="top">
+    <div class="header-container">
+      <div class="logo-area">
+        <img src="image/notora.jpg" alt="Logo" class="logo" />
+        <div class="site-title">Notora</div>
+      </div>
+      <div class="header-controls">
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search books..." />
+          <ul id="searchSuggestions"></ul>
+        </div>
+        <div class="category-container">
+          <select id="categorySelect">
+            <option value="All">All Categories</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="book-section">
+    <div class="book-grid" id="bookGrid"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <div class="modal" id="bookModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalAuthor"></p>
+      <div class="modal-toolbar">
+        <button onclick="toggleFullScreen()">Fullscreen</button>
+        <button onclick="toggleHighlight()">Highlight</button>
+      </div>
+      <iframe id="modalViewer" src="" frameborder="0"></iframe>
+      <a id="modalDownload" href="#" target="_blank">Download PDF</a>
+    </div>
+  </div>
+
+  <!-- <a href="#top" class="scroll-to-top" title="Go to top">⬆</a> -->
+
+  <footer>
+    <p>&copy; 2025 Notora. All rights reserved.</p>
+  </footer>
+</body>
+</html>
