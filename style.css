@@ -25,6 +25,7 @@
       --music-player-bg-night:#2d3250;
       --cert-card-bg-night:#2d3250;
       --footer-bg-night:#2d3250;
+      --close-btn-bg-night:#fef8e7;
       
     }
 
@@ -61,6 +62,9 @@ body.night-mode {
     }
     body.night-mode footer{
       color: var(--night-text)
+    }
+    body.night-mode .close-btn{
+      color: var(--close-button-bg-night)
     }
     
 
@@ -262,7 +266,7 @@ header {
 }
 
 .modal-toolbar button {
-  background: #4e54c8;
+  background:linear-gradient(135deg,#00C2A8,#0078FF);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -272,7 +276,7 @@ header {
 }
 
 .modal-toolbar button:hover {
-  background: #3b41a1;
+  background:linear-gradient(135deg,#00C2A8,#0078FF);
 }
 
 .modal-content iframe {
@@ -286,7 +290,7 @@ header {
 #modalDownload {
   display: inline-block;
   margin-top: 10px;
-  background: #27ae60;
+  background:linear-gradient(135deg,#00C2A8,#0078FF);
   color: white;
   padding: 10px 16px;
   text-decoration: none;
