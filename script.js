@@ -150,3 +150,9 @@ function toggleFullScreen() {
 function toggleHighlight() {
   alert("Highlight feature coming soon!");
 }
+
+function toggleTheme() {
+      document.body.classList.toggle('night-mode');
+      document.querySelector('.theme-toggle').textContent = document.body.classList.contains('night-mode') ? '🌙' : '🌞';
+    }
+
