@@ -1,64 +1,56 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notora - Book Library</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+  <title>EduBook Library</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header id="top">
-    <div class="header-container">
-      <div class="logo-area">
-        <img src="assets/logo.jpg" alt="Logo" class="logo" />
-        <div class="site-title">Notora</div>
-        <div class="theme-toggle" onclick="toggleTheme()">🌞</div>
-      </div>
-      <div class="header-controls">
-        <div class="search-container">
-          <input type="text" id="searchInput" placeholder="Search books..." />
-          <ul id="searchSuggestions"></ul>
-        </div>
-        <div class="category-container">
-          <select id="categorySelect">
-            <option value="All">All Categories</option>
-          </select>
-        </div>
-      </div>
+  <header class="header">
+    <h1 class="logo">EduBook Library</h1>
+    <div class="search-genre">
+      <input type="text" id="searchInput" placeholder="Search books, authors, genres...">
+      <select id="genreFilter">
+        <option value="all">All Genres</option>
+        <option value="Science">Science</option>
+        <option value="Mathematics">Mathematics</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Non-Fiction">Non-Fiction</option>
+        <option value="NEET">NEET</option>
+        <option value="JEE">JEE</option>
+        <option value="UPSC">UPSC</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Other">Other</option>
+      </select>
     </div>
   </header>
 
-  <main class="book-section">
-    <div class="book-grid" id="bookGrid"></div>
-    <div class="pagination" id="pagination"></div>
-  </main>
+  <section class="popular-section">
+    <h2><span class="fire">🔥</span> Popular Now</h2>
+    <div class="popular-container">
+      <button class="arrow left"><</button>
+      <div class="popular-slider" id="popularBooks"></div>
+      <button class="arrow right">></button>
+    </div>
+  </section>
 
+  <section class="grid-section">
+    <h2>Discover Books</h2>
+    <div class="book-grid" id="allBooks"></div>
+  </section>
+
+  <!-- Dynamic Modal -->
   <div class="modal" id="bookModal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="modal-content" id="modalContent">
+      <span class="close-btn">&times;</span>
       <h2 id="modalTitle"></h2>
-      <p id="modalAuthor"></p>
-      <div class="modal-toolbar">
-        <button onclick="toggleFullScreen()">Fullscreen</button>
-        <button onclick="toggleHighlight()">Highlight</button>
-      </div>
-      <iframe id="modalViewer" src="" frameborder="0"></iframe>
-      <a id="modalDownload" href="#" target="_blank">Download PDF</a>
-      
-
+      <iframe id="bookPdf" frameborder="0"></iframe>
+      <button id="fullscreenBtn">View Full Screen</button>
     </div>
   </div>
 
-  <!-- <a href="#top" class="scroll-to-top" title="Go to top">⬆</a> -->
-
-  <footer>
-    <p>&copy; 2025 Notora. All rights reserved.</p>
-  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
