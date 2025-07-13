@@ -1,0 +1,27 @@
+[
+  {
+    "name": "hi",
+    "author": "H. C. Verma",
+    "thumbnail": "https://example.com/images/hcv1.jpg",
+    "genre": "JEE Preparation",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Organic Chemistry",
+    "author": "Morrison & Boyd",
+    "thumbnail": "https://example.com/images/morrison.jpg",
+    "genre": "JEE Chemistry",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Problems in Calculus of One Variable",
+    "author": "I.A. Maron",
+    "thumbnail": "https://example.com/images/maron.jpg",
+    "genre": "Mathematics",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  }
+  
+]

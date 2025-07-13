@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduSpark Books</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="logo">📚 EduSpark</div>
+    <div class="search-box" id="searchBox">
+      <!-- <input type="text" placeholder="Search books, authors..." id="searchInput">
+      <button id="searchClose">×</button> -->
+    </div>
+    <button id="openSearch">🔍</button>
+  </header>
+
+  <main id="mainContent">
+    <div id="categoryContainer"></div>
+  </main>
+
+  <div id="searchOverlay" class="hidden">
+    <div class="search-overlay-box">
+      <input type="text" placeholder="Search books..." id="overlaySearchInput">
+      <button id="closeOverlay">×</button>
+    </div>
+    <div id="searchResults" class="grid-container"></div>
+  </div>
+
+  <div id="bookModal" class="modal hidden">
+    <button id="closeModal">×</button>
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+      <button id="fullscreenBtn">Full Screen</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

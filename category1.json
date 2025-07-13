@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Trueman's Biology Vol 1",
+    "author": "M.P. Tyagi",
+    "genre": "Biology",
+    "rating": "4.7",
+    "img": "https://m.media-amazon.com/images/I/71Ur0i9MAML.jpg",
+    "pdf": "https://drive.google.com/uc?id=1BiologyPDFFile"
+  },
+  {
+    "title": "Objective NCERT Biology",
+    "author": "MTG Editorial Board",
+    "genre": "Biology",
+    "rating": "4.6",
+    "img": "https://m.media-amazon.com/images/I/81l3rZK4lnL.jpg",
+    "pdf": "https://drive.google.com/uc?id=2NCERTBioPDF"
+  },
+  {
+    "title": "Concepts of Physics Vol 1",
+    "author": "H.C. Verma",
+    "genre": "Physics",
+    "rating": "4.8",
+    "img": "https://m.media-amazon.com/images/I/81LWkWgRexL.jpg",
+    "pdf": "https://drive.google.com/uc?id=3HCVermaPDF"
+  },
+  {
+    "title": "Modern ABC Chemistry",
+    "author": "S.P. Jauhar",
+    "genre": "Chemistry",
+    "rating": "4.5",
+    "img": "https://m.media-amazon.com/images/I/91F-rEwgm1L.jpg",
+    "pdf": "https://drive.google.com/uc?id=4ABCChemPDF"
+  },
+  {
+    "title": "Dinesh Objective Biology",
+    "author": "Dr. A.K. Raj",
+    "genre": "Biology",
+    "rating": "4.4",
+    "img": "https://m.media-amazon.com/images/I/81hcwGG90ZL.jpg",
+    "pdf": "https://drive.google.com/uc?id=5DineshBioPDF"
+  }
+]

@@ -1,56 +1,529 @@
-<!-- index.html -->
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduBook Library</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <title>EduSpark Hero</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="header">
-    <h1 class="logo">EduBook Library</h1>
-    <div class="search-genre">
-      <input type="text" id="searchInput" placeholder="Search books, authors, genres...">
-      <select id="genreFilter">
-        <option value="all">All Genres</option>
-        <option value="Science">Science</option>
-        <option value="Mathematics">Mathematics</option>
-        <option value="Fiction">Fiction</option>
-        <option value="Non-Fiction">Non-Fiction</option>
-        <option value="NEET">NEET</option>
-        <option value="JEE">JEE</option>
-        <option value="UPSC">UPSC</option>
-        <option value="Computer Science">Computer Science</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-  </header>
 
-  <section class="popular-section">
-    <h2><span class="fire">🔥</span> Popular Now</h2>
-    <div class="popular-container">
-      <button class="arrow left"><</button>
-      <div class="popular-slider" id="popularBooks"></div>
-      <button class="arrow right">></button>
-    </div>
-  </section>
+    
 
-  <section class="grid-section">
-    <h2>Discover Books</h2>
-    <div class="book-grid" id="allBooks"></div>
-  </section>
 
-  <!-- Dynamic Modal -->
-  <div class="modal" id="bookModal">
-    <div class="modal-content" id="modalContent">
-      <span class="close-btn">&times;</span>
-      <h2 id="modalTitle"></h2>
-      <iframe id="bookPdf" frameborder="0"></iframe>
-      <button id="fullscreenBtn">View Full Screen</button>
+  <div class="hero-container">
+    <canvas id="snowCanvas"></canvas>
+    <div class="hero-text">
+      <h1>Where Knowledge Sparks & Learning Begins</h1>
+      <p>A collaborative community for sharing and discovering free educational books and courses.</p>
+      <a href="test.html" class="cta">Discover More</a>
     </div>
   </div>
+
+  <section class="offer-section">
+  <h2 class="offer-heading">What We Offer</h2>
+  <p class="offer-subtitle">
+    EduSpark is more than just a platform; it's a community dedicated to making education accessible for everyone.
+  </p>
+  <div class="offer-cards">
+    <div class="offer-card">
+      <div class="offer-icon"><i class="fas fa-book-open"></i></div>
+      <h3>Vast Library of Books</h3>
+      <p>
+        Access a rich collection of books, notes, and resources shared by a community of dedicated learners. Find materials for every subject and exam.
+      </p>
+      <a href="#" class="offer-btn">Explore Books</a>
+    </div>
+    <div class="offer-card glow">
+      <div class="offer-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+      <h3>Interactive Batches</h3>
+      <p>
+        Enroll in free and premium batches or structured courses led by experienced instructors to master new skills and ace your exams.
+      </p>
+      <a href="#" class="offer-btn">Find a Batch</a>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon"><i class="fas fa-share-alt"></i></div>
+      <h3>Share & Contribute</h3>
+      <p>
+        Become a vital part of our community. Upload your own valuable notes and books to help others on their learning path.
+      </p>
+      <a href="#" class="offer-btn">Start Sharing</a>
+    </div>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <h2 class="hiw-title">How It Works</h2>
+  <p class="hiw-subtitle">Getting started is simple. Follow these three easy steps.</p>
+  <div class="hiw-steps">
+    <div class="hiw-step">
+      <div class="hiw-number">1</div>
+      <h3>Sign Up For Free</h3>
+      <p>Create your free account in seconds to unlock all features and join our growing community.</p>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-number">2</div>
+      <h3>Explore & Learn</h3>
+      <p>Browse our extensive library of books and discover new courses to enhance your knowledge.</p>
+    </div>
+    <!-- <div class="hiw-step">
+      <div class="hiw-number">3</div>
+      <h3>Contribute & Grow</h3>
+      <p>Share your resources with others, give feedback, and help the EduSparK community thrive.</p>
+    </div> -->
+  </div>
+</section>
+
+<footer style="background-color: #121212; color: #d1d5db; text-align: center; padding: 2rem 1rem;">
+  <div style="margin-bottom: 1rem;">
+    <img src="logo.png" alt="EduSpark Logo" style="height: 40px;">
+    <h2 style="color: #ef4444; font-size: 1.5rem; margin-top: 0.5rem;">EduSparK</h2>
+  </div>
+  <p style="margin-bottom: 1.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+    A community-driven platform for accessible education. Share, learn, and grow together.
+  </p>
+  <div style="margin-bottom: 1.5rem;">
+    <a href="#" style="margin: 0 0.5rem;"><img src="youtube.svg"alt="YouTube" style="height: 24px; "></a>
+    <a href="#" style="margin: 0 0.5rem;"><img src="instagram.svg" alt="Instagram" style="height: 24px;color:gray;"></a>
+    <a href="#" style="margin: 0 0.5rem;"><img src="telegram.svg" alt="Telegram" style="height: 24px;color:gray;"></a>
+  </div>
+  <p style="margin-bottom: 0.5rem;">
+    Have questions? Contact us at <a href="mailto:edusparkofficial@gmail.com" style="color: #ef4444;">edusparkofficial@gmail.com</a>
+  </p>
+  <p style="font-size: 0.875rem; color: #9ca3af;">
+    © 2024 EduSparK. All Rights Reserved.
+  </p>
+</footer>
+
+
 
   <script src="script.js"></script>
 </body>
 </html>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #0b0b0b;
+  color: white;
+  overflow-x: hidden;
+}
+
+
+header {
+  background-color: #121212;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  color: #ffffff;
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+}
+
+header nav a:first-child span {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ef4444;
+}
+
+header nav a:nth-child(4) span {
+  position: absolute;
+  top: -8px;
+  right: -28px;
+  background-color: #ef4444;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+header nav a:nth-child(5) span {
+  position: absolute;
+  top: -8px;
+  right: -30px;
+  background-color: #22c55e;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+header a:last-child {
+  background-color: #ef4444;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  text-decoration: none;
+}
+
+.hero-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+#snowCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #ff7e5f, #feb47b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.cta {
+  display: inline-block;
+  background: #e50914;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.cta:hover {
+  background: #ff0f24;
+}
+
+@media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
+  }
+}
+
+
+.offer-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: #0b0b0b;
+}
+
+.offer-heading {
+  font-size: 2.5rem;
+  color: #f59ca9;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.offer-subtitle {
+  font-size: 1rem;
+  color: #b8becd;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.offer-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.offer-card {
+  background-color: #1b1b1b;
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 330px;
+  transition: 0.3s ease;
+  text-align: center;
+  box-shadow: 0 0 0px rgba(255, 0, 0, 0);
+  border: 1px solid transparent;
+}
+
+.offer-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+  border: 1px solid #ff4b5c;
+}
+
+.offer-icon {
+  font-size: 3rem;
+  color: #e50914;
+  margin-bottom: 1rem;
+}
+
+.offer-card h3 {
+  color: white;
+  margin-bottom: 0.8rem;
+  font-size: 1.3rem;
+}
+
+.offer-card p {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.offer-btn {
+  padding: 0.6rem 1.3rem;
+  background: transparent;
+  border: 1.5px solid #ff4b5c;
+  color: #ff4b5c;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.offer-btn:hover {
+  background-color: #ff4b5c;
+  color: white;
+}
+
+
+
+.how-it-works {
+  background-color: #1e1e1e;
+  text-align: center;
+  padding: 80px 20px;
+  color: #ffffff;
+}
+
+.hiw-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fca7a7;
+  margin-bottom: 10px;
+}
+
+.hiw-subtitle {
+  color: #a3b1c6;
+  font-size: 16px;
+  margin-bottom: 50px;
+}
+
+.hiw-steps {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+  border-top: 1px solid #a53333;
+  border-bottom: 1px solid #a53333;
+  padding: 40px 0;
+}
+
+.hiw-step {
+  max-width: 300px;
+}
+
+.hiw-number {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #f55a5a;
+  color: #f55a5a;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 50%;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiw-step h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.hiw-step p {
+  font-size: 14px;
+  color: #cccccc;
+}
+
+
+footer {
+  background-color: #121212;
+  color: #d1d5db;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+footer h2 {
+  color: #ef4444;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+footer p {
+  margin-bottom: 1.5rem;
+}
+
+footer a img {
+  height: 24px;
+  margin: 0 0.5rem;
+}
+
+footer a {
+  color: #ef4444;
+  text-decoration: none;
+}
+
+footer small {
+  font-size: 0.875rem;
+  color: #006c04;
+}
+
+
+</style>
+<script>
+    const canvas = document.getElementById("snowCanvas");
+const ctx = canvas.getContext("2d");
+
+let snowflakes = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+function createSnowflakes(count) {
+  snowflakes = [];
+  for (let i = 0; i < count; i++) {
+    snowflakes.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2 + 1,
+      speedY: Math.random() * 1 + 0.5,
+      speedX: Math.random() * 0.5 - 0.25,
+    });
+  }
+}
+
+function drawSnowflakes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+  ctx.beginPath();
+
+  snowflakes.forEach(flake => {
+    ctx.moveTo(flake.x, flake.y);
+    ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+  });
+
+  ctx.fill();
+  moveSnowflakes();
+}
+
+function moveSnowflakes() {
+  snowflakes.forEach(flake => {
+    flake.y += flake.speedY;
+    flake.x += flake.speedX;
+
+    if (flake.y > canvas.height) flake.y = 0;
+    if (flake.x > canvas.width) flake.x = 0;
+    if (flake.x < 0) flake.x = canvas.width;
+  });
+}
+
+function animateSnow() {
+  drawSnowflakes();
+  requestAnimationFrame(animateSnow);
+}
+
+createSnowflakes(120);
+animateSnow();
+
+
+const track = document.getElementById("sliderTrack");
+const dotsContainer = document.getElementById("dotsContainer");
+const totalImages = track.children.length;
+const imagesPerSlide = 5;
+const totalSlides = Math.ceil(totalImages / imagesPerSlide);
+
+let currentSlide = 0;
+
+// Create dots
+for (let i = 0; i < totalSlides; i++) {
+  const dot = document.createElement("span");
+  dot.addEventListener("click", () => goToSlide(i));
+  dotsContainer.appendChild(dot);
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  const offset = -(100 / imagesPerSlide) * index;
+  track.style.transform = `translateX(${offset}%)`;
+
+  updateDots();
+}
+
+function updateDots() {
+  const allDots = dotsContainer.querySelectorAll("span");
+  allDots.forEach(dot => dot.classList.remove("active"));
+  if (allDots[currentSlide]) allDots[currentSlide].classList.add("active");
+}
+
+// Auto-slide every 5s
+setInterval(() => {
+  currentSlide = (currentSlide + 1) % totalSlides;
+  goToSlide(currentSlide);
+}, 5000);
+
+goToSlide(0); // Init
+
+
+</script>

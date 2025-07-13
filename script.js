@@ -1,122 +1,159 @@
+// ===== JavaScript for EduSpark Books with Arrow Buttons, Modal Exit, and Full Search Support =====
 
-// script.js
+const categories = [
+  "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", "Self Help",
+  "Coding", "Computer Science", "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
+];
 
-const popContainer = document.getElementById('popularBooks');
-const allContainer = document.getElementById('allBooks');
-const modal = document.getElementById('bookModal');
-const modalTitle = document.getElementById('modalTitle');
-const modalPdf = document.getElementById('bookPdf');
-const closeModal = document.querySelector('.close-btn');
-const fullscreenBtn = document.getElementById('fullscreenBtn');
-const genreFilter = document.getElementById('genreFilter');
-const searchInput = document.getElementById('searchInput');
+const categoryContainer = document.getElementById("categoryContainer");
 
-let allBooksData = [];
-let popBooksData = [];
+async function loadCategory(category) {
+  const res = await fetch(`data/${category}.json`);
+  const books = await res.json();
+  const section = document.createElement("div");
+  section.className = "category-section";
 
-fetch('pop.json')
-  .then(res => res.json())
-  .then(data => {
-    popBooksData = data;
-    renderPopularBooks(data);
-    autoSlidePopular();
+  const title = document.createElement("h3");
+  title.className = "category-title";
+  title.textContent = category;
+
+  const wrapper = document.createElement("div");
+  wrapper.style.position = 'relative';
+
+  const slider = document.createElement("div");
+  slider.className = "book-slider";
+
+  books.slice(0, 30).forEach(book => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+      <img src="${book.thumbnail}" alt="${book.name}" />
+      <div class="book-title">${book.name}</div>
+      <div class="book-author">${book.author}</div>
+      <div class="book-genre">${book.genre}</div>
+      <div class="book-rating">⭐ ${book.rating}</div>
+    `;
+    card.addEventListener("click", () => openModal(book));
+    slider.appendChild(card);
   });
 
-fetch('all.json')
-  .then(res => res.json())
-  .then(data => {
-    allBooksData = data;
-    renderAllBooks(data);
-  });
+  const leftArrow = document.createElement("button");
+  leftArrow.className = "arrow-btn arrow-left";
+  leftArrow.innerHTML = "&#8249;";
+  leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: 'smooth' });
 
-function createBookCard(book) {
-  const card = document.createElement('div');
-  card.className = 'book-card';
-  card.innerHTML = `
-    <img src="${book.img}" alt="${book.name}" />
-    <div class="book-name">${book.name}</div>
-    <div class="book-author">${book.author}</div>
-    <div class="book-genre">${book.genre}</div>
-    <div class="book-rating">⭐ ${book.rating}</div>
-  `;
-  card.onclick = () => openModal(book);
-  return card;
+  const rightArrow = document.createElement("button");
+  rightArrow.className = "arrow-btn arrow-right";
+  rightArrow.innerHTML = "&#8250;";
+  rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: 'smooth' });
+
+  wrapper.appendChild(leftArrow);
+  wrapper.appendChild(slider);
+  wrapper.appendChild(rightArrow);
+
+  section.appendChild(title);
+  section.appendChild(wrapper);
+  categoryContainer.appendChild(section);
 }
 
-function renderPopularBooks(data) {
-  popContainer.innerHTML = '';
-  data.forEach(book => {
-    const div = createBookCard(book);
-    popContainer.appendChild(div);
-  });
-}
+categories.forEach(loadCategory);
 
-function renderAllBooks(data) {
-  allContainer.innerHTML = '';
-  data.forEach(book => {
-    const div = createBookCard(book);
-    allContainer.appendChild(div);
-  });
-}
+// ===== Modal for Book View =====
+const modal = document.getElementById("bookModal");
+const modalTitle = document.getElementById("modalTitle");
+const pdfViewer = document.getElementById("pdfViewer");
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const closeModal = document.getElementById("closeModal");
 
 function openModal(book) {
-  modal.style.display = 'flex';
   modalTitle.textContent = book.name;
-  modalPdf.src = book.link;
+  pdfViewer.src = book.pdfUrl;
+  modal.classList.remove("hidden");
 }
 
-closeModal.onclick = () => {
-  modal.style.display = 'none';
-  modalPdf.src = '';
-};
-
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.style.display = 'none';
-    modalPdf.src = '';
+fullscreenBtn.addEventListener("click", () => {
+  if (pdfViewer.requestFullscreen) {
+    pdfViewer.requestFullscreen();
   }
 });
 
-fullscreenBtn.onclick = () => {
-  modalPdf.requestFullscreen();
-};
+closeModal.addEventListener("click", () => {
+  modal.classList.add("hidden");
+  pdfViewer.src = "";
+});
 
-const leftBtn = document.querySelector('.left');
-const rightBtn = document.querySelector('.right');
-const slider = document.querySelector('.popular-slider');
+window.addEventListener("click", (e) => {
+  if (e.target === modal) modal.classList.add("hidden");
+});
 
-leftBtn.onclick = () => slider.scrollBy({ left: -300, behavior: 'smooth' });
-rightBtn.onclick = () => slider.scrollBy({ left: 300, behavior: 'smooth' });
+// ===== Search Logic =====
+const openSearch = document.getElementById("openSearch");
+const searchOverlay = document.getElementById("searchOverlay");
+const closeOverlay = document.getElementById("closeOverlay");
+const overlaySearchInput = document.getElementById("overlaySearchInput");
+const searchResults = document.getElementById("searchResults");
 
-function filterBooks() {
-  const query = searchInput.value.toLowerCase();
-  const genre = genreFilter.value;
+let allBooks = [];
 
-  const filterFn = book => {
-    const matchesText = book.name.toLowerCase().includes(query) ||
-                        book.author.toLowerCase().includes(query) ||
-                        book.genre.toLowerCase().includes(query);
-    const matchesGenre = genre === 'all' || book.genre === genre;
-    return matchesText && matchesGenre;
-  };
-
-  const filteredAll = allBooksData.filter(filterFn);
-  const filteredPop = popBooksData.filter(filterFn);
-
-  renderAllBooks(filteredAll);
-  renderPopularBooks(filteredPop);
+async function loadAllBooksOnce() {
+  try {
+    const res = await fetch("data/All.json");
+    const extraBooks = await res.json();
+    allBooks = extraBooks;
+  } catch (e) {
+    console.error("Failed to load All.json", e);
+  }
 }
 
-searchInput.addEventListener('input', filterBooks);
-genreFilter.addEventListener('change', filterBooks);
+openSearch.addEventListener("click", async () => {
+  document.getElementById("mainContent").style.display = "none";
+  searchOverlay.classList.remove("hidden");
+  if (allBooks.length === 0) await loadAllBooksOnce();
+});
 
+closeOverlay.addEventListener("click", () => {
+  searchOverlay.classList.add("hidden");
+  document.getElementById("mainContent").style.display = "block";
+  overlaySearchInput.value = "";
+  searchResults.innerHTML = "";
+});
 
-let scrollDirection = 1;
-function autoSlidePopular() {
-  setInterval(() => {
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-    if (slider.scrollLeft >= maxScroll) scrollDirection = -1;
-    else if (slider.scrollLeft <= 0) scrollDirection = 1;
-    slider.scrollBy({ left: scrollDirection * 300, behavior: 'smooth' });
-  }, 3000);
-}
+overlaySearchInput.addEventListener("input", async (e) => {
+  const query = e.target.value.toLowerCase();
+  searchResults.innerHTML = "";
+  if (query.trim() === "") return;
+
+  let results = [];
+
+  // Load from categories
+  for (const cat of categories) {
+    try {
+      const res = await fetch(`data/${cat}.json`);
+      const books = await res.json();
+      results = results.concat(books);
+    } catch {}
+  }
+
+  // Add from All.json if not already included
+  results = results.concat(allBooks);
+
+  const filtered = results.filter(book =>
+    book.name.toLowerCase().includes(query) ||
+    book.author.toLowerCase().includes(query) ||
+    book.genre.toLowerCase().includes(query)
+  );
+
+  filtered.forEach(book => {
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+      <img src="${book.thumbnail}" alt="${book.name}" />
+      <div class="book-title">${book.name}</div>
+      <div class="book-author">${book.author}</div>
+      <div class="book-genre">${book.genre}</div>
+      <div class="book-rating">⭐ ${book.rating}</div>
+    `;
+    card.addEventListener("click", () => openModal(book));
+    searchResults.appendChild(card);
+  });
+});
