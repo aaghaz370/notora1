@@ -432,7 +432,7 @@
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .book-card {
     width: 45vw;
     height: auto;
@@ -451,7 +451,7 @@
   #searchResults {
     grid-template-columns: 1fr 1fr;
   }
-}
+} */
 
 /* ===== Animations ===== */
 @keyframes fadeIn {
