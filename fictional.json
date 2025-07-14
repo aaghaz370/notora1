@@ -1,0 +1,17 @@
+[
+  {
+    "name": "The Last Kingdom",
+    "image": "book1.jpg",
+    "author": "Bernard Cornwell",
+    "genre": "Historical Fiction",
+    "rating": 4.6
+  },
+  {
+    "name": "The Night Circus",
+    "image": "book2.jpg",
+    "author": "Erin Morgenstern",
+    "genre": "Fantasy",
+    "rating": 4.3
+  }
+  
+]

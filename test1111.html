@@ -1,0 +1,97 @@
+<header class="header">
+  <div class="logo">📚 EduSpark</div>
+  <div class="search-box" id="searchBox">
+    <!-- <input type="text" placeholder="Search books, authors..." id="searchInput">
+    <button id="searchClose">×</button> -->
+  </div>
+  <button id="openSearch" class="icon-btn">🔍</button>
+</header>
+<style>
+    body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #111;
+  color: #fff;
+  transition: background 0.4s ease;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(90deg, #000, #111, #000);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease-in-out;
+}
+
+.logo {
+  font-size: 1.7rem;
+  color: #e50914;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px #e50914aa;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+  transition: transform 0.3s, color 0.3s;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+  color: #e50914;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-box input {
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background-color: #1a1a1a;
+  color: #fff;
+  outline: none;
+  font-size: 1rem;
+  width: 200px;
+  transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+  border-color: #e50914;
+  box-shadow: 0 0 8px #e50914aa;
+  background-color: #222;
+}
+
+#searchClose {
+  font-size: 1.5rem;
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, color 0.3s;
+}
+
+#searchClose:hover {
+  transform: rotate(90deg) scale(1.2);
+  color: #e50914;
+}
+
+</style>
