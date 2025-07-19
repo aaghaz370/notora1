@@ -1,0 +1,75 @@
+[
+  {
+    "name": "Concepts of Physics Vol 1",
+    "author": "H. C. Verma",
+    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
+    "genre": "JEE Preparation",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Organic Chemistry",
+    "author": "Morrison & Boyd",
+    "thumbnail": "https://example.com/images/morrison.jpg",
+    "genre": "JEE Chemistry",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Problems in Calculus of One Variable",
+    "author": "I.A. Maron",
+    "thumbnail": "https://example.com/images/maron.jpg",
+    "genre": "Mathematics",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Concepts of Physics Vol 1",
+    "author": "H. C. Verma",
+    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
+    "genre": "JEE Preparation",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Organic Chemistry",
+    "author": "Morrison & Boyd",
+    "thumbnail": "https://example.com/images/morrison.jpg",
+    "genre": "JEE Chemistry",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Problems in Calculus of One Variable",
+    "author": "I.A. Maron",
+    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
+    "genre": "Mathematics",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Concepts of Physics Vol 1",
+    "author": "H. C. Verma",
+    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
+    "genre": "JEE Preparation",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Organic Chemistry",
+    "author": "Morrison & Boyd",
+    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
+    "genre": "JEE Chemistry",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  },
+  {
+    "name": "Problems in Calculus of One Variable",
+    "author": "I.A. Maron",
+    "thumbnail": "https://example.com/images/maron.jpg",
+    "genre": "Mathematics",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+  }
+  
+]
