@@ -340,15 +340,15 @@ overlaySearchInput.addEventListener("input", async (e) => {
 
 
 
-window.addEventListener('load', () => {
-  const audio = document.getElementById('notify-sound');
-  audio.play().catch(() => {});
-});
+// window.addEventListener('load', () => {
+//   const audio = document.getElementById('notify-sound');
+//   audio.play().catch(() => {});
+// });
 
-function closeNotice() {
-  const banner = document.getElementById('notice');
-  banner.style.display = 'none';
-}
+// function closeNotice() {
+//   const banner = document.getElementById('notice');
+//   banner.style.display = 'none';
+// }
 
 
 
@@ -488,20 +488,21 @@ window.addEventListener('load', () => {
     }
   }
 
-  // function updateBadge() {
-  //   const read = parseInt(localStorage.getItem("readCount") || "0");
-  //   const level = getLevel(read);
-  //   const target = getNextLevelTarget(level);
-  //   const percent = Math.min((read / target) * 100, 100);
+  function updateBadge() {
+    const read = parseInt(localStorage.getItem("readCount") || "0");
+    const level = getLevel(read);
+    const target = getNextLevelTarget(level);
+    const percent = Math.min((read / target) * 100, 100);
 
-  //   badgeReadCount.textContent = read;
-  //   badgeCircle.textContent = `Level ${level}`;
-  //   badgeFill.style.width = `${percent}%`;
+    badgeReadCount.textContent = read;
+    badgeCircle.textContent = `Level ${level}`;
+    badgeFill.style.width = `${percent}%`;
 
-  //   badgeLevelText.textContent = read >= 300
-  //     ? "🔥 Max Level Reached! You're a Master Reader!"
-  //     : `Next level at ${target} books`;
-  // }
+    badgeLevelText.textContent = read >= 300
+      ? "🔥 Max Level Reached! You're a Master Reader!"
+      : `Next level at ${target} books`;
+  }
+
   function updateBadgeProgress() {
   const readCount = parseInt(localStorage.getItem("readCount")) || 0;
 
