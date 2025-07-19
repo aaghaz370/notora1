@@ -78,5 +78,87 @@
     "genre": "Fictional",
     "rating": 4.6,
     "pdfUrl": "https://drive.google.com/file/d/50wrathdawn-id/preview"
+  },
+  {
+    "name": "Aankh Micholi",
+    "author": "Harishankar Parsai",
+    "thumbnail": "https://m.media-amazon.com/images/I/71xrWygqozL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/41aankh-id/preview"
+  },
+  {
+    "name": "Duniya Ne Kaha Tha",
+    "author": "Mannu Bhandari",
+    "thumbnail": "https://m.media-amazon.com/images/I/81tK9GJ+cKL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/42duniyane-id/preview"
+  },
+  {
+    "name": "Suraj Ka Satvan Ghoda",
+    "author": "Dharamvir Bharati",
+    "thumbnail": "https://m.media-amazon.com/images/I/71oLf8Zc7lL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/43suraj-id/preview"
+  },
+  {
+    "name": "Premchand Ki Sarvottam Kahaniyan",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/91-Vf9cHtsL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 5.0,
+    "pdfUrl": "https://drive.google.com/file/d/44premchand-id/preview"
+  },
+  {
+    "name": "Aankhon Dekhi",
+    "author": "Rajesh Joshi",
+    "thumbnail": "https://m.media-amazon.com/images/I/71sjSyQuxEL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/45ankhon-id/preview"
+  },
+  {
+    "name": "Jungle Ki Kahaniyan",
+    "author": "Various Authors",
+    "thumbnail": "https://m.media-amazon.com/images/I/71O+Alk4qZL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/46jungle-id/preview"
+  },
+  {
+    "name": "Desh Bhakti Kahaniyan",
+    "author": "Various Authors",
+    "thumbnail": "https://m.media-amazon.com/images/I/81KUIfaVp3L.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/47desh-id/preview"
+  },
+  {
+    "name": "Moral Stories in Hindi",
+    "author": "Compilation",
+    "thumbnail": "https://m.media-amazon.com/images/I/71o8EKhW+ZL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/48moral-id/preview"
+  },
+  {
+    "name": "Akbar Birbal Ki Kahaniyan",
+    "author": "Compilation",
+    "thumbnail": "https://m.media-amazon.com/images/I/81YktSLydGL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/49akbar-id/preview"
+  },
+  {
+    "name": "Shekh Chilli Ki Kahaniyan",
+    "author": "Compilation",
+    "thumbnail": "https://m.media-amazon.com/images/I/81Y1UUVG5nL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/50shekh-id/preview"
   }
 ]
+
+

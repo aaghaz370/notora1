@@ -1,75 +1,164 @@
 [
   {
-    "name": "Concepts of Physics Vol 1",
-    "author": "H. C. Verma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Preparation",
-    "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "name": "DC Pandey Physics 6 PDF JEE NEET 11th 12th",
+    "author": "DC Pandey",
+    "thumbnail": "https://i.ibb.co/YBzgPGwq/book-image-1749652523628-jee-main-advanced-waves-of-thermodynamics-set-of-5-books-original-imagzsfbr.webp",
+    "genre": "JEE/NEET Preparation",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_dcPandey/preview"
   },
   {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://example.com/images/morrison.jpg",
-    "genre": "JEE Chemistry",
-    "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
-  },
-  {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://example.com/images/maron.jpg",
-    "genre": "Mathematics",
+    "name": "Aakash Physics Module (Crash Course)",
+    "author": "Aakash Institute",
+    "thumbnail": "https://imgv2-1-f.scribdassets.com/img/document/481442446/149x198/104d106718/1745172764?v=1",
+    "genre": "JEE/NEET Preparation",
     "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_aakashphysics/preview"
   },
   {
-    "name": "Concepts of Physics Vol 1",
-    "author": "H. C. Verma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Preparation",
-    "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
-  },
-  {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://example.com/images/morrison.jpg",
-    "genre": "JEE Chemistry",
+    "name": "Botany Med Easy",
+    "author": "Vedantu Master Teacher",
+    "thumbnail": "https://i.ibb.co/ksCPZLZc/pw-botany-med-easy-notes-by-dr-vipin-sharma-neet-boards-original-imah77p2wvbusezf-2.jpg",
+    "genre": "NEET Botany",
     "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_botanymedeasy/preview"
   },
   {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "Mathematics",
-    "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
-  },
-  {
-    "name": "Concepts of Physics Vol 1",
-    "author": "H. C. Verma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Preparation",
+    "name": "Physics NCERT Finger Tip",
+    "author": "MTG Editorial Board",
+    "thumbnail": "https://i.ibb.co/YFSXF7pq/mtg-objective-ncert-at-your-fingertips-physics-ncert-neet-jee-original-imah4uwzfcry6juc-1.jpg",
+    "genre": "NCERT Practice",
     "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_mtgphysics/preview"
   },
   {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Chemistry",
+    "name": "Biology NCERT Finger Tip Part 2",
+    "author": "MTG Editorial Board",
+    "thumbnail": "https://i.ibb.co/hRQwrrKp/mtg-objective-ncert-at-your-fingertips-biology-ncert-neet-trend-original-imah4uwyy5w35fhz-1.jpg",
+    "genre": "NCERT Practice",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_mtgbiopart2/preview"
+  },
+  {
+    "name": "Biology NCERT Finger Tip Part 1",
+    "author": "MTG Editorial Board",
+    "thumbnail": "https://i.ibb.co/hRQwrrKp/mtg-objective-ncert-at-your-fingertips-biology-ncert-neet-trend-original-imah4uwyy5w35fhz-1.jpg",
+    "genre": "NCERT Practice",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_mtgbiopart1/preview"
+  },
+  {
+    "name": "12 Physics NEET PYQ",
+    "author": "Arihant Experts",
+    "thumbnail": "https://i.ibb.co/gFFGCQ4T/pw-neet-12-years-pyq-chapterwise-and-topicwise-english-original-imahckwhzmgkbhaw-1.jpg",
+    "genre": "NEET Physics PYQ",
     "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_12neetpyq/preview"
   },
   {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://example.com/images/maron.jpg",
-    "genre": "Mathematics",
+    "name": "6 JEE Mains PYQ (All 124 Shifts)",
+    "author": "Career Point",
+    "thumbnail": "https://i.ibb.co/pv3p9bMC/pw-jee-main-and-advanced-physics-6-years-original-imahbj4dakc2vqxj-1.jpg",
+    "genre": "JEE PYQ",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_6jeemains/preview"
+  },
+  {
+    "name": "12 Years Biology NEET PYQ",
+    "author": "Arihant Experts",
+    "thumbnail": "https://i.ibb.co/gFFGCQ4T/pw-neet-12-years-pyq-chapterwise-and-topicwise-english-original-imahckwhzmgkbhaw-1.jpg",
+    "genre": "NEET Biology PYQ",
     "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_12bio/preview"
+  },
+  {
+    "name": "Problems in Physical Chemistry",
+    "author": "Narendra Awasthi",
+    "thumbnail": "https://i.ibb.co/d0qZymXQ/problems-in-physical-chemistry-for-neet-aiims-5th-edition-2019-original-imafgk3qytsjhwfm-1.jpg",
+    "genre": "JEE/NEET Chemistry",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_physicalchem/preview"
+  },
+  {
+    "name": "37 Years NEET Chemistry PYQ",
+    "author": "EduCart Team",
+    "thumbnail": "https://i.ibb.co/GfGkPKQJ/original-imah5q4ads6hmjmc-1.jpg",
+    "genre": "NEET Chemistry PYQ",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_37neetchem/preview"
+  },
+  {
+    "name": "37 Years NEET Physics PYQ",
+    "author": "EduCart Team",
+    "thumbnail": "https://i.ibb.co/d0R0NVx6/educart-neet-37-years-physics-solved-papers-pyqs-chapterwise-and-original-imah35swwwf28ggy-1.jpg",
+    "genre": "NEET Physics PYQ",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/1W_Np6g7R_37neetphy/preview"
+  },
+  {
+    "name": "Biohack 5th eddition",
+    "author": "Parth Goyal",
+    "thumbnail": "https://i.ibb.co/84SF0wTB/biohack-for-neet-ug-boards-class-xi-xii-biology-original-imagnxw6uswfmafd-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here1/preview"
+  },
+  {
+    "name": "Chemhack 5th eddition",
+    "author": "Parth Goyal",
+    "thumbnail": "https://i.ibb.co/jkv9MCK3/chemhack-for-neet-ug-jee-boards-class-xi-xii-chemistry-original-imagnxw3yb2umur9-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here2/preview"
+  },
+  {
+    "name": "Neet objective physics volume 1",
+    "author": "DC Pandey",
+    "thumbnail": "https://i.ibb.co/XZjGXjww/neet-objective-physics-volume-1-original-imagch9kher7qxua-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here3/preview"
+  },
+  {
+    "name": "Objective physics for neet vol 2",
+    "author": "DC Pandey",
+    "thumbnail": "https://i.ibb.co/XZjGXjww/neet-objective-physics-volume-1-original-imagch9kher7qxua-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here4/preview"
+  },
+  {
+    "name": "Botany medeasy",
+    "author": "Dr. Vishal Sharma",
+    "thumbnail": "https://i.ibb.co/XZjGXjww/neet-objective-physics-volume-1-original-imagch9kher7qxua-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here5/preview"
+  },
+  {
+    "name": "Physics medeasy",
+    "author": "Dr. Abhay Kumar",
+    "thumbnail": "https://i.ibb.co/6JG1Wt9B/pw-physics-med-easy-notes-original-imah77p26rfjkq9c-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here6/preview"
+  },
+  {
+    "name": "Bio NEET 37 years pyq",
+    "author": "EduCart Team",
+    "thumbnail": "https://i.ibb.co/QwNGC5L/original-imah45zs2dnvnvju-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here7/preview"
+  },
+  {
+    "name": "Disha NEET 36 YEAR PYQ Subject wise",
+    "author": "Disha Experts",
+    "thumbnail": "https://i.ibb.co/wZNVf01W/71f-Bb-D-Xs8-L-1.jpg",
+    "genre": "Hindi Moral Story",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here8/preview"
   }
-  
+
+
 ]

@@ -1,75 +1,312 @@
 [
-  {
-    "name": "Concepts of Physics Vol 1",
-    "author": "H. C. Verma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Preparation",
-    "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    {
+    "name": "Panchatantra Ki Kahaniyan",
+    "author": "Vishnu Sharma",
+    "thumbnail": "https://m.media-amazon.com/images/I/81hgZhtW7pL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/40panchatantra-id/preview"
   },
   {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://example.com/images/morrison.jpg",
-    "genre": "JEE Chemistry",
+    "name": "Godaan",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTHw9CgCuAQwrSN_wfi2DANv8Cf-trkYfqVA&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/1godaan-id/preview"
+  },
+  {
+    "name": "Nirmala",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://www.maplepress.co.in/cdn/shop/products/nirmalahindi.jpg?v=1678772714",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/2nirmala-id/preview"
+  },
+  {
+    "name": "Karmabhoomi",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/61lgAJRUKgL.jpg",
+    "genre": "Hindi Story Book",
     "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/3karmabhoomi-id/preview"
   },
   {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://example.com/images/maron.jpg",
-    "genre": "Mathematics",
-    "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
-  },
-  {
-    "name": "Concepts of Physics Vol 1",
-    "author": "H. C. Verma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Preparation",
+    "name": "Gaban",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/71cx7DCQblL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
     "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/4gaban-id/preview"
   },
   {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://example.com/images/morrison.jpg",
-    "genre": "JEE Chemistry",
-    "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "name": "Mansarovar (Vol. 1)",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSir7LowpC_Oq6bvk467_jP48jp61iviyaLoA&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/5mansarovar1-id/preview"
   },
   {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "Mathematics",
+    "name": "Sevasadan",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/71tQLG9uaaL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
     "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/6sevasadan-id/preview"
   },
   {
-    "name": "Concepts of Physics Vol 1",
-    "author": "H. C. Verma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Preparation",
+    "name": "Premchand Ki Sarvashreshtha Kahaniyan",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXgs3NMKXwxyiSts2NSNjrc5-Uihd7rWTBPw&s",
+    "genre": "Hindi Story Book",
     "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/8sarvashreshtha-id/preview"
   },
   {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://m.media-amazon.com/images/I/81BE7eeKzAL._UF1000,1000_QL80_.jpg",
-    "genre": "JEE Chemistry",
+    "name": "Idgah",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUkDA8Mrc3OMbdX3EqTa4rAx2kRSElqvblzg&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/9idgah-id/preview"
+  },
+  {
+    "name": "Do Bailon Ki Katha",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/818yFne0PmL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/10dobail-id/preview"
+  },
+  {
+    "name": "Raag Darbari",
+    "author": "Shrilal Shukla",
+    "thumbnail": "https://m.media-amazon.com/images/I/91lTTaDHHAS.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/11raagdarbari-id/preview"
+  },
+  {
+    "name": "Maila Anchal",
+    "author": "Phanishwar Nath Renu",
+    "thumbnail": "https://m.media-amazon.com/images/I/71VlU8PZ36L.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/12mailaanchal-id/preview"
+  },
+  {
+    "name": "Gunahon Ka Devta",
+    "author": "Dharamvir Bharati",
+    "thumbnail": "https://m.media-amazon.com/images/I/813GkVYIXcL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/13gunahondevta-id/preview"
+  },
+  {
+    "name": "Tamas",
+    "author": "Bhisham Sahni",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyGcJ0io9eXEAH1auh9GK9leEWtrLp-NtgIQ&s",
+    "genre": "Hindi Story Book",
     "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/14tamas-id/preview"
   },
   {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://example.com/images/maron.jpg",
-    "genre": "Mathematics",
+    "name": "Jhootha Sach",
+    "author": "Yashpal",
+    "thumbnail": "https://m.media-amazon.com/images/I/81q4hYScjZL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/15jhoothasach-id/preview"
+  },
+  {
+    "name": "Chitralekha",
+    "author": "Bhagwati Charan Verma",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwgqbUxXxKaZcH9m-gyuuyCgq01fDcNlqo1Q&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/16chitralekha-id/preview"
+  },
+  {
+    "name": "Rashmirathi",
+    "author": "Ramdhari Singh Dinkar",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5SHz8-mMhpd0BBTEfnOuWWa8GNPJBNyLywQ&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/17rashmirathi-id/preview"
+  },
+  {
+    "name": "Suraj Ka Satvan Ghoda",
+    "author": "Dharamvir Bharati",
+    "thumbnail": "https://m.media-amazon.com/images/I/713YtbZOdlL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/18satvanhorse-id/preview"
+  },
+  {
+    "name": "Zindaginama",
+    "author": "Krishna Sobti",
+    "thumbnail": "https://m.media-amazon.com/images/I/61cm04BLYpL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
     "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/19zindaginama-id/preview"
+  },
+  {
+    "name": "Mitron Marjani",
+    "author": "Krishna Sobti",
+    "thumbnail": "https://m.media-amazon.com/images/I/71M4qb3YbvS._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/20mitronmarjani-id/preview"
+  },
+  {
+    "name": "Madhushala",
+    "author": "Harivansh Rai Bachchan",
+    "thumbnail": "https://m.media-amazon.com/images/I/71VVm4pMYvL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/21madhushala-id/preview"
+  },
+  {
+    "name": "Vyavharik Hindi Vyakaran",
+    "author": "Dr. Vasudevnandan Prasad",
+    "thumbnail": "https://m.media-amazon.com/images/I/918su8PZAcL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/22vyakaran-id/preview"
+  },
+  {
+    "name": "Bade Bhai Sahab",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/41C5vCg2gRL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/23badebhai-id/preview"
+  },
+  {
+    "name": "Kafan",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://m.media-amazon.com/images/I/81MDiCjzUxL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/24kafan-id/preview"
+  },
+  {
+    "name": "Ek Tukda Dhoop Ka",
+    "author": "Nirmal Verma",
+    "thumbnail": "https://m.media-amazon.com/images/I/614g-2+HU6L._AC_UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/25tukdadhoop-id/preview"
+  },
+  {
+    "name": "Parinde",
+    "author": "Nirmal Verma",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCdMLtubhRUqedzo_aOTkvITwDTRppBCar2Q&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/26parinde-id/preview"
+  },
+  {
+    "name": "Dilli Ki Galiyaan",
+    "author": "Krishna Sobti",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZphCK9REbGcQV0HNpgglN-_7-llC_314Hyg&s",
+    "genre": "Hindi Story Book",
+    "rating": 4.3,
+    "pdfUrl": "https://drive.google.com/file/d/27dilligali-id/preview"
+  },
+  {
+    "name": "Andhere Band Kamre",
+    "author": "Bhisham Sahni",
+    "thumbnail": "https://m.media-amazon.com/images/I/81LwRmx6zsL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/28andherekamre-id/preview"
+  },
+  {
+    "name": "Aadha Gaon",
+    "author": "Rahi Masoom Raza",
+    "thumbnail": "https://m.media-amazon.com/images/I/91GdrnoqIqL.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/29aadhagaon-id/preview"
+  },
+  {
+    "name": "Vaaris",
+    "author": "Acharya Chatursen",
+    "thumbnail": "https://m.media-amazon.com/images/I/611H31xPzYL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/30vaaris-id/preview"
+  },
+  {
+    "name": "Vayam Rakshamah",
+    "author": "Acharya Chatursen",
+    "thumbnail": "https://m.media-amazon.com/images/I/71dchk0bvqL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/31vayam-id/preview"
+  },
+  {
+    "name": "Tilism Hoshruba",
+    "author": "Mohammad Husain Jah",
+    "thumbnail": "https://m.media-amazon.com/images/I/71FrpTOBWiL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/33tilismhosh-id/preview"
+  },
+  {
+    "name": "Chandrakanta",
+    "author": "Devkinandan Khatri",
+    "thumbnail": "https://m.media-amazon.com/images/I/71Ih0qvJpJL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/34chandrakanta-id/preview"
+  },
+  {
+    "name": "Chandrakanta Santati",
+    "author": "Devkinandan Khatri",
+    "thumbnail": "https://rukminim2.flixcart.com/image/850/1000/ks7tuvk0/book/z/y/e/chandrakanta-santati-4-hindi-original-imag5u3c2m8navm6.jpeg?q=90&crop=false",
+    "genre": "Hindi Story Book",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/35santati-id/preview"
+  },
+  {
+    "name": "Bhootnath",
+    "author": "Devkinandan Khatri",
+    "thumbnail": "https://m.media-amazon.com/images/I/61qtO4yHXZL._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/36bhootnath-id/preview"
+  },
+  {
+    "name": "Bhagavad Gita (Hindi)",
+    "author": "Ved Vyas",
+    "thumbnail": "https://m.media-amazon.com/images/I/51xH9l43lkL._SY445_SX342_PQ93_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/37gita-id/preview"
+  },
+  {
+    "name": "Ramayan Ki Kahaniyan",
+    "author": "Valmiki",
+    "thumbnail": "https://m.media-amazon.com/images/I/81dkZ-a7r-L._UF1000,1000_QL80_.jpg",
+    "genre": "Hindi Story Book",
+    "rating": 4.8,
+    "pdfUrl": "https://drive.google.com/file/d/38ramayan-id/preview"
+  },
+  {
+    "name": "Mahabharat Ki Kahaniyan",
+    "author": "Ved Vyas",
+    "thumbnail": "https://rukminim2.flixcart.com/image/704/844/k1l1ea80/book/9/7/3/mahabharat-original-imafh4hgeztfpkkx.jpeg?q=90&crop=false",
+    "genre": "Hindi Story Book",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/39mahabharat-id/preview"
   }
-  
 ]
+
+
+
+
+
+
