@@ -1,27 +1,82 @@
 [
   {
-    "name": "hi",
-    "author": "H. C. Verma",
-    "thumbnail": "https://example.com/images/hcv1.jpg",
-    "genre": "JEE Preparation",
-    "rating": 4.8,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "name": "The House in the Cerulean Sea",
+    "author": "TJ Klune",
+    "thumbnail": "https://m.media-amazon.com/images/I/81MnY8Q7OLL._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/41ceruleansea-id/preview"
   },
   {
-    "name": "Organic Chemistry",
-    "author": "Morrison & Boyd",
-    "thumbnail": "https://example.com/images/morrison.jpg",
-    "genre": "JEE Chemistry",
+    "name": "The Invisible Life of Addie LaRue",
+    "author": "V.E. Schwab",
+    "thumbnail": "https://m.media-amazon.com/images/I/91Ql48Y0mqL._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/42addielarue-id/preview"
+  },
+  {
+    "name": "Circe",
+    "author": "Madeline Miller",
+    "thumbnail": "https://m.media-amazon.com/images/I/91c0yRVm+0L._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
     "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/43circe-id/preview"
   },
   {
-    "name": "Problems in Calculus of One Variable",
-    "author": "I.A. Maron",
-    "thumbnail": "https://example.com/images/maron.jpg",
-    "genre": "Mathematics",
+    "name": "The Song of Achilles",
+    "author": "Madeline Miller",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQq1dTx27RbkVNF7igFWxdO7QYqU1x-xtSIcQ&s",
+    "genre": "Fictional",
+    "rating": 4.9,
+    "pdfUrl": "https://drive.google.com/file/d/44achilles-id/preview"
+  },
+  {
+    "name": "Shatter Me",
+    "author": "Tahereh Mafi",
+    "thumbnail": "https://m.media-amazon.com/images/I/81DiRcPJKaL._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
     "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/your-file-id-here/preview"
+    "pdfUrl": "https://drive.google.com/file/d/45shatterme-id/preview"
+  },
+  {
+    "name": "Legend",
+    "author": "Marie Lu",
+    "thumbnail": "https://m.media-amazon.com/images/I/81x3RtYe+YL.jpg",
+    "genre": "Fictional",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/46legend-id/preview"
+  },
+  {
+    "name": "Red Queen",
+    "author": "Victoria Aveyard",
+    "thumbnail": "https://m.media-amazon.com/images/I/51LgxDIbO7L._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
+    "rating": 4.3,
+    "pdfUrl": "https://drive.google.com/file/d/47redqueen-id/preview"
+  },
+  {
+    "name": "The Cruel Prince",
+    "author": "Holly Black",
+    "thumbnail": "https://m.media-amazon.com/images/I/81vCaMmKrWL._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
+    "rating": 4.5,
+    "pdfUrl": "https://drive.google.com/file/d/48cruelprince-id/preview"
+  },
+  {
+    "name": "Caraval",
+    "author": "Stephanie Garber",
+    "thumbnail": "https://m.media-amazon.com/images/I/81+3j4jf2kL._UF1000,1000_QL80_.jpg",
+    "genre": "Fictional",
+    "rating": 4.4,
+    "pdfUrl": "https://drive.google.com/file/d/49caraval-id/preview"
+  },
+  {
+    "name": "The Wrath & the Dawn",
+    "author": "Renée Ahdieh",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTt0mK5QY6YCPVbJe4AOYG7M1-2DK6AmQfkKg&s",
+    "genre": "Fictional",
+    "rating": 4.6,
+    "pdfUrl": "https://drive.google.com/file/d/50wrathdawn-id/preview"
   }
-  
 ]

@@ -909,6 +909,83 @@
 
 
 
+/* .badge-panel {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.badge-panel.hidden {
+  display: none;
+}
+
+.badge-box {
+  background: #1e1e1e;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 20px #ffd70070;
+  position: relative;
+  animation: popIn 0.4s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.close-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  color: white;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.badge-progress {
+  margin-top: 1.5rem;
+}
+
+.badge-circle {
+  font-size: 1.3rem;
+  padding: 1rem;
+  border-radius: 50%;
+  background: gold;
+  color: black;
+  font-weight: bold;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-bar {
+  margin: 1rem auto;
+  height: 10px;
+  background: #444;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#badgeFill {
+  height: 100%;
+  width: 0%;
+  background: gold;
+  transition: width 0.5s ease;
+} */
 .badge-panel {
   position: fixed;
   inset: 0;

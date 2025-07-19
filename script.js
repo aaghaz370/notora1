@@ -450,77 +450,203 @@ window.addEventListener('load', () => {
 
 
 
-   const badgeIcon = document.querySelector(".badge-icon");
-  const badgePanel = document.getElementById("badgePanel");
-  const closeBadge = document.getElementById("closeBadge");
+//    const badgeIcon = document.querySelector(".badge-icon");
+//   const badgePanel = document.getElementById("badgePanel");
+//   const closeBadge = document.getElementById("closeBadge");
 
-  const badgeLevelText = document.getElementById("badgeLevelText");
-  const badgeReadCount = document.getElementById("badgeReadCount");
-  const badgeCircle = document.getElementById("badgeCircle");
-  const badgeFill = document.getElementById("badgeFill");
+//   const badgeLevelText = document.getElementById("badgeLevelText");
+//   const badgeReadCount = document.getElementById("badgeReadCount");
+//   const badgeCircle = document.getElementById("badgeCircle");
+//   const badgeFill = document.getElementById("badgeFill");
 
-  badgeIcon.addEventListener("click", () => {
-    badgePanel.classList.remove("hidden");
-    updateBadge();
-  });
+//   badgeIcon.addEventListener("click", () => {
+//     badgePanel.classList.remove("hidden");
+//     updateBadge();
+//   });
 
-  closeBadge.addEventListener("click", () => {
-    badgePanel.classList.add("hidden");
-  });
+//   closeBadge.addEventListener("click", () => {
+//     badgePanel.classList.add("hidden");
+//   });
 
-  function getLevel(readCount) {
-    if (readCount >= 300) return 5;
-    if (readCount >= 200) return 4;
-    if (readCount >= 100) return 3;
-    if (readCount >= 50) return 2;
-    if (readCount >= 10) return 1;
-    return 0;
-  }
+//   function getLevel(readCount) {
+//     if (readCount >= 300) return 5;
+//     if (readCount >= 200) return 4;
+//     if (readCount >= 100) return 3;
+//     if (readCount >= 50) return 2;
+//     if (readCount >= 10) return 1;
+//     return 0;
+//   }
 
-  function getNextLevelTarget(level) {
-    switch(level) {
-      case 0: return 10;
-      case 1: return 50;
-      case 2: return 100;
-      case 3: return 200;
-      case 4: return 300;
-      default: return 300;
+//   function getNextLevelTarget(level) {
+//     switch(level) {
+//       case 0: return 10;
+//       case 1: return 50;
+//       case 2: return 100;
+//       case 3: return 200;
+//       case 4: return 300;
+//       default: return 300;
+//     }
+//   }
+
+//   function updateBadge() {
+//     const read = parseInt(localStorage.getItem("readCount") || "0");
+//     const level = getLevel(read);
+//     const target = getNextLevelTarget(level);
+//     const percent = Math.min((read / target) * 100, 100);
+
+//     badgeReadCount.textContent = read;
+//     badgeCircle.textContent = `Level ${level}`;
+//     badgeFill.style.width = `${percent}%`;
+
+//     badgeLevelText.textContent = read >= 300
+//       ? "🔥 Max Level Reached! You're a Master Reader!"
+//       : `Next level at ${target} books`;
+//   }
+
+//   function updateBadgeProgress() {
+//   const readCount = parseInt(localStorage.getItem("readCount")) || 0;
+
+//   const badgeLevelText = document.getElementById("badgeLevelText");
+//   const badgeCircle = document.getElementById("badgeCircle");
+//   const badgeFill = document.getElementById("badgeFill");
+//   const badgeReadCount = document.getElementById("badgeReadCount");
+
+//   badgeReadCount.textContent = readCount;
+
+//   let level = 0;
+//   if (readCount >= 100) level = 5;
+//   else if (readCount >= 50) level = 4;
+//   else if (readCount >= 25) level = 3;
+//   else if (readCount >= 10) level = 2;
+//   else if (readCount >= 1) level = 1;
+
+//   badgeCircle.textContent = `Level ${level}`;
+//   badgeLevelText.textContent = `You're at Level ${level}!`;
+//   badgeFill.style.width = Math.min(100, (readCount / 100) * 100) + "%";
+// }
+
+  // const badgeIcon = document.querySelector(".badge-icon");
+  // const badgePanel = document.getElementById("badgePanel");
+  // const closeBadge = document.getElementById("closeBadge");
+
+  // const badgeLevelText = document.getElementById("badgeLevelText");
+  // const badgeReadCount = document.getElementById("badgeReadCount");
+  // const badgeCircle = document.getElementById("badgeCircle");
+  // const badgeFill = document.getElementById("badgeFill");
+
+  // const LEVELS = [
+  //   { level: 0, target: 10 },
+  //   { level: 1, target: 50 },
+  //   { level: 2, target: 100 },
+  //   { level: 3, target: 200 },
+  //   { level: 4, target: 300 },
+  //   { level: 5, target: Infinity }
+  // ];
+
+  // function getLevel(readCount) {
+  //   for (let i = LEVELS.length - 1; i >= 0; i--) {
+  //     if (readCount >= LEVELS[i].target) {
+  //       return i;
+  //     }
+  //   }
+  //   return 0;
+  // }
+
+  // function getNextLevelTarget(level) {
+  //   if (level >= LEVELS.length - 1) return LEVELS[LEVELS.length - 1].target;
+  //   return LEVELS[level + 1].target;
+  // }
+
+  // function updateBadge() {
+  //   const read = parseInt(localStorage.getItem("readCount") || "0");
+  //   const level = getLevel(read);
+  //   const target = getNextLevelTarget(level);
+
+  //   const percent = Math.min((read / target) * 100, 100);
+
+  //   badgeReadCount.textContent = read;
+  //   badgeCircle.textContent = `Level ${level}`;
+  //   badgeFill.style.width = `${percent}%`;
+
+  //   if (level === 5) {
+  //     badgeLevelText.textContent = "🔥 Max Level Reached! You're a Master Reader!";
+  //   } else {
+  //     badgeLevelText.textContent = `Next level at ${target} books`;
+  //   }
+  // }
+
+  // badgeIcon.addEventListener("click", () => {
+  //   badgePanel.classList.remove("hidden");
+  //   updateBadge();
+  // });
+
+  // closeBadge.addEventListener("click", () => {
+  //   badgePanel.classList.add("hidden");
+  // });
+
+  // // Optionally call updateBadge on page load
+  // updateBadge();
+const badgeIcon = document.querySelector(".badge-icon");
+const badgePanel = document.getElementById("badgePanel");
+const closeBadge = document.getElementById("closeBadge");
+
+const badgeLevelText = document.getElementById("badgeLevelText");
+const badgeReadCount = document.getElementById("badgeReadCount");
+const badgeCircle = document.getElementById("badgeCircle");
+const badgeFill = document.getElementById("badgeFill");
+
+const LEVELS = [
+  { level: 0, target: 10 },
+  { level: 1, target: 50 },
+  { level: 2, target: 100 },
+  { level: 3, target: 200 },
+  { level: 4, target: 700 },
+  { level: 5, target: Infinity }
+];
+
+function getLevel(readCount) {
+  for (let i = LEVELS.length - 1; i >= 0; i--) {
+    if (readCount >= LEVELS[i].target) {
+      return i;
     }
   }
-
-  function updateBadge() {
-    const read = parseInt(localStorage.getItem("readCount") || "0");
-    const level = getLevel(read);
-    const target = getNextLevelTarget(level);
-    const percent = Math.min((read / target) * 100, 100);
-
-    badgeReadCount.textContent = read;
-    badgeCircle.textContent = `Level ${level}`;
-    badgeFill.style.width = `${percent}%`;
-
-    badgeLevelText.textContent = read >= 300
-      ? "🔥 Max Level Reached! You're a Master Reader!"
-      : `Next level at ${target} books`;
-  }
-
-  function updateBadgeProgress() {
-  const readCount = parseInt(localStorage.getItem("readCount")) || 0;
-
-  const badgeLevelText = document.getElementById("badgeLevelText");
-  const badgeCircle = document.getElementById("badgeCircle");
-  const badgeFill = document.getElementById("badgeFill");
-  const badgeReadCount = document.getElementById("badgeReadCount");
-
-  badgeReadCount.textContent = readCount;
-
-  let level = 0;
-  if (readCount >= 100) level = 5;
-  else if (readCount >= 50) level = 4;
-  else if (readCount >= 25) level = 3;
-  else if (readCount >= 10) level = 2;
-  else if (readCount >= 1) level = 1;
-
-  badgeCircle.textContent = `Level ${level}`;
-  badgeLevelText.textContent = `You're at Level ${level}!`;
-  badgeFill.style.width = Math.min(100, (readCount / 100) * 100) + "%";
+  return 0;
 }
+
+function getNextLevelTarget(level) {
+  return LEVELS[Math.min(level + 1, LEVELS.length - 1)].target;
+}
+
+function updateBadge() {
+  const read = parseInt(localStorage.getItem("readCount") || "0");
+  const level = getLevel(read);
+  const target = getNextLevelTarget(level);
+  const percent = Math.min((read / target) * 100, 100);
+
+  badgeReadCount.textContent = `Books Read: ${read}`;
+  badgeCircle.textContent = `Level ${level}`;
+  badgeFill.style.width = `${percent}%`;
+
+  if (level === 5) {
+    badgeLevelText.textContent = "🔥 Max Level Reached! You're a Master Reader!";
+  } else {
+    badgeLevelText.textContent = `Next level at ${target} books`;
+  }
+}
+
+// Open badge panel
+badgeIcon.addEventListener("click", () => {
+  badgePanel.classList.remove("hidden");
+  updateBadge();
+});
+
+// Close badge panel
+closeBadge.addEventListener("click", () => {
+  badgePanel.classList.add("hidden");
+});
+
+// Live update every 5 seconds in case user reads book dynamically
+setInterval(updateBadge, 5000);
+
+// Optionally call once on load
+updateBadge();
