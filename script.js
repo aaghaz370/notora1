@@ -1,7 +1,7 @@
 // ===== JavaScript for EduSpark Books with Arrow Buttons, Modal Exit, and Full Search Support =====
 
 const categories = [
-  "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", "Self Help",
+  "Fictional", "JEE", "NEET", "Story Hindi","Moral Stories" ,"UPSC", "Biography", "Romance", "Horror", "Fantasy", "Self Help",
   "Coding", "Computer Science", "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
 ];
 
