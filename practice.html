@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Section Concept</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="header-container">
+            <button class="menu-toggle" id="menu-toggle" aria-label="Open Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="logo">
+                <a href="#">LOGO</a>
+            </div>
+
+            <a href="#" class="header-link">FIND A DEALER</a>
+        </div>
+    </header>
+
+    <nav class="side-nav" id="side-nav">
+        <div class="nav-header">
+            <button class="close-btn" id="close-menu">CLOSE</button>
+        </div>
+        <ul>
+            <li><a href="#">INSPIRING GREATNESS</a></li>
+            <li><a href="#">MODELS</a></li>
+            <li><a href="#">BESPOKE</a></li>
+            <li><a href="#">OWNERSHIP</a></li>
+            <li><a href="#">PROVENANCE</a></li>
+            <li><a href="#">BOUTIQUE</a></li>
+            <li><a href="#">MUSE ARTS PROGRAMME</a></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <section class="hero" id="hero-banner">
+            <div class="hero-content">
+                <h1>Inspiring Greatness</h1>
+                <p>This is the hero banner text.</p>
+            </div>
+        </section>
+
+        <section class="other-content">
+            <h2>This is the Next Section</h2>
+            <p>जब आप यहां तक स्क्रॉल करेंगे, तब ऊपर हेडर दिखने लगेगा।</p>
+            <p style="padding-bottom: 200vh;">Scroll down further...</p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<style>
+/* बेसिक रीसेट और फॉन्ट */
+:root {
+    /* अपनी डेस्कटॉप और मोबाइल हीरो इमेज के पाथ यहां डालें */
+    --desktop-hero-img: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y2FyLG1vdG9yfHx8fHx8MTcyNjM0MDMyOQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1600');
+    --mobile-hero-img: url('https://images.unsplash.com/photo-1542281286-9e0e16bb7366?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y2FyLG1vdG9yLG5pZ2h0fHx8fHwxNzI2MzQwMzQz&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=900');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* 1. हेडर और लोगो स्टाइलिंग */
+#main-header {
+    position: fixed;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    /* हेडर बैकग्राउंड बदलने के लिए ट्रांज़िशन */
+    transition: background-color 0.4s ease-in-out;
+    background-color: transparent; /* शुरू में ट्रांसपेरेंट */
+}
+
+/* यह क्लास JS द्वारा तब जोड़ी जाएगी जब यूजर हीरो बैनर को स्क्रॉल कर लेगा */
+#main-header.scrolled {
+    background-color: rgba(255, 255, 255, 0.95); /* सॉलिड सफ़ेद बैकग्राउंड */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    /* यह लोगो को हमेशा बीच में रखेगा */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.logo a {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+.header-link {
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    /* यह लोगो के लिए जगह बनाने के लिए है, ताकि फ्लेक्स में यह दाईं ओर रहे */
+    margin-left: auto; 
+}
+
+
+/* 2. हीरो बैनर स्टाइलिंग */
+.hero {
+    height: 100vh; /* फुल स्क्रीन हाइट */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    
+    /* डिफ़ॉल्ट (डेस्कटॉप) इमेज */
+    background-image: var(--desktop-hero-img);
+    background-size: cover;
+    background-position: center center;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
+/* 3. हैमबर्गर और साइड मेन्यू स्टाइलिंग */
+
+/* हैमबर्गर बटन */
+.menu-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 24px;
+    padding: 0;
+    z-index: 2001; /* यह मेन्यू के ऊपर रहेगा */
+    position: relative; 
+}
+
+.menu-toggle span {
+    width: 30px;
+    height: 3px;
+    background: #333;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+/* साइड नेविगेशन मेन्यू */
+.side-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 350px; /* मेन्यू की चौड़ाई */
+    background: rgba(255, 255, 255, 0.98); /* स्क्रीनशॉट जैसा हल्का बैकग्राउंड */
+    z-index: 2000;
+    padding: 2rem;
+    padding-top: 6rem; /* हेडर के लिए जगह */
+    
+    /* शुरू में स्क्रीन से बाहर छिपा हुआ */
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.nav-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1.5rem 2rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    cursor: pointer;
+}
+
+.side-nav ul {
+    list-style: none;
+}
+
+.side-nav ul li {
+    margin-bottom: 1.5rem;
+}
+
+.side-nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* 4. मेन्यू खुलने पर होने वाले बदलाव (JS द्वारा नियंत्रित) */
+
+/* यह क्लास JS द्वारा <body> पर लगाई जाएगी */
+body.menu-open .side-nav {
+    transform: translateX(0); /* मेन्यू को स्क्रीन पर लाओ */
+}
+
+/* मुख्य कंटेंट को ब्लर करो */
+body.menu-open #main-content {
+    filter: blur(8px);
+    transition: filter 0.4s ease;
+}
+
+/* ब्लर इफ़ेक्ट के लिए मेन कंटेंट पर डिफ़ॉल्ट ट्रांज़िशन */
+#main-content {
+    transition: filter 0.4s ease;
+}
+
+/* हैमबर्गर को 'X' में बदलना */
+body.menu-open .menu-toggle span:nth-child(1) {
+    transform: translateY(10.5px) rotate(45deg);
+}
+
+body.menu-open .menu-toggle span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+body.menu-open .menu-toggle span:nth-child(3) {
+    transform: translateY(-10.5px) rotate(-45deg);
+}
+
+
+/* 5. रिस्पॉन्सिव (मोबाइल के लिए) */
+@media (max-width: 768px) {
+    #main-header {
+        padding: 1rem;
+    }
+
+    /* मोबाइल पर 'FIND A DEALER' लिंक छिपा दें */
+    .header-link {
+        display: none;
+    }
+
+    /* हीरो इमेज बदलना */
+    .hero {
+        background-image: var(--mobile-hero-img);
+        /* यूजर रिक्वायरमेंट के अनुसार: "pura show hona chahiye"
+           'cover' इमेज को क्रॉप करेगा। 'contain' पूरी इमेज दिखाएगा लेकिन खाली जगह छोड़ सकता है।
+           'cover' ज़्यादातर हीरो के लिए बेहतर होता है। अगर आपको सच में पूरी इमेज दिखानी है तो 'contain' इस्तेमाल करें।
+        */
+        background-size: cover; /* आप इसे 'contain' में बदल सकते हैं */
+        /* background-repeat: no-repeat; */ /* (अगर 'contain' इस्तेमाल करें तो इसे ऑन करें) */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    /* मोबाइल पर साइड मेन्यू फुल स्क्रीन हो */
+    .side-nav {
+        width: 100%;
+    }
+}
+</style>
+<script>
+    // DOM एलिमेंट्स को एक बार सेलेक्ट कर लें
+const mainHeader = document.getElementById('main-header');
+const heroBanner = document.getElementById('hero-banner');
+const menuToggleButton = document.getElementById('menu-toggle');
+const closeMenuButton = document.getElementById('close-menu');
+const sideNav = document.getElementById('side-nav');
+const mainContent = document.getElementById('main-content');
+const body = document.body;
+
+/**
+ * 1. हेडर स्क्रॉल लॉजिक
+ * यह चेक करेगा कि यूजर ने हीरो बैनर (जो 100vh ऊंचा है) से ज़्यादा स्क्रॉल कर लिया है या नहीं।
+ */
+function handleScroll() {
+    // हीरो बैनर की ऊंचाई प्राप्त करें (यह मूल रूप से 100vh है)
+    const heroHeight = heroBanner.offsetHeight;
+
+    // अगर स्क्रॉल की दूरी हीरो की ऊंचाई से 10px कम भी है, तब भी हेडर दिखा दो
+    // (ताकि स्मूथ ट्रांजीशन लगे)
+    if (window.scrollY > (heroHeight - 50)) {
+        mainHeader.classList.add('scrolled');
+    } else {
+        mainHeader.classList.remove('scrolled');
+    }
+}
+
+// विंडो पर स्क्रॉल इवेंट लिस्नर लगाएं
+window.addEventListener('scroll', handleScroll);
+
+/**
+ * 2. मेन्यू टॉगल (खोलने और बंद करने) का लॉजिक
+ */
+
+// मेन्यू खोलने का फंक्शन
+function openMenu() {
+    body.classList.add('menu-open'); // <body> पर क्लास लगाओ (ब्लर और 'X' एनिमेशन के लिए)
+}
+
+// मेन्यू बंद करने का फंक्शन
+function closeMenu() {
+    body.classList.remove('menu-open'); // <body> से क्लास हटाओ
+}
+
+// हैमबर्गर बटन पर क्लिक लिस्नर (यह मेन्यू खोलेगा)
+menuToggleButton.addEventListener('click', openMenu);
+
+// 'CLOSE' बटन (जो मेन्यू के अंदर है) पर क्लिक लिस्नर (यह मेन्यू बंद करेगा)
+closeMenuButton.addEventListener('click', closeMenu);
+
+// बोनस: अगर यूजर मेन्यू के बाहर (ब्लर एरिया) पर क्लिक करे तो भी मेन्यू बंद हो जाए
+mainContent.addEventListener('click', () => {
+    if (body.classList.contains('menu-open')) {
+        closeMenu();
+    }
+});
+</script>
