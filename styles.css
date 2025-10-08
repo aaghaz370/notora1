@@ -272,7 +272,7 @@
 .search-overlay-box {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-bottom: 1.5rem;
   position: sticky;
   top: 0;
