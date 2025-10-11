@@ -317,7 +317,7 @@
 #searchResults {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
+  gap: 2rem;
   margin-left: 30px;
   padding-bottom: 2rem;
   animation: fadeIn 0.4s ease-in;
@@ -340,27 +340,7 @@
 
 
 
-/* ===== Responsive ===== */
-/* @media (max-width: 768px) {
-  .book-card {
-    width: 45vw;
-    height: auto;
-  }
 
-  #searchResults {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 480px) {
-  .book-card {
-    width: 80vw;
-  }
-
-  #searchResults {
-    grid-template-columns: 1fr 1fr;
-  }
-} */
 
 /* ===== Animations ===== */
 @keyframes fadeIn {
@@ -386,87 +366,7 @@
 }
 
 
-/* .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.9);
-  width: 100%;
-  height: 100%;
-  z-index: 1100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
 
-.modal.hidden {
-  display: none;
-}
-
-#closeModal {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-.modal-content {
-  background: #1a1a1a;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 800px;
-  height: 90%;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-content h2 {
-  margin: 0;
-  color: #e50914;
-  text-align: center;
-  font-weight: 700;
-}
-
-#pdfViewer {
-  flex: 1;
-  width: 100%;
-  border: none;
-  margin: 1rem 0;
-}
-
-#fullscreenBtn {
-  background: #e50914;
-  color: #fff;
-  border: none;
-  padding: 0.5rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-@media (min-width: 1024px) {
-  #searchResults {
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .book-slider {
-    overflow-x: scroll;
-  }
-  .book-card {
-    width: 120px;
-  }
-  #searchResults {
-    grid-template-columns: repeat(2, 1fr);
-  }
-} */
  .modal {
   position: fixed;
   inset: 0;
@@ -801,83 +701,7 @@
 
 
 
-/* .badge-panel {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-.badge-panel.hidden {
-  display: none;
-}
-
-.badge-box {
-  background: #1e1e1e;
-  color: #fff;
-  padding: 2rem;
-  border-radius: 20px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 0 20px #ffd70070;
-  position: relative;
-  animation: popIn 0.4s ease;
-}
-
-@keyframes popIn {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
-
-.close-badge {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: transparent;
-  color: white;
-  font-size: 1.5rem;
-  border: none;
-  cursor: pointer;
-}
-
-.badge-progress {
-  margin-top: 1.5rem;
-}
-
-.badge-circle {
-  font-size: 1.3rem;
-  padding: 1rem;
-  border-radius: 50%;
-  background: gold;
-  color: black;
-  font-weight: bold;
-  width: 120px;
-  height: 120px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.badge-bar {
-  margin: 1rem auto;
-  height: 10px;
-  background: #444;
-  width: 100%;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#badgeFill {
-  height: 100%;
-  width: 0%;
-  background: gold;
-  transition: width 0.5s ease;
-} */
 .badge-panel {
   position: fixed;
   inset: 0;
@@ -1004,4 +828,56 @@ footer a {
 footer small {
   font-size: 0.875rem;
   color: #006c04;
+}
+
+#searchResults {
+  position: relative;
+  min-height: 200px; /* ensure some height so message can center */
+}
+
+.no-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  color: #555;
+  text-align: center;
+}
+
+
+/* Skeleton for book image and details */
+.book-card.skeleton img,
+.book-card.skeleton .book-title,
+.book-card.skeleton .book-author,
+.book-card.skeleton .book-genre,
+.book-card.skeleton .book-rating {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  color: transparent;
+}
+
+/* Image placeholder */
+.book-card.skeleton img {
+  width: 100%;
+  height: 160px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Text placeholders */
+.book-card.skeleton .book-title,
+.book-card.skeleton .book-author,
+.book-card.skeleton .book-genre,
+.book-card.skeleton .book-rating {
+  height: 12px;
+  border-radius: 4px;
+  margin: 4px 0;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }

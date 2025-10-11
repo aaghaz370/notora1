@@ -1,93 +1,73 @@
- // ===== JavaScript for EduSpark Books with Arrow Buttons, Modal Exit, and Full Search Support =====
+// ===== Main Page Book Loading =====
+    const categories = [
+        "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", 
+        "Coding",  "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
+    ];
+    const categoryContainer = document.getElementById("categoryContainer");
 
-const categories = [
-  "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", "Self Help",
-  "Coding", "Computer Science", "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
-];
+    async function loadCategory(category) {
+        try {
+            const res = await fetch(`data/${category}.json`);
+            if (!res.ok) return; // Skip if a category file doesn't exist
+            const books = await res.json();
+            
+            const section = document.createElement("div");
+            section.className = "category-section";
 
-const categoryContainer = document.getElementById("categoryContainer");
+            const title = document.createElement("h3");
+            title.className = "category-title";
+            title.textContent = category;
 
-async function loadCategory(category) {
-  const res = await fetch(`data/${category}.json`);
-  const books = await res.json();
-  const section = document.createElement("div");
-  section.className = "category-section";
+            const wrapper = document.createElement("div");
+            wrapper.style.position = 'relative';
 
-  const title = document.createElement("h3");
-  title.className = "category-title";
-  title.textContent = category;
+            const slider = document.createElement("div");
+            slider.className = "book-slider";
 
-  const wrapper = document.createElement("div");
-  wrapper.style.position = 'relative';
+            books.slice(0, 30).forEach(book => {
+                const card = document.createElement("div");
+                card.className = "book-card";
+                card.innerHTML = `
+                    <img src="${book.thumbnail}" alt="${book.name}" />
+                    <div class="book-title">${book.name}</div>
+                    <div class="book-author">${book.author}</div>
+                    <div class="book-genre">${book.genre}</div>
+                    <div class="book-rating">⭐ ${book.rating}</div>
+                `;
+                // When a card is clicked, save the book data and go to book.html
+                card.addEventListener("click", () => {
+                    localStorage.setItem("selectedBook", JSON.stringify(book));
+                    window.location.href = "book.html";
+                });
+                slider.appendChild(card);
+            });
 
-  const slider = document.createElement("div");
-  slider.className = "book-slider";
+            const leftArrow = document.createElement("button");
+            leftArrow.className = "arrow-btn arrow-left";
+            leftArrow.innerHTML = "&#8249;";
+            leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: 'smooth' });
 
-  books.slice(0, 30).forEach(book => {
-    const card = document.createElement("div");
-    card.className = "book-card";
-    card.innerHTML = `
-      <img src="${book.thumbnail}" alt="${book.name}" />
-      <div class="book-title">${book.name}</div>
-      <div class="book-author">${book.author}</div>
-      <div class="book-genre">${book.genre}</div>
-      <div class="book-rating">⭐ ${book.rating}</div>
-    `;
-    card.addEventListener("click", () => openModal(book));
-    slider.appendChild(card);
-  });
+            const rightArrow = document.createElement("button");
+            rightArrow.className = "arrow-btn arrow-right";
+            rightArrow.innerHTML = "&#8250;";
+            rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: 'smooth' });
 
-  const leftArrow = document.createElement("button");
-  leftArrow.className = "arrow-btn arrow-left";
-  leftArrow.innerHTML = "&#8249;";
-  leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: 'smooth' });
+            wrapper.appendChild(leftArrow);
+            wrapper.appendChild(slider);
+            wrapper.appendChild(rightArrow);
 
-  const rightArrow = document.createElement("button");
-  rightArrow.className = "arrow-btn arrow-right";
-  rightArrow.innerHTML = "&#8250;";
-  rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: 'smooth' });
+            section.appendChild(title);
+            section.appendChild(wrapper);
+            categoryContainer.appendChild(section);
+        } catch (error) {
+            console.error(`Failed to load category: ${category}`, error);
+        }
+    }
 
-  wrapper.appendChild(leftArrow);
-  wrapper.appendChild(slider);
-  wrapper.appendChild(rightArrow);
+    categories.forEach(loadCategory);
 
-  section.appendChild(title);
-  section.appendChild(wrapper);
-  categoryContainer.appendChild(section);
-}
-
-categories.forEach(loadCategory);
-
-// ===== Modal for Book View =====
-const modal = document.getElementById("bookModal");
-const modalTitle = document.getElementById("modalTitle");
-const pdfViewer = document.getElementById("pdfViewer");
-const fullscreenBtn = document.getElementById("fullscreenBtn");
-const closeModal = document.getElementById("closeModal");
-
-function openModal(book) {
-  modalTitle.textContent = book.name;
-  pdfViewer.src = book.pdfUrl;
-  modal.classList.remove("hidden");
-}
-
-fullscreenBtn.addEventListener("click", () => {
-  if (pdfViewer.requestFullscreen) {
-    pdfViewer.requestFullscreen();
-  }
-});
-
-closeModal.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  pdfViewer.src = "";
-});
-
-window.addEventListener("click", (e) => {
-  if (e.target === modal) modal.classList.add("hidden");
-});
-
-// ===== Search Logic =====
-const openSearch = document.getElementById("openSearch");
+    // ===== Search Logic =====
+    const openSearch = document.getElementById("openSearch");
 const searchOverlay = document.getElementById("searchOverlay");
 const closeOverlay = document.getElementById("closeOverlay");
 const overlaySearchInput = document.getElementById("overlaySearchInput");
@@ -143,17 +123,148 @@ overlaySearchInput.addEventListener("input", async (e) => {
     book.genre.toLowerCase().includes(query)
   );
 
-  filtered.forEach(book => {
-    const card = document.createElement("div");
-    card.className = "book-card";
-    card.innerHTML = `
-      <img src="${book.thumbnail}" alt="${book.name}" />
-      <div class="book-title">${book.name}</div>
-      <div class="book-author">${book.author}</div>
-      <div class="book-genre">${book.genre}</div>
-      <div class="book-rating">⭐ ${book.rating}</div>
-    `;
-    card.addEventListener("click", () => openModal(book));
-    searchResults.appendChild(card);
-  });
+  if (filtered.length === 0) {
+    // Only one no-result div
+    const noResult = document.createElement("div");
+    noResult.className = "no-result";
+    noResult.textContent = "No results found";
+    searchResults.appendChild(noResult);
+  } else {
+    filtered.forEach(book => {
+      const card = document.createElement("div");
+      card.className = "book-card";
+      card.innerHTML = `
+        <img src="${book.thumbnail}" alt="${book.name}" />
+        <div class="book-title">${book.name}</div>
+        <div class="book-author">${book.author}</div>
+        <div class="book-genre">${book.genre}</div>
+        <div class="book-rating">⭐ ${book.rating}</div>
+      `;
+      card.addEventListener("click", () => openModal(book));
+      searchResults.appendChild(card);
+    });
+  }
 });
+
+
+    
+    // ===== Profile Section =====
+    const profileOverlay = document.getElementById("profileOverlay");
+    const profileIcon = document.getElementById("profileIcon");
+    const closeProfile = document.getElementById("closeProfile");
+    const userImage = document.getElementById("userImage");
+    const imageOptions = document.getElementById("imageOptions");
+    const usernameDisplay = document.getElementById("usernameDisplay");
+
+    profileIcon.addEventListener("click", () => {
+        profileOverlay.classList.remove("hidden");
+        loadUserData();
+    });
+
+    closeProfile.addEventListener("click", () => {
+        profileOverlay.classList.add("hidden");
+    });
+
+    userImage.addEventListener("click", () => {
+        imageOptions.classList.toggle("hidden");
+    });
+
+    window.changeImage = function() {
+        const url = prompt("Enter image URL:");
+        if (url) {
+            localStorage.setItem("userImage", url);
+            userImage.src = url;
+        }
+        imageOptions.classList.add("hidden");
+    }
+
+    window.deleteImage = function() {
+        localStorage.removeItem("userImage");
+        userImage.src = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+        imageOptions.classList.add("hidden");
+    }
+    
+    window.editUsername = function() {
+        const name = prompt("Enter your name:");
+        if (name) {
+            localStorage.setItem("userName", name);
+            usernameDisplay.textContent = name;
+        }
+    }
+
+    function loadUserData() {
+        const savedName = localStorage.getItem("userName");
+        const savedImage = localStorage.getItem("userImage");
+        usernameDisplay.textContent = savedName || "Click to add name";
+        if (savedImage) userImage.src = savedImage;
+        document.getElementById("readBooks").textContent = localStorage.getItem("readCount") || 0;
+    }
+    
+    // ===== Badge System =====
+    const badgeIcon = document.querySelector(".badge-icon");
+    const badgePanel = document.getElementById("badgePanel");
+    const closeBadge = document.getElementById("closeBadge");
+    const badgeReadCount = document.getElementById("badgeReadCount");
+    const badgeCircle = document.getElementById("badgeCircle");
+    const badgeFill = document.getElementById("badgeFill");
+    const badgeLevelText = document.getElementById("badgeLevelText");
+
+    const LEVELS = [
+        { level: 1, target: 10 }, { level: 2, target: 50 },
+        { level: 3, target: 100 }, { level: 4, target: 200 },
+        { level: 5, target: 700 }
+    ];
+
+    function updateBadge() {
+        const read = parseInt(localStorage.getItem("readCount") || "0");
+        let currentLevel = 0;
+        let nextTarget = LEVELS[0].target;
+        
+        for (const levelInfo of LEVELS) {
+            if (read >= levelInfo.target) {
+                currentLevel = levelInfo.level;
+            }
+        }
+        
+        const nextLevelInfo = LEVELS.find(l => l.level === currentLevel + 1);
+        nextTarget = nextLevelInfo ? nextLevelInfo.target : LEVELS[LEVELS.length-1].target;
+
+        const prevTarget = LEVELS.find(l => l.level === currentLevel)?.target || 0;
+        const progressInLevel = read - prevTarget;
+        const levelRange = nextTarget - prevTarget;
+        const percent = Math.min((progressInLevel / levelRange) * 100, 100);
+
+        badgeReadCount.textContent = `${read} books read`;
+        badgeCircle.textContent = `Level ${currentLevel}`;
+        badgeFill.style.width = `${percent}%`;
+
+        if (currentLevel >= 5) {
+            badgeLevelText.textContent = "🔥 Max Level Reached! You're a Master Reader!";
+        } else {
+            badgeLevelText.textContent = `Read ${nextTarget - read} more books for Level ${currentLevel + 1}`;
+        }
+    }
+
+    badgeIcon.addEventListener("click", () => {
+        badgePanel.classList.remove("hidden");
+        updateBadge();
+    });
+
+    closeBadge.addEventListener("click", () => {
+        badgePanel.classList.add("hidden");
+    });
+
+    // Initial load
+    updateBadge();
+});
+
+
+window.addEventListener('load', () => {
+    const audio = document.getElementById('notify-sound');
+    audio.play().catch(() => {}); // In case user hasn't interacted yet
+  });
+
+  function closeNotice() {
+    const banner = document.getElementById('notice');
+    banner.style.display = 'none';
+  }
