@@ -1,17 +1,16 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // ===== Main Page Book Loading =====
+// ===== Main Page Book Loading =====
     const categories = [
-        "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy",
-        "Coding", "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
+        "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", 
+        "Coding",  "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
     ];
     const categoryContainer = document.getElementById("categoryContainer");
 
     async function loadCategory(category) {
         try {
             const res = await fetch(`data/${category}.json`);
-            if (!res.ok) return;
+            if (!res.ok) return; // Skip if a category file doesn't exist
             const books = await res.json();
-
+            
             const section = document.createElement("div");
             section.className = "category-section";
 
@@ -35,6 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="book-genre">${book.genre}</div>
                     <div class="book-rating">⭐ ${book.rating}</div>
                 `;
+                // When a card is clicked, save the book data and go to book.html
                 card.addEventListener("click", () => {
                     localStorage.setItem("selectedBook", JSON.stringify(book));
                     window.location.href = "book.html";
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     categories.forEach(loadCategory);
 
-    // ===== Search Logic with Skeleton Loading =====
+    // ===== Search Logic =====
     const openSearch = document.getElementById("openSearch");
 const searchOverlay = document.getElementById("searchOverlay");
 const closeOverlay = document.getElementById("closeOverlay");
@@ -146,6 +146,8 @@ overlaySearchInput.addEventListener("input", async (e) => {
   }
 });
 
+
+    
     // ===== Profile Section =====
     const profileOverlay = document.getElementById("profileOverlay");
     const profileIcon = document.getElementById("profileIcon");
@@ -181,7 +183,7 @@ overlaySearchInput.addEventListener("input", async (e) => {
         userImage.src = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
         imageOptions.classList.add("hidden");
     }
-
+    
     window.editUsername = function() {
         const name = prompt("Enter your name:");
         if (name) {
@@ -197,7 +199,7 @@ overlaySearchInput.addEventListener("input", async (e) => {
         if (savedImage) userImage.src = savedImage;
         document.getElementById("readBooks").textContent = localStorage.getItem("readCount") || 0;
     }
-
+    
     // ===== Badge System =====
     const badgeIcon = document.querySelector(".badge-icon");
     const badgePanel = document.getElementById("badgePanel");
@@ -216,13 +218,17 @@ overlaySearchInput.addEventListener("input", async (e) => {
     function updateBadge() {
         const read = parseInt(localStorage.getItem("readCount") || "0");
         let currentLevel = 0;
-
+        let nextTarget = LEVELS[0].target;
+        
         for (const levelInfo of LEVELS) {
-            if (read >= levelInfo.target) currentLevel = levelInfo.level;
+            if (read >= levelInfo.target) {
+                currentLevel = levelInfo.level;
+            }
         }
-
+        
         const nextLevelInfo = LEVELS.find(l => l.level === currentLevel + 1);
-        const nextTarget = nextLevelInfo ? nextLevelInfo.target : LEVELS[LEVELS.length-1].target;
+        nextTarget = nextLevelInfo ? nextLevelInfo.target : LEVELS[LEVELS.length-1].target;
+
         const prevTarget = LEVELS.find(l => l.level === currentLevel)?.target || 0;
         const progressInLevel = read - prevTarget;
         const levelRange = nextTarget - prevTarget;
@@ -250,15 +256,15 @@ overlaySearchInput.addEventListener("input", async (e) => {
 
     // Initial load
     updateBadge();
-});
+;
 
-// ===== Notification Sound & Notice Banner =====
+
 window.addEventListener('load', () => {
     const audio = document.getElementById('notify-sound');
-    audio.play().catch(() => {}); // Avoid errors if user hasn't interacted
-});
+    audio.play().catch(() => {}); // In case user hasn't interacted yet
+  });
 
-function closeNotice() {
+  function closeNotice() {
     const banner = document.getElementById('notice');
     banner.style.display = 'none';
-}
+  }
