@@ -146,59 +146,14 @@ overlaySearchInput.addEventListener("input", async (e) => {
   }
 });
 
+profileIcon.addEventListener("click", () => {
+  window.location.href = "profile.html";
+});
+
+
 
     
-    // ===== Profile Section =====
-    const profileOverlay = document.getElementById("profileOverlay");
-    const profileIcon = document.getElementById("profileIcon");
-    const closeProfile = document.getElementById("closeProfile");
-    const userImage = document.getElementById("userImage");
-    const imageOptions = document.getElementById("imageOptions");
-    const usernameDisplay = document.getElementById("usernameDisplay");
-
-    profileIcon.addEventListener("click", () => {
-        profileOverlay.classList.remove("hidden");
-        loadUserData();
-    });
-
-    closeProfile.addEventListener("click", () => {
-        profileOverlay.classList.add("hidden");
-    });
-
-    userImage.addEventListener("click", () => {
-        imageOptions.classList.toggle("hidden");
-    });
-
-    window.changeImage = function() {
-        const url = prompt("Enter image URL:");
-        if (url) {
-            localStorage.setItem("userImage", url);
-            userImage.src = url;
-        }
-        imageOptions.classList.add("hidden");
-    }
-
-    window.deleteImage = function() {
-        localStorage.removeItem("userImage");
-        userImage.src = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
-        imageOptions.classList.add("hidden");
-    }
-    
-    window.editUsername = function() {
-        const name = prompt("Enter your name:");
-        if (name) {
-            localStorage.setItem("userName", name);
-            usernameDisplay.textContent = name;
-        }
-    }
-
-    function loadUserData() {
-        const savedName = localStorage.getItem("userName");
-        const savedImage = localStorage.getItem("userImage");
-        usernameDisplay.textContent = savedName || "Click to add name";
-        if (savedImage) userImage.src = savedImage;
-        document.getElementById("readBooks").textContent = localStorage.getItem("readCount") || 0;
-    }
+   
     
     // ===== Badge System =====
     const badgeIcon = document.querySelector(".badge-icon");
@@ -268,3 +223,8 @@ window.addEventListener('load', () => {
     const banner = document.getElementById('notice');
     banner.style.display = 'none';
   }
+
+
+  profileIcon.addEventListener("click", () => {
+  window.location.href = "profile.html";
+});

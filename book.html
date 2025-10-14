@@ -189,37 +189,70 @@
       header h1 { font-size: 1.3rem; }
       .fullscreen-btn { padding: 0.5rem 0.8rem; font-size: 0.8rem; }
     }
+
+    /* 🔹 Bookmark Button */
+    .bookmark-btn {
+      width: 100%;
+      background: linear-gradient(90deg, #ff4b2b, #ff416c);
+      color: #fff;
+      border: none;
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: all 0.3s ease;
+    }
+
+    .bookmark-btn:hover {
+      background: linear-gradient(90deg, #ff6347, #ff416c);
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(255, 65, 108, 0.5);
+    }
+
+    .bookmark-btn i {
+      margin-right: 8px;
+    }
+
+
+
+    
   </style>
 </head>
 
 <body>
-  <!-- ---------- HEADER ---------- -->
+ 
   <header>
     <i class="fa-solid fa-arrow-left back-arrow" onclick="window.history.back()"></i>
     <h1 id="bookName"></h1>
   </header>
 
-  <!-- ---------- PDF CONTAINER ---------- -->
+  
   <div class="pdf-container">
     <iframe id="bookPdf"></iframe>
     <button class="fullscreen-btn" id="fullscreenBtn">Fullscreen</button>
   </div>
 
-  <!-- ---------- BOOK INFO ---------- -->
+   <button class="bookmark-btn" id="bookmarkBtn">
+      <i class="fa-solid fa-bookmark"></i> Add to Bookmarks
+    </button>
+  </div>
+
+  
   <section class="book-meta">
     <p><strong>Author:</strong> <span id="bookAuthor"></span></p>
     <p><strong>Genre:</strong> <span id="bookGenre"></span></p>
     <p class="rating" id="bookRating"></p>
   </section>
 
-  <!-- ---------- SUGGESTIONS ---------- -->
+  
   <section class="suggestions">
     <h3>Similar Books You May Like</h3>
     <div class="suggestion-grid" id="suggestionGrid"></div>
   </section>
 
   <script>
-    // 🔹 Get book details from localStorage
+    
     const book = JSON.parse(localStorage.getItem("selectedBook"));
 
     if (book) {
@@ -230,7 +263,7 @@
       document.getElementById('bookPdf').src = book.pdfUrl;
     }
 
-    // 🔹 Fullscreen function
+    
     const fullscreenBtn = document.getElementById('fullscreenBtn');
     fullscreenBtn.addEventListener('click', () => {
       const iframe = document.getElementById('bookPdf');
@@ -245,7 +278,7 @@
       }
     });
 
-    // 🔹 Load similar books (same genre)
+   
     async function loadSuggestions() {
       try {
         const res = await fetch(`data/${book.genre}.json`);
@@ -276,9 +309,90 @@
 
 
 
-    
-   
+     const bookmarkBtn = document.getElementById('bookmarkBtn');
+    bookmarkBtn.addEventListener('click', () => {
+      if (!book) return;
+
+      let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || [];
+      const exists = bookmarks.some(b => b.name === book.name);
+
+      if (exists) {
+        alert("📚 This book is already in your bookmarks!");
+      } else {
+        bookmarks.push(book);
+        localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
+        alert("✅ Book added to your bookmarks!");
+      }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  // const book = JSON.parse(localStorage.getItem("selectedBook"));
+  // if (book) {
+  //   document.getElementById('bookName').textContent = book.name;
+  //   document.getElementById('bookAuthor').textContent = book.author;
+  //   document.getElementById('bookGenre').textContent = book.genre;
+  //   document.getElementById('bookRating').textContent = '⭐ ' + book.rating;
+  //   document.getElementById('bookPdf').src = book.pdfUrl;
+  // }
+
+  
+  // const fullscreenBtn = document.getElementById('fullscreenBtn');
+  // fullscreenBtn.addEventListener('click', () => {
+  //   const iframe = document.getElementById('bookPdf');
+  //   if (iframe.requestFullscreen) iframe.requestFullscreen();
+  //   else if (iframe.mozRequestFullScreen) iframe.mozRequestFullScreen();
+  //   else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+  //   else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+  // });
+
+  
+  // async function loadSuggestions() {
+  //   try {
+  //     const res = await fetch(`data/${book.genre}.json`);
+  //     const data = await res.json();
+  //     const suggestions = data.filter(b => b.name !== book.name).slice(0, 6);
+
+  //     const grid = document.getElementById('suggestionGrid');
+  //     grid.innerHTML = '';
+  //     suggestions.forEach(b => {
+  //       const card = document.createElement('div');
+  //       card.classList.add('suggestion-card');
+  //       card.innerHTML = `
+  //         <img src="${b.thumbnail}" alt="${b.name}" />
+  //         <p>${b.name}</p>
+  //       `;
+  //       card.addEventListener('click', () => {
+  //         localStorage.setItem("selectedBook", JSON.stringify(b));
+  //         window.location.href = "book.html"; 
+  //       });
+  //       grid.appendChild(card);
+  //     });
+  //   } catch (err) {
+  //     console.error('Error loading suggestions:', err);
+  //   }
+  // }
+
+  // loadSuggestions();
+
+
+
+
+
+ 
+
 
   </script>
+  
 </body>
 </html>
