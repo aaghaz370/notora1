@@ -1,85 +1,169 @@
 // ===== Main Page Book Loading =====
-    const categories = [
-        "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", 
-        "Coding",  "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
-    ];
-    const categoryContainer = document.getElementById("categoryContainer");
+//     const categories = [
+//         "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", "Horror", "Fantasy", 
+//         "Coding",  "Business", "CBSE", "ICSE", "10th", "11th", "12th", "Spiritual", "Comics"
+//     ];
+//     const categoryContainer = document.getElementById("categoryContainer");
 
-    async function loadCategory(category) {
-        try {
-            const res = await fetch(`data/${category}.json`);
-            if (!res.ok) return; // Skip if a category file doesn't exist
-            const books = await res.json();
+//     async function loadCategory(category) {
+//         try {
+//             const res = await fetch(`data/${category}.json`);
+//             if (!res.ok) return; 
+//             const books = await res.json();
             
-            const section = document.createElement("div");
-            section.className = "category-section";
+//             const section = document.createElement("div");
+//             section.className = "category-section";
 
-            const title = document.createElement("h3");
-            title.className = "category-title";
-            title.textContent = category;
+//             const title = document.createElement("h3");
+//             title.className = "category-title";
+//             title.textContent = category;
 
-            const wrapper = document.createElement("div");
-            wrapper.style.position = 'relative';
+//             const wrapper = document.createElement("div");
+//             wrapper.style.position = 'relative';
 
-            const slider = document.createElement("div");
-            slider.className = "book-slider";
+//             const slider = document.createElement("div");
+//             slider.className = "book-slider";
 
-            books.slice(0, 30).forEach(book => {
-                const card = document.createElement("div");
-                card.className = "book-card";
-                card.innerHTML = `
-                    <img src="${book.thumbnail}" alt="${book.name}" />
-                    <div class="book-title">${book.name}</div>
-                    <div class="book-author">${book.author}</div>
-                    <div class="book-genre">${book.genre}</div>
-                    <div class="book-rating">⭐ ${book.rating}</div>
-                `;
+//             books.slice(0, 30).forEach(book => {
+//                 const card = document.createElement("div");
+//                 card.className = "book-card";
+//                 card.innerHTML = `
+//                     <img src="${book.thumbnail}" alt="${book.name}" />
+//                     <div class="book-title">${book.name}</div>
+//                     <div class="book-author">${book.author}</div>
+//                     <div class="book-genre">${book.genre}</div>
+//                     <div class="book-rating">⭐ ${book.rating}</div>
+//                 `;
                 
-                card.addEventListener("click", () => {
-                    localStorage.setItem("selectedBook", JSON.stringify(book));
-                    window.location.href = "book.html";
-                });
-                slider.appendChild(card);
-            });
+//                 card.addEventListener("click", () => {
+//                     localStorage.setItem("selectedBook", JSON.stringify(book));
+//                     window.location.href = "book.html";
+//                 });
+//                 slider.appendChild(card);
+//             });
 
-            const leftArrow = document.createElement("button");
-            leftArrow.className = "arrow-btn arrow-left";
-            leftArrow.innerHTML = "&#8249;";
-            leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: 'smooth' });
+//             const leftArrow = document.createElement("button");
+//             leftArrow.className = "arrow-btn arrow-left";
+//             leftArrow.innerHTML = "&#8249;";
+//             leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: 'smooth' });
 
-            const rightArrow = document.createElement("button");
-            rightArrow.className = "arrow-btn arrow-right";
-            rightArrow.innerHTML = "&#8250;";
-            rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: 'smooth' });
+//             const rightArrow = document.createElement("button");
+//             rightArrow.className = "arrow-btn arrow-right";
+//             rightArrow.innerHTML = "&#8250;";
+//             rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: 'smooth' });
 
-            wrapper.appendChild(leftArrow);
-            wrapper.appendChild(slider);
-            wrapper.appendChild(rightArrow);
+//             wrapper.appendChild(leftArrow);
+//             wrapper.appendChild(slider);
+//             wrapper.appendChild(rightArrow);
 
-            // ===== Add "Show All" Button =====
-const showAllBtn = document.createElement("button");
-showAllBtn.className = "show-all-btn";
-showAllBtn.textContent = "Show All →";
-showAllBtn.onclick = () => {
-  window.location.href = `category.html?genre=${encodeURIComponent(category)}`;
-};
+            
+// const showAllBtn = document.createElement("button");
+// showAllBtn.className = "show-all-btn";
+// showAllBtn.textContent = "Show All →";
+// showAllBtn.onclick = () => {
+//   window.location.href = `category.html?genre=${encodeURIComponent(category)}`;
+// };
 
-section.appendChild(showAllBtn);
+// section.appendChild(showAllBtn);
 
 
           
 
 
-            section.appendChild(title);
-            section.appendChild(wrapper);
-            categoryContainer.appendChild(section);
-        } catch (error) {
-            console.error(`Failed to load category: ${category}`, error);
-        }
-    }
+//             section.appendChild(title);
+//             section.appendChild(wrapper);
+//             categoryContainer.appendChild(section);
+//         } catch (error) {
+//             console.error(`Failed to load category: ${category}`, error);
+//         }
+//     }
 
-    categories.forEach(loadCategory);
-    
+//     categories.forEach(loadCategory);
+    // ===== Main Page Book Loading =====
+const categories = [
+  "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance", 
+  "Horror", "Fantasy", "Coding", "Business", "CBSE", "ICSE", 
+  "10th", "11th", "12th", "Spiritual", "Comics"
+];
+
+const categoryContainer = document.getElementById("categoryContainer");
+
+async function loadCategory(category) {
+  try {
+    const res = await fetch(`data/${category}.json`);
+    if (!res.ok) return;
+
+    const books = await res.json();
+
+    const section = document.createElement("div");
+    section.className = "category-section";
+
+    const title = document.createElement("h3");
+    title.className = "category-title";
+    title.textContent = category;
+
+    const wrapper = document.createElement("div");
+    wrapper.style.position = "relative";
+
+    const slider = document.createElement("div");
+    slider.className = "book-slider";
+
+    // ==== Load First 30 Books ====
+    books.slice(0, 30).forEach(book => {
+      const card = document.createElement("div");
+      card.className = "book-card";
+      card.innerHTML = `
+        <img src="${book.thumbnail}" alt="${book.name}" />
+        <div class="book-title">${book.name}</div>
+        <div class="book-author">${book.author}</div>
+        <div class="book-genre">${book.genre}</div>
+        <div class="book-rating">⭐ ${book.rating}</div>
+      `;
+
+      card.addEventListener("click", () => {
+        localStorage.setItem("selectedBook", JSON.stringify(book));
+        window.location.href = "book.html";
+      });
+
+      slider.appendChild(card);
+    });
+
+    // ==== Arrows ====
+    const leftArrow = document.createElement("button");
+    leftArrow.className = "arrow-btn arrow-left";
+    leftArrow.innerHTML = "&#8249;";
+    leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: "smooth" });
+
+    const rightArrow = document.createElement("button");
+    rightArrow.className = "arrow-btn arrow-right";
+    rightArrow.innerHTML = "&#8250;";
+    rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: "smooth" });
+
+    wrapper.appendChild(leftArrow);
+    wrapper.appendChild(slider);
+    wrapper.appendChild(rightArrow);
+
+    // ==== Show All Button ====
+    const showAllBtn = document.createElement("button");
+    showAllBtn.className = "show-all-btn";
+    showAllBtn.textContent = "Show All →";
+    showAllBtn.onclick = () => {
+      window.location.href = `category.html?genre=${encodeURIComponent(category)}`;
+    };
+
+    // ==== Append Everything ====
+    section.appendChild(title);
+    section.appendChild(wrapper);
+    section.appendChild(showAllBtn); // ✅ Button at the END
+    categoryContainer.appendChild(section);
+
+  } catch (error) {
+    console.error(`Failed to load category: ${category}`, error);
+  }
+}
+
+categories.forEach(loadCategory);
+
 
 
     // ===== Search Logic =====

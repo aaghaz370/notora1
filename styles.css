@@ -956,21 +956,23 @@ footer small {
 
 .show-all-btn {
   display: block;
-  margin: 10px auto 30px;
-  background: #1f6feb;
-  color: #fff;
+  margin: 20px auto 40px;
+  padding: 10px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-color, #fff);
+  background: linear-gradient(135deg, #0078ff, #00c6ff);
   border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 0.95rem;
+  border-radius: 30px;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .show-all-btn:hover {
-  background: #58a6ff;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
 }
+
 
 
 }
