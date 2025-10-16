@@ -1058,12 +1058,32 @@
   });
 
   // floating open modal
-  floating.addEventListener("click", (e)=>{
-    // open overlay
-    overlay.classList.add("show");
-    overlay.setAttribute("aria-hidden","false");
-    overlayModal.focus?.();
-  });
+//   floating.addEventListener("click", (e)=>{
+//     // open overlay
+//     overlay.classList.add("show");
+//     overlay.setAttribute("aria-hidden","false");
+//     overlayModal.focus?.();
+//   });
+// ---------- floating open modal (desktop + mobile touch fix) ----------
+let isModalOpen = false; // debounce flag
+
+function openModal() {
+  if (isModalOpen) return; // prevent multiple triggers
+  isModalOpen = true;
+  overlay.classList.add("show");
+  overlay.setAttribute("aria-hidden", "false");
+  overlayModal.focus?.();
+  // reset flag after tiny delay
+  setTimeout(() => { isModalOpen = false; }, 100);
+}
+
+// Add both click and touchstart for mobile
+floating.addEventListener("click", openModal);
+floating.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // prevent ghost click on mobile
+  openModal();
+});
+
 
   // Mobile UI improvement: close button handler
   closeModalBtn.addEventListener("click", ()=>{
