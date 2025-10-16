@@ -17,6 +17,8 @@
     --smooth: 300ms cubic-bezier(.2,.9,.2,1);
     --shadow: 0 8px 30px rgba(2,6,23,0.6);
     }
+
+     html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;color:#e6eef8;background:linear-gradient(180deg,#071019 0%, #08111a 100%);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
  
  body {
   margin: 0;
