@@ -295,9 +295,16 @@
       <div style="flex:1">
         <p><strong>Author:</strong> ${escapeHtml(book.author||'Unknown')}</p>
         <p><strong>Category:</strong> ${escapeHtml(book.category||'Fiction')}</p>
-        <p style="margin-top:18px"><a href="book.html?name=${encodeURIComponent(book.name||'')}">Open book </a></p>
+
+        ${/* Open book button styled like remove button */''}
+        <a href="book.html?name=${encodeURIComponent(book.name||'')}" 
+           style="display:inline-block;margin-top:18px;padding:10px 16px;background:#3498db;color:#fff;border:none;border-radius:6px;text-decoration:none;cursor:pointer;">
+           Open Book
+        </a>
+
       </div>
     </div>
+
     ${isBookmarked ? `<button id="removeBookmarkBtn" style="margin-top:20px;padding:10px 16px;background:#e74c3c;color:#fff;border:none;border-radius:6px;cursor:pointer;">Remove from Bookmarks</button>` : ''}`;
 
   // Add event listener for remove button
@@ -313,6 +320,7 @@
     });
   }
 }
+
 
 
     showMoreBtn.addEventListener('click', ()=>{
