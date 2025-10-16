@@ -6,19 +6,7 @@
       --gradient-3: #000000;
       --text-light: #2f2d2d;
 
-       --bg: #0d1117;
-    --card: rgba(18,20,26,0.85);
-    --muted: #9aa4b2;
-    --accent: #7c4dff; /* change to match your site */
-    --accent-2: #ff6b6b;
-    --glass: rgba(255,255,255,0.03);
-    --glass-2: rgba(255,255,255,0.02);
-    --radius: 14px;
-    --smooth: 300ms cubic-bezier(.2,.9,.2,1);
-    --shadow: 0 8px 30px rgba(2,6,23,0.6);
-    }
-
-     html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;color:#e6eef8;background:linear-gradient(180deg,#071019 0%, #08111a 100%);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+      
  
  body {
   margin: 0;
@@ -916,4 +904,4 @@ footer small {
   100% { opacity: 0; transform: translateY(20px); }
 }
 
-   
+}
