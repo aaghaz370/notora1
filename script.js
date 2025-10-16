@@ -146,9 +146,22 @@ overlaySearchInput.addEventListener("input", async (e) => {
   }
 });
 
-profileIcon.addEventListener("click", () => {
-  window.location.href = "profile.html";
+// profileIcon.addEventListener("click", () => {
+//   window.location.href = "profile.html";
+// });
+// ---------- Load Profile Image from localStorage ----------
+document.addEventListener("DOMContentLoaded", () => {
+  const profileIconImg = document.querySelector("#profileIcon img");
+  const savedImage = localStorage.getItem("userImage");
+
+  if (savedImage && profileIconImg) {
+    profileIconImg.src = savedImage;
+  } else {
+    // fallback default if none saved yet
+    profileIconImg.src = "https://cdn-icons-png.flaticon.com/512/3135/3135715.png";
+  }
 });
+
 
 
 
