@@ -7,6 +7,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -160,7 +163,149 @@
     
   </div>
 </div>
+<!-- clock -->
+<div class="floating-clock" id="floatingClock" title="Open Study Timer">
+  <div class="pulse"></div>
+  <div class="time-mini" id="miniTime">25:00</div>
+</div>
 
+<!-- Modal -->
+<div class="ts-overlay" id="overlay" aria-hidden="true">
+  <div class="ts-modal" role="dialog" aria-modal="true" aria-label="Study Timer Modal">
+    <!-- left: timer view & stats -->
+    <div class="panel-left">
+      <div class="modal-head">
+        <div class="title">
+          <div class="brand-badge">ES</div>
+          <div>
+            <h3>Study Timer</h3>
+            <div class="small-muted">Pomodoro • Focus Sessions</div>
+          </div>
+        </div>
+
+        <div class="view-toggle">
+          <div class="chip" id="viewTimerBtn"><i class="fa-solid fa-stopwatch"></i>&nbsp;Timer</div>
+          <div class="chip" id="viewGraphBtn"><i class="fa-solid fa-chart-column"></i>&nbsp;Graph</div>
+        </div>
+      </div>
+
+      <!-- Timer block -->
+      <div id="timerBlock" class="fade-in">
+        <div class="timer-big">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <div class="timer-controls">
+              <button class="btn btn-start" id="startBtn"><i class="fa-solid fa-play"></i> Start</button>
+              <button class="btn btn-pause" id="pauseBtn"><i class="fa-solid fa-pause"></i> Pause</button>
+              <button class="btn btn-reset" id="resetBtn"><i class="fa-solid fa-rotate"></i> Reset</button>
+            </div>
+          </div>
+
+          <div class="presets" aria-hidden="true">
+            <div class="preset-item" data-min="15">15m</div>
+            <div class="preset-item" data-min="25">25m</div>
+            <div class="preset-item" data-min="30">30m</div>
+            <div class="preset-item" data-min="45">45m</div>
+            <div class="preset-item" data-min="60">60m</div>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="num" id="statSessions">0</div>
+              <div class="label">Sessions</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statThisWeek">0h</div>
+              <div class="label">This Week</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statGoalPerc">0%</div>
+              <div class="label">Goal</div>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:12px">
+              <div>Today's Progress</div>
+              <div id="progressLabel">0/60 min</div>
+            </div>
+            <div class="progress-bar" aria-hidden="true" style="margin-top:8px">
+              <div id="progressFill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph block hidden by default -->
+      <div id="graphBlock" style="display:none">
+        <div style="padding:8px 4px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:700;color:#e9f0ff">Focus & Progress</div>
+            <div class="control-small">View: <span id="graphRange">Week</span></div>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <div class="chip" id="weekRange">Week</div>
+            <div class="chip" id="monthRange">Month</div>
+          </div>
+
+          <div class="graph-wrap" style="margin-top:12px">
+            <canvas id="focusChart" width="600" height="240"></canvas>
+          </div>
+
+          <div class="history" id="historyList"></div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <div>
+          <div style="font-weight:700">Daily Goal (min)</div>
+          <div style="margin-top:8px"><input class="goal-input" id="dailyGoal" type="number" min="10" value="60"></div>
+        </div>
+        <div style="text-align:right">
+          <div class="control-small">Notifications</div>
+          <div style="margin-top:6px"><label style="display:inline-flex;align-items:center;gap:8px"><input type="checkbox" id="notifyToggle"> Enable</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right: history, session list & settings -->
+    <div class="panel-right">
+      <h4>Session History</h4>
+      <div style="color:var(--muted);font-size:13px">All tracked sessions are stored locally on your device. Weekly data auto-rotates every 7 days.</div>
+
+      <div style="margin-top:12px" id="rightStats">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <div style="flex:1;min-width:120px">
+            <div style="font-size:12px;color:var(--muted)">Weekly Total</div>
+            <div style="font-weight:800;font-size:20px" id="rightWeekTotal">0 min</div>
+          </div>
+          <div style="flex:1;min-width:120px">
+            <div style="font-size:12px;color:var(--muted)">Monthly Total</div>
+            <div style="font-weight:800;font-size:20px" id="rightMonthTotal">0 min</div>
+          </div>
+          <div style="flex:1;min-width:120px">
+            <div style="font-size:12px;color:var(--muted)">Sessions</div>
+            <div style="font-weight:800;font-size:20px" id="rightSessions">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px"><div class="graph-wrap" style="padding:12px"><canvas id="miniChart" width="400" height="120"></canvas></div></div>
+
+      <h4 style="margin-top:16px">Recent Sessions</h4>
+      <div class="history" id="recentSessions"></div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button class="btn btn-start" id="exportBtn"><i class="fa-solid fa-download"></i> Export JSON</button>
+        <button class="btn btn-pause" id="clearBtn"><i class="fa-solid fa-trash"></i> Clear Local Data</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- clock -->
 
   <div class="notice-banner" id="notice">
   <button class="close-btn" onclick="closeNotice()">×</button>
