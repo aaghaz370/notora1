@@ -56,6 +56,17 @@
             wrapper.appendChild(slider);
             wrapper.appendChild(rightArrow);
 
+            // ===== Add "Show All" Button =====
+const showAllBtn = document.createElement("button");
+showAllBtn.className = "show-all-btn";
+showAllBtn.textContent = "Show All →";
+showAllBtn.onclick = () => {
+  window.location.href = `category.html?genre=${encodeURIComponent(category)}`;
+};
+
+section.appendChild(showAllBtn);
+
+
             section.appendChild(title);
             section.appendChild(wrapper);
             categoryContainer.appendChild(section);
