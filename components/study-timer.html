@@ -1,294 +1,678 @@
-<div class="study-timer-widget">
-  <div class="timer-toggle">
-    <i class="fas fa-clock"></i>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Study Timer | EduSpark</title>
 
-  <div class="timer-card">
-    <div class="timer-header">
-      <h2>Study Timer</h2>
-      <span id="closeTimer">&times;</span>
-    </div>
+  <!-- Fonts and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <div class="timer-tabs">
-      <button class="tab-btn active" data-tab="timer">Timer</button>
-      <button class="tab-btn" data-tab="stats">Stats</button>
-      <button class="tab-btn" data-tab="graph">Graph</button>
-    </div>
-
-    <!-- Timer -->
-    <div class="tab-content active" id="timer">
-      <h1 id="timerDisplay">25:00</h1>
-      <input type="text" id="studyTopic" placeholder="What are you studying? (optional)">
-      <div class="timer-buttons">
-        <button id="startBtn" class="start">Start</button>
-        <button id="stopBtn" class="stop">Stop</button>
-      </div>
-      <p class="session-info">Today's Progress: <span id="progressText">0/60 min</span></p>
-      <div class="progress-bar"><div id="progressFill"></div></div>
-    </div>
-
-    <!-- Stats -->
-    <div class="tab-content" id="stats">
-      <div class="stats-grid">
-        <div class="stat-box"><h3 id="sessionCount">0</h3><p>Sessions</p></div>
-        <div class="stat-box"><h3 id="weekHours">0h</h3><p>This Week</p></div>
-        <div class="stat-box"><h3 id="monthHours">0h</h3><p>This Month</p></div>
-      </div>
-      <label>Daily Goal (min)</label>
-      <input type="number" id="dailyGoal" value="60" min="10" max="600">
-    </div>
-
-    <!-- Graph -->
-    <div class="tab-content" id="graph">
-      <canvas id="progressChart"></canvas>
+  <style>
+    /* ====== CSS WILL GO IN PART 2 ====== */
+  </style>
+</head>
+<body>
+  <!-- Floating Timer Button -->
+  <div class="floating-timer" id="floatingTimer">
+    <div class="floating-circle">
+      <span class="clock-icon">⏱️</span>
     </div>
   </div>
-</div>
+
+  <!-- Timer Popup Modal -->
+  <div class="timer-modal hidden" id="timerModal">
+    <div class="timer-container">
+      <div class="timer-header">
+        <h2>Smart Study Timer</h2>
+        <div class="tabs">
+          <button class="tab-btn active" data-target="timerSection">Timer</button>
+          <button class="tab-btn" data-target="graphSection">Graph</button>
+          <button class="tab-btn" data-target="sessionSection">Session</button>
+        </div>
+        <button class="close-btn" id="closeModal">✖</button>
+      </div>
+
+      <div class="tab-content">
+        <!-- ================= TIMER SECTION ================= -->
+        <section id="timerSection" class="tab-pane active">
+          <div class="timer-display">
+            <div id="time">25:00</div>
+            <div class="timer-controls">
+              <button id="startBtn">Start</button>
+              <button id="pauseBtn">Pause</button>
+              <button id="resetBtn">Reset</button>
+            </div>
+          </div>
+
+          <div class="timer-options">
+            <label>Session Duration:
+              <select id="sessionLength">
+                <option value="25">25 min</option>
+                <option value="45">45 min</option>
+                <option value="60">60 min</option>
+              </select>
+            </label>
+            <label>Break Duration:
+              <select id="breakLength">
+                <option value="5">5 min</option>
+                <option value="10">10 min</option>
+                <option value="15">15 min</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="status">
+            <p id="statusText">Focus Session</p>
+          </div>
+
+          <div class="progress-ring">
+            <canvas id="progressCanvas" width="250" height="250"></canvas>
+          </div>
+        </section>
+
+        <!-- ================= GRAPH SECTION ================= -->
+        <section id="graphSection" class="tab-pane">
+          <div class="graph-container">
+            <h3>Weekly Productivity</h3>
+            <canvas id="studyGraph" width="400" height="200"></canvas>
+            <div class="graph-stats">
+              <p>Total Study Time: <span id="totalTime">0 hrs</span></p>
+              <p>Sessions Completed: <span id="totalSessions">0</span></p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ================= SESSION SECTION ================= -->
+        <section id="sessionSection" class="tab-pane">
+          <div class="session-summary">
+            <h3>Session Summary</h3>
+            <div id="sessionList" class="session-list">
+              <!-- Session history dynamically added here -->
+            </div>
+            <div class="clear-session">
+              <button id="clearSessions">Clear All Sessions</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script>
+    /* ====== JAVASCRIPT WILL GO IN PART 3 ====== */
+  </script>
+</body>
+</html>
 <style>
-    .study-timer-widget {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10000;
+    /* ========= GLOBAL RESET ========= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
 }
 
-/* Floating button */
-.timer-toggle {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #6a5acd, #7b68ee);
-  color: #fff;
+body {
+  background: var(--bg-color);
+  color: var(--text-color);
+  overflow-x: hidden;
+}
+
+/* ========= THEME VARIABLES ========= */
+:root {
+  --bg-color: #0e0e10;
+  --text-color: #ffffff;
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --border-color: rgba(255, 255, 255, 0.2);
+  --accent-color: #5e8bff;
+  --secondary-color: #6affd5;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.light-mode {
+  --bg-color: #f9f9fb;
+  --text-color: #121212;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --border-color: rgba(0, 0, 0, 0.1);
+  --accent-color: #3d6ef7;
+  --secondary-color: #00c6a2;
+  --shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* ========= FLOATING TIMER BUTTON ========= */
+.floating-timer {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  cursor: grab;
+}
+
+.floating-circle {
+  background: var(--accent-color);
+  width: 65px;
+  height: 65px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 1.6rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-  transition: transform 0.3s ease;
+  box-shadow: var(--shadow);
 }
-.timer-toggle:hover { transform: scale(1.1); }
 
-.timer-card {
-  display: none;
-  position: absolute;
-  bottom: 80px;
-  right: 0;
-  width: 340px;
-  background: #141414;
+.floating-circle:hover {
+  transform: scale(1.05);
+}
+
+.clock-icon {
+  font-size: 28px;
+  color: #fff;
+}
+
+/* ========= TIMER MODAL ========= */
+.timer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.timer-container {
+  width: 90%;
+  max-width: 480px;
+  background: var(--card-bg);
   border-radius: 20px;
   padding: 20px;
-  color: #fff;
-  box-shadow: 0 0 25px rgba(0,0,0,0.5);
-  animation: fadeIn 0.3s ease;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
+/* ========= HEADER ========= */
 .timer-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
-.timer-header h2 { font-size: 1.2rem; }
-#closeTimer { cursor: pointer; font-size: 1.4rem; color: #999; }
 
-.timer-tabs {
+.timer-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.tabs {
   display: flex;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 8px;
 }
+
 .tab-btn {
-  flex: 1;
-  background: #1e1e1e;
-  border: none;
-  color: #999;
-  border-radius: 10px;
-  padding: 8px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.3s ease;
 }
-.tab-btn.active {
-  background: #6a5acd;
+
+.tab-btn.active,
+.tab-btn:hover {
+  background: var(--accent-color);
   color: #fff;
 }
 
-.tab-content { display: none; margin-top: 20px; }
-.tab-content.active { display: block; }
-
-/* Timer display */
-#timerDisplay {
-  font-size: 3rem;
-  color: #b19fff;
-  margin-bottom: 10px;
-}
-.timer-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-.timer-buttons button {
+.close-btn {
+  background: transparent;
   border: none;
-  padding: 10px 25px;
-  border-radius: 10px;
-  font-weight: 600;
+  font-size: 1.2rem;
   cursor: pointer;
-  transition: 0.3s;
-}
-.start { background: #32cd32; color: #fff; }
-.stop { background: #ff4b4b; color: #fff; }
-
-.progress-bar {
-  height: 8px;
-  width: 100%;
-  background: #222;
-  border-radius: 5px;
-  margin-top: 10px;
-  overflow: hidden;
-}
-#progressFill {
-  height: 100%;
-  width: 0;
-  background: #6a5acd;
-  transition: width 0.3s ease;
+  color: var(--text-color);
 }
 
-/* Stats */
-.stats-grid {
+/* ========= TIMER DISPLAY ========= */
+.timer-display {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#time {
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--secondary-color);
+}
+
+.timer-controls button {
+  background: var(--accent-color);
+  border: none;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.timer-controls button:hover {
+  background: var(--secondary-color);
+  color: #000;
+}
+
+.timer-options {
   display: flex;
   justify-content: space-between;
+  margin: 15px 0;
+  font-size: 0.9rem;
+}
+
+.timer-options select {
+  background: transparent;
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 4px 6px;
+  border-radius: 5px;
+}
+
+.status {
   text-align: center;
-  margin-bottom: 20px;
+  font-size: 1rem;
+  margin-top: 10px;
+  color: var(--accent-color);
 }
-.stat-box {
-  background: #1e1e1e;
+
+/* ========= PROGRESS RING ========= */
+.progress-ring {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ========= GRAPH SECTION ========= */
+.graph-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.graph-container h3 {
+  margin-bottom: 15px;
+}
+
+.graph-stats {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+/* ========= SESSION SECTION ========= */
+.session-summary {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.session-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.session-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.session-list::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+.session-item {
+  border-bottom: 1px solid var(--border-color);
+  padding: 8px 4px;
+}
+
+.clear-session button {
+  background: var(--secondary-color);
+  border: none;
+  padding: 8px 15px;
   border-radius: 10px;
-  padding: 15px;
-  width: 30%;
-}
-.stat-box h3 {
-  font-size: 1.4rem;
-  color: #b19fff;
+  cursor: pointer;
 }
 
-/* Graph */
-#progressChart {
-  width: 100%;
-  height: 180px;
+.clear-session button:hover {
+  background: var(--accent-color);
+  color: white;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(15px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ========= THEME TOGGLE ========= */
+.theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 50px;
+  cursor: pointer;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
 }
 
-/* Responsive */
-@media (max-width: 480px) {
-  .timer-card {
-    width: 90vw;
-    right: -5vw;
+/* ========= RESPONSIVE ========= */
+@media (max-width: 768px) {
+  .timer-container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  #time {
+    font-size: 2.5rem;
+  }
+
+  .tab-btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+  }
+
+  .timer-controls button {
+    padding: 6px 10px;
+  }
+
+  .floating-circle {
+    width: 55px;
+    height: 55px;
+  }
+
+  .clock-icon {
+    font-size: 24px;
+  }
+
+  .graph-container canvas {
+    width: 100% !important;
+    height: auto !important;
   }
 }
 
 </style>
 <script>
-    // Load Chart.js
-const script = document.createElement("script");
-script.src = "https://cdn.jsdelivr.net/npm/chart.js";
-document.head.appendChild(script);
+    // =============== THEME TOGGLE ===============
+const root = document.documentElement;
+const body = document.body;
+const themeToggle = document.createElement("div");
+themeToggle.classList.add("theme-toggle");
+themeToggle.innerHTML = "☀️";
+document.querySelector(".timer-container").appendChild(themeToggle);
 
-let timerInterval;
-let timeLeft = 25 * 60;
-let running = false;
-let totalMinutes = parseInt(localStorage.getItem("totalMinutes")) || 0;
-let weeklyData = JSON.parse(localStorage.getItem("weeklyData")) || Array(7).fill(0);
-let currentDay = new Date().getDay();
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+  themeToggle.innerHTML = body.classList.contains("light-mode") ? "🌙" : "☀️";
+  localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
+});
 
-function updateTimerDisplay() {
-  const m = Math.floor(timeLeft / 60);
-  const s = timeLeft % 60;
-  document.getElementById("timerDisplay").textContent = `${m}:${s.toString().padStart(2, "0")}`;
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+  themeToggle.innerHTML = "🌙";
+}
+
+// =============== TIMER LOGIC ===============
+const timeDisplay = document.getElementById("time");
+const startBtn = document.getElementById("startBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const resetBtn = document.getElementById("resetBtn");
+const statusText = document.getElementById("statusText");
+const sessionSelect = document.getElementById("sessionLength");
+const breakSelect = document.getElementById("breakLength");
+const canvas = document.getElementById("progressCanvas");
+const ctx = canvas.getContext("2d");
+
+let timer;
+let totalSeconds = 25 * 60;
+let remaining = totalSeconds;
+let isRunning = false;
+let isBreak = false;
+
+const ding = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_ding-10772.mp3?filename=ding-10772.mp3");
+
+// Format time
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
+}
+
+// Draw progress ring
+function drawProgress() {
+  const radius = 100;
+  const center = canvas.width / 2;
+  const progress = 1 - remaining / totalSeconds;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--border-color");
+
+  ctx.beginPath();
+  ctx.arc(center, center, radius, 0, 2 * Math.PI);
+  ctx.stroke();
+
+  ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--accent-color");
+  ctx.beginPath();
+  ctx.arc(center, center, radius, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * progress);
+  ctx.stroke();
+}
+
+// Update timer every second
+function updateTimer() {
+  remaining--;
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+
+  if (remaining <= 0) {
+    clearInterval(timer);
+    ding.play();
+    if (!isBreak) {
+      addSession(totalSeconds / 60);
+      startBreak();
+    } else {
+      startFocus();
+    }
+  }
 }
 
 function startTimer() {
-  if (running) return;
-  running = true;
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    updateTimerDisplay();
-    if (timeLeft <= 0) {
-      clearInterval(timerInterval);
-      running = false;
-      addSession();
-    }
-  }, 1000);
-}
-
-function stopTimer() {
-  clearInterval(timerInterval);
-  running = false;
-}
-
-function addSession() {
-  totalMinutes += 25;
-  weeklyData[currentDay] += 25;
-  saveData();
-  updateStats();
-}
-
-function saveData() {
-  localStorage.setItem("totalMinutes", totalMinutes);
-  localStorage.setItem("weeklyData", JSON.stringify(weeklyData));
-}
-
-function updateStats() {
-  document.getElementById("sessionCount").textContent = Math.floor(totalMinutes / 25);
-  document.getElementById("weekHours").textContent = `${Math.floor(totalMinutes / 60)}h`;
-  document.getElementById("monthHours").textContent = `${Math.floor(totalMinutes / 60)}h`;
-}
-
-function switchTab(tab) {
-  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add("active");
-  document.getElementById(tab).classList.add("active");
-}
-
-// UI controls
-document.addEventListener("click", e => {
-  if (e.target.matches(".timer-toggle, .timer-toggle *")) {
-    document.querySelector(".timer-card").style.display = "block";
+  if (!isRunning) {
+    timer = setInterval(updateTimer, 1000);
+    isRunning = true;
   }
-  if (e.target.id === "closeTimer") {
-    document.querySelector(".timer-card").style.display = "none";
-  }
-  if (e.target.matches("#startBtn")) startTimer();
-  if (e.target.matches("#stopBtn")) stopTimer();
-  if (e.target.matches(".tab-btn")) switchTab(e.target.dataset.tab);
+}
+
+function pauseTimer() {
+  clearInterval(timer);
+  isRunning = false;
+}
+
+function resetTimer() {
+  clearInterval(timer);
+  isRunning = false;
+  remaining = totalSeconds;
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+}
+
+function startFocus() {
+  isBreak = false;
+  totalSeconds = parseInt(sessionSelect.value) * 60;
+  remaining = totalSeconds;
+  statusText.textContent = "Focus Session";
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+}
+
+function startBreak() {
+  isBreak = true;
+  totalSeconds = parseInt(breakSelect.value) * 60;
+  remaining = totalSeconds;
+  statusText.textContent = "Break Time ☕";
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+  startTimer();
+}
+
+// Buttons
+startBtn.addEventListener("click", startTimer);
+pauseBtn.addEventListener("click", pauseTimer);
+resetBtn.addEventListener("click", resetTimer);
+sessionSelect.addEventListener("change", startFocus);
+breakSelect.addEventListener("change", startFocus);
+
+// =============== SESSION STORAGE ===============
+const sessionList = document.getElementById("sessionList");
+const clearBtn = document.getElementById("clearSessions");
+
+function addSession(minutes) {
+  const session = {
+    date: new Date().toLocaleString(),
+    duration: minutes,
+  };
+  const sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+  sessions.push(session);
+  localStorage.setItem("sessions", JSON.stringify(sessions));
+  renderSessions();
+  updateGraph();
+}
+
+function renderSessions() {
+  const sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+  sessionList.innerHTML = "";
+  sessions.slice().reverse().forEach((s) => {
+    const div = document.createElement("div");
+    div.classList.add("session-item");
+    div.textContent = `${s.date} — ${s.duration} min`;
+    sessionList.appendChild(div);
+  });
+}
+
+clearBtn.addEventListener("click", () => {
+  localStorage.removeItem("sessions");
+  renderSessions();
+  updateGraph();
 });
 
-// Initialize
-updateTimerDisplay();
-updateStats();
+// =============== GRAPH LOGIC ===============
+const graphCanvas = document.getElementById("studyGraph");
+const gctx = graphCanvas.getContext("2d");
 
-// Graph after Chart.js loads
-script.onload = () => {
-  const ctx = document.getElementById("progressChart");
-  new Chart(ctx, {
-    type: "bar",
-    data: {
-      labels: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
-      datasets: [{
-        label: "Study Minutes",
-        data: weeklyData,
-        backgroundColor: "#6a5acd"
-      }]
-    },
-    options: {
-      scales: { y: { beginAtZero: true } },
-      plugins: { legend: { display: false } }
-    }
+function updateGraph() {
+  const sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+  const week = Array(7).fill(0);
+  const now = new Date();
+  sessions.forEach((s) => {
+    const d = new Date(s.date);
+    const diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+    if (diff < 7) week[6 - diff] += s.duration;
   });
-};
+
+  gctx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+
+  const barWidth = 40;
+  const gap = 20;
+  const max = Math.max(...week, 1);
+  const heightScale = 150 / max;
+
+  const days = ["M", "T", "W", "T", "F", "S", "S"];
+
+  gctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--accent-color");
+  gctx.textAlign = "center";
+  gctx.font = "14px Poppins";
+
+  week.forEach((v, i) => {
+    const x = 40 + i * (barWidth + gap);
+    const y = 200 - v * heightScale;
+    gctx.fillRect(x, y, barWidth, v * heightScale);
+    gctx.fillText(days[i], x + barWidth / 2, 190 + 20);
+  });
+
+  document.getElementById("totalTime").textContent = (week.reduce((a, b) => a + b, 0) / 60).toFixed(1) + " hrs";
+  document.getElementById("totalSessions").textContent = sessions.length;
+}
+
+// =============== TAB SWITCHING ===============
+const tabs = document.querySelectorAll(".tab-btn");
+const panes = document.querySelectorAll(".tab-pane");
+
+tabs.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabs.forEach((b) => b.classList.remove("active"));
+    panes.forEach((p) => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.target).classList.add("active");
+  });
+});
+
+// =============== FLOATING BUTTON BEHAVIOR ===============
+const floatingTimer = document.getElementById("floatingTimer");
+const modal = document.getElementById("timerModal");
+const closeModal = document.getElementById("closeModal");
+
+let offsetX, offsetY, isDragging = false;
+
+floatingTimer.addEventListener("mousedown", startDrag);
+floatingTimer.addEventListener("touchstart", startDrag);
+
+function startDrag(e) {
+  isDragging = true;
+  offsetX = e.touches ? e.touches[0].clientX - floatingTimer.getBoundingClientRect().left : e.clientX - floatingTimer.getBoundingClientRect().left;
+  offsetY = e.touches ? e.touches[0].clientY - floatingTimer.getBoundingClientRect().top : e.clientY - floatingTimer.getBoundingClientRect().top;
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("mouseup", stopDrag);
+  document.addEventListener("touchmove", drag);
+  document.addEventListener("touchend", stopDrag);
+}
+
+function drag(e) {
+  if (!isDragging) return;
+  const x = e.touches ? e.touches[0].clientX - offsetX : e.clientX - offsetX;
+  const y = e.touches ? e.touches[0].clientY - offsetY : e.clientY - offsetY;
+  floatingTimer.style.left = `${x}px`;
+  floatingTimer.style.top = `${y}px`;
+  floatingTimer.style.bottom = "auto";
+  floatingTimer.style.right = "auto";
+}
+
+function stopDrag() {
+  isDragging = false;
+  document.removeEventListener("mousemove", drag);
+  document.removeEventListener("mouseup", stopDrag);
+  document.removeEventListener("touchmove", drag);
+  document.removeEventListener("touchend", stopDrag);
+}
+
+floatingTimer.addEventListener("click", (e) => {
+  if (!isDragging) modal.classList.remove("hidden");
+});
+
+closeModal.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+// =============== INIT ===============
+renderSessions();
+updateGraph();
+drawProgress();
+timeDisplay.textContent = formatTime(remaining);
 
 </script>

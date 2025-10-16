@@ -243,591 +243,266 @@ window.addEventListener('load', () => {
 });
 
 
-// clock
-(function(){
-  // ---------- Config ----------
-  const DEFAULT_MIN = 25;
-  const STORAGE_KEY = "es_timer_v1";
-  const WEEK_KEY = "es_timer_week_start_v1";
+  // =============== THEME TOGGLE ===============
+const root = document.documentElement;
+const body = document.body;
+const themeToggle = document.createElement("div");
+themeToggle.classList.add("theme-toggle");
+themeToggle.innerHTML = "☀️";
+document.querySelector(".timer-container").appendChild(themeToggle);
 
-  // ---------- DOM ----------
-  const overlay = document.getElementById("overlay");
-  const floating = document.getElementById("floatingClock");
-  const miniTime = document.getElementById("miniTime");
-  const timerDisplay = document.getElementById("timerDisplay");
-  const startBtn = document.getElementById("startBtn");
-  const pauseBtn = document.getElementById("pauseBtn");
-  const resetBtn = document.getElementById("resetBtn");
-  const presetEls = document.querySelectorAll(".preset-item");
-  const statSessions = document.getElementById("statSessions");
-  const statThisWeek = document.getElementById("statThisWeek");
-  const statGoalPerc = document.getElementById("statGoalPerc");
-  const progressFill = document.getElementById("progressFill");
-  const progressLabel = document.getElementById("progressLabel");
-  const dailyGoalInput = document.getElementById("dailyGoal");
-  const notifyToggle = document.getElementById("notifyToggle");
+themeToggle.addEventListener("click", () => {
+  body.classList.toggle("light-mode");
+  themeToggle.innerHTML = body.classList.contains("light-mode") ? "🌙" : "☀️";
+  localStorage.setItem("theme", body.classList.contains("light-mode") ? "light" : "dark");
+});
 
-  const viewTimerBtn = document.getElementById("viewTimerBtn");
-  const viewGraphBtn = document.getElementById("viewGraphBtn");
-  const timerBlock = document.getElementById("timerBlock");
-  const graphBlock = document.getElementById("graphBlock");
-  const graphRangeLabel = document.getElementById("graphRange");
-  const weekRange = document.getElementById("weekRange");
-  const monthRange = document.getElementById("monthRange");
-  const focusCanvas = document.getElementById("focusChart");
-  const miniCanvas = document.getElementById("miniChart");
-  const historyList = document.getElementById("historyList");
-  const recentSessions = document.getElementById("recentSessions");
-  const rightWeekTotal = document.getElementById("rightWeekTotal");
-  const rightMonthTotal = document.getElementById("rightMonthTotal");
-  const rightSessions = document.getElementById("rightSessions");
-  const exportBtn = document.getElementById("exportBtn");
-  const clearBtn = document.getElementById("clearBtn");
-  const overlayModal = document.querySelector(".ts-modal");
+if (localStorage.getItem("theme") === "light") {
+  body.classList.add("light-mode");
+  themeToggle.innerHTML = "🌙";
+}
 
-  // ---------- state ----------
-  let state = {
-    // runtime
-    secondsLeft: DEFAULT_MIN * 60,
-    running: false,
-    endTime: null,
-    // data
-    sessions: [], // {duration:min, timestamp:ms}
-    dailyProgress: {}, // 'YYYY-MM-DD' : minutes
-    weeklyTotals: {}, // weekStart(ms): totalMin
-    monthlyTotals: {}, // 'YYYY-MM' : totalMin
-    totalSessions: 0,
-    // settings
-    dailyGoal: parseInt(dailyGoalInput.value || 60, 10),
-    notify: false,
+// =============== TIMER LOGIC ===============
+const timeDisplay = document.getElementById("time");
+const startBtn = document.getElementById("startBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+const resetBtn = document.getElementById("resetBtn");
+const statusText = document.getElementById("statusText");
+const sessionSelect = document.getElementById("sessionLength");
+const breakSelect = document.getElementById("breakLength");
+const canvas = document.getElementById("progressCanvas");
+const ctx = canvas.getContext("2d");
+
+let timer;
+let totalSeconds = 25 * 60;
+let remaining = totalSeconds;
+let isRunning = false;
+let isBreak = false;
+
+const ding = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_ding-10772.mp3?filename=ding-10772.mp3");
+
+// Format time
+function formatTime(seconds) {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m < 10 ? "0" : ""}${m}:${s < 10 ? "0" : ""}${s}`;
+}
+
+// Draw progress ring
+function drawProgress() {
+  const radius = 100;
+  const center = canvas.width / 2;
+  const progress = 1 - remaining / totalSeconds;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--border-color");
+
+  ctx.beginPath();
+  ctx.arc(center, center, radius, 0, 2 * Math.PI);
+  ctx.stroke();
+
+  ctx.strokeStyle = getComputedStyle(document.body).getPropertyValue("--accent-color");
+  ctx.beginPath();
+  ctx.arc(center, center, radius, -Math.PI / 2, -Math.PI / 2 + 2 * Math.PI * progress);
+  ctx.stroke();
+}
+
+// Update timer every second
+function updateTimer() {
+  remaining--;
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+
+  if (remaining <= 0) {
+    clearInterval(timer);
+    ding.play();
+    if (!isBreak) {
+      addSession(totalSeconds / 60);
+      startBreak();
+    } else {
+      startFocus();
+    }
+  }
+}
+
+function startTimer() {
+  if (!isRunning) {
+    timer = setInterval(updateTimer, 1000);
+    isRunning = true;
+  }
+}
+
+function pauseTimer() {
+  clearInterval(timer);
+  isRunning = false;
+}
+
+function resetTimer() {
+  clearInterval(timer);
+  isRunning = false;
+  remaining = totalSeconds;
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+}
+
+function startFocus() {
+  isBreak = false;
+  totalSeconds = parseInt(sessionSelect.value) * 60;
+  remaining = totalSeconds;
+  statusText.textContent = "Focus Session";
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+}
+
+function startBreak() {
+  isBreak = true;
+  totalSeconds = parseInt(breakSelect.value) * 60;
+  remaining = totalSeconds;
+  statusText.textContent = "Break Time ☕";
+  timeDisplay.textContent = formatTime(remaining);
+  drawProgress();
+  startTimer();
+}
+
+// Buttons
+startBtn.addEventListener("click", startTimer);
+pauseBtn.addEventListener("click", pauseTimer);
+resetBtn.addEventListener("click", resetTimer);
+sessionSelect.addEventListener("change", startFocus);
+breakSelect.addEventListener("change", startFocus);
+
+// =============== SESSION STORAGE ===============
+const sessionList = document.getElementById("sessionList");
+const clearBtn = document.getElementById("clearSessions");
+
+function addSession(minutes) {
+  const session = {
+    date: new Date().toLocaleString(),
+    duration: minutes,
   };
+  const sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+  sessions.push(session);
+  localStorage.setItem("sessions", JSON.stringify(sessions));
+  renderSessions();
+  updateGraph();
+}
 
-  // ---------- helpers ----------
-  function save(){
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-    catch(e){ console.warn("Storage failed",e); }
-  }
-  function load(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if(raw){ Object.assign(state, JSON.parse(raw)); }
-    }catch(e){ console.warn("Storage read failed", e); }
-    // migrate or ensure keys:
-    if(!state.sessions) state.sessions = [];
-    if(!state.dailyProgress) state.dailyProgress = {};
-    if(!state.weeklyTotals) state.weeklyTotals = {};
-    if(!state.monthlyTotals) state.monthlyTotals = {};
-    state.dailyGoal = parseInt(state.dailyGoal || dailyGoalInput.value || 60, 10);
-    state.notify = !!state.notify;
-  }
-  function formatTime(sec){
-    const m = Math.floor(sec/60).toString().padStart(2,'0');
-    const s = Math.floor(sec%60).toString().padStart(2,'0');
-    return `${m}:${s}`;
-  }
-  function getTodayKey(){ const d=new Date(); return d.toISOString().slice(0,10); }
-  function getWeekStart(ts){
-    const d = ts? new Date(ts) : new Date();
-    // compute Monday as week start for consistent rotate (or use user's preference)
-    const day = d.getDay(); // 0 Sun .. 6 Sat
-    const diff = (day + 6) % 7; // days since Monday
-    d.setDate(d.getDate() - diff);
-    d.setHours(0,0,0,0);
-    return d.getTime();
-  }
-  function getMonthKey(ts){
-    const d = ts? new Date(ts) : new Date();
-    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-  }
-
-  // ---------- persistence with weekly rotation ----------
-  function ensureWeeklyRotation(){
-    const storedWeek = localStorage.getItem(WEEK_KEY);
-    const currentWeek = getWeekStart();
-    if(!storedWeek){
-      localStorage.setItem(WEEK_KEY, String(currentWeek));
-      return;
-    }
-    const weekNum = parseInt(storedWeek,10);
-    if(weekNum !== currentWeek){
-      // rotate: remove data older than 8 weeks (keep history in sessions though), but keep monthly
-      localStorage.setItem(WEEK_KEY, String(currentWeek));
-      // Optionally remove weeklyTotals older than this week to keep small
-      Object.keys(state.weeklyTotals).forEach(k=>{
-        if(parseInt(k,10) < currentWeek - (1000*60*60*24*7*8)) delete state.weeklyTotals[k];
-      });
-      save();
-    }
-  }
-
-  // ---------- UI update ----------
-  function refreshUI(){
-    // timer display
-    timerDisplay.textContent = formatTime(state.secondsLeft);
-    miniTime.textContent = formatTime(state.secondsLeft);
-
-    // stats compute
-    const todayKey = getTodayKey();
-    const todayMin = (state.dailyProgress[todayKey] || 0);
-    const weekStart = getWeekStart();
-    const weekTotal = Object.keys(state.dailyProgress).reduce((acc,k)=>{
-      const d = new Date(k);
-      if(getWeekStart(d.getTime()) === weekStart) return acc + (state.dailyProgress[k]||0);
-      return acc;
-    },0);
-
-    const monthKey = getMonthKey();
-    const monthTotal = Object.keys(state.dailyProgress).reduce((acc,k)=>{
-      const mk = k.slice(0,7);
-      if(mk === monthKey) return acc + (state.dailyProgress[k]||0);
-      return acc;
-    },0);
-
-    statSessions.textContent = state.totalSessions || 0;
-    statThisWeek.textContent = `${Math.round(weekTotal/60)}h`;
-    rightWeekTotal.textContent = `${weekTotal} min`;
-    rightMonthTotal.textContent = `${monthTotal} min`;
-    rightSessions.textContent = `${state.totalSessions||0}`;
-
-    // progress
-    const goal = parseInt(state.dailyGoal,10) || 60;
-    const pct = Math.min(100, Math.round((todayMin/goal) * 100));
-    progressFill.style.width = pct + "%";
-    progressLabel.textContent = `${todayMin}/${goal} min`;
-    statGoalPerc.textContent = `${pct}%`;
-
-    // history lists
-    renderHistory();
-    drawMiniChart();
-    drawFocusChart(currGraphRange);
-  }
-
-  function renderHistory(){
-    // recent sessions (last 20)
-    const rec = state.sessions.slice().reverse().slice(0,20);
-    recentSessions.innerHTML = rec.map(s=>{
-      const dt = new Date(s.timestamp);
-      const t = dt.toLocaleString();
-      return `<div class="session-item"><div class="left">${s.duration} min • ${s.note || 'focus'}</div><div class="right">${t}</div></div>`;
-    }).join('') || '<div style="color:var(--muted);padding:12px;border-radius:8px">No sessions yet — start a focus session to track progress.</div>';
-
-    // history small (for graph detail)
-    historyList.innerHTML = state.sessions.slice().reverse().slice(0,40).map(s=>{
-      const dt=new Date(s.timestamp);
-      return `<div class="session-item"><div class="left">${s.duration} min</div><div class="right">${dt.toLocaleDateString()} ${dt.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div></div>`;
-    }).join('');
-  }
-
-  // ---------- timer runtime ----------
-  let tickInterval = null;
-  function startTimer(minutes){
-    if(typeof minutes === 'number' && minutes > 0) state.secondsLeft = minutes*60;
-    if(state.running) return;
-    state.running = true;
-    state.endTime = Date.now() + state.secondsLeft*1000;
-    save();
-
-    // set up tick
-    tickInterval = setInterval(()=> tick(), 250);
-    refreshUI();
-  }
-  function pauseTimer(){
-    if(!state.running) return;
-    state.running = false;
-    // recalc secondsLeft
-    if(state.endTime) state.secondsLeft = Math.max(0, Math.round((state.endTime - Date.now())/1000));
-    state.endTime = null;
-    clearInterval(tickInterval);
-    tickInterval = null;
-    save();
-    refreshUI();
-  }
-  function resetTimer(){
-    pauseTimer();
-    state.secondsLeft = DEFAULT_MIN*60;
-    state.endTime = null;
-    save();
-    refreshUI();
-  }
-
-  function tick(){
-    if(!state.running) return;
-    const remainMs = state.endTime - Date.now();
-    if(remainMs <= 0){
-      // session complete
-      state.secondsLeft = 0;
-      completeSession();
-    } else {
-      state.secondsLeft = Math.ceil(remainMs/1000);
-      // update UI frequently
-      refreshUI();
-    }
-  }
-
-  // when session finishes
-  function completeSession(){
-    // mark session length in minutes (round)
-    const durationMin = Math.max(1, Math.round(( (DEFAULT_MIN*60) - state.secondsLeft ) / 60 ) || DEFAULT_MIN);
-    const ts = Date.now();
-    state.sessions.push({duration: durationMin, timestamp: ts, note: 'session'});
-    state.totalSessions = (state.totalSessions||0) + 1;
-
-    // update daily progress
-    const today = getTodayKey();
-    state.dailyProgress[today] = (state.dailyProgress[today] || 0) + durationMin;
-
-    // update weekly & monthly
-    const weekKey = String(getWeekStart());
-    state.weeklyTotals[weekKey] = (state.weeklyTotals[weekKey]||0) + durationMin;
-    const monthKey = getMonthKey(ts);
-    state.monthlyTotals[monthKey] = (state.monthlyTotals[monthKey]||0) + durationMin;
-
-    // stop timer and notify
-    state.running = false;
-    state.endTime = null;
-    state.secondsLeft = DEFAULT_MIN*60;
-    save();
-
-    // popup like notification (browser notification if allowed), small confetti substitute via modal pulse
-    showSessionComplete();
-    refreshUI();
-  }
-
-  function showSessionComplete(){
-    // small visual: scale floating clock briefly
-    floating.style.transform = "scale(1.06)";
-    setTimeout(()=> floating.style.transform = "", 350);
-
-    if(state.notify && "Notification" in window){
-      if(Notification.permission === "granted"){
-        new Notification("Pomodoro Completed", {body:"Great work — session recorded to local stats."});
-      } else if(Notification.permission !== "denied"){
-        Notification.requestPermission().then(p=>{
-          if(p === "granted") new Notification("Pomodoro Completed",{body:"Nice! Notifications enabled."});
-        });
-      }
-    }
-    // also show ephemeral badge inside modal if open
-    const oldText = startBtn.innerHTML;
-    startBtn.innerHTML = '<i class="fa-solid fa-check"></i> Complete';
-    setTimeout(()=> startBtn.innerHTML = oldText, 1400);
-  }
-
-  // ---------- UI events ----------
-  startBtn.addEventListener("click",()=>{
-    if(!state.running){
-      // if secondsLeft is zero, reset to default
-      if(state.secondsLeft <= 0) state.secondsLeft = DEFAULT_MIN*60;
-      startTimer(Math.round(state.secondsLeft/60));
-    }
+function renderSessions() {
+  const sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+  sessionList.innerHTML = "";
+  sessions.slice().reverse().forEach((s) => {
+    const div = document.createElement("div");
+    div.classList.add("session-item");
+    div.textContent = `${s.date} — ${s.duration} min`;
+    sessionList.appendChild(div);
   });
-  pauseBtn.addEventListener("click", ()=> pauseTimer());
-  resetBtn.addEventListener("click", ()=> { resetTimer(); });
+}
 
-  // presets
-  presetEls.forEach(p=>{
-    p.addEventListener("click", ()=> {
-      const m = parseInt(p.dataset.min,10) || DEFAULT_MIN;
-      state.secondsLeft = m*60;
-      pauseTimer();
-      refreshUI();
-    });
+clearBtn.addEventListener("click", () => {
+  localStorage.removeItem("sessions");
+  renderSessions();
+  updateGraph();
+});
+
+// =============== GRAPH LOGIC ===============
+const graphCanvas = document.getElementById("studyGraph");
+const gctx = graphCanvas.getContext("2d");
+
+function updateGraph() {
+  const sessions = JSON.parse(localStorage.getItem("sessions") || "[]");
+  const week = Array(7).fill(0);
+  const now = new Date();
+  sessions.forEach((s) => {
+    const d = new Date(s.date);
+    const diff = Math.floor((now - d) / (1000 * 60 * 60 * 24));
+    if (diff < 7) week[6 - diff] += s.duration;
   });
 
-  // floating open modal
-  floating.addEventListener("click", (e)=>{
-    // open overlay
-    overlay.classList.add("show");
-    overlay.setAttribute("aria-hidden","false");
-    overlayModal.focus?.();
+  gctx.clearRect(0, 0, graphCanvas.width, graphCanvas.height);
+
+  const barWidth = 40;
+  const gap = 20;
+  const max = Math.max(...week, 1);
+  const heightScale = 150 / max;
+
+  const days = ["M", "T", "W", "T", "F", "S", "S"];
+
+  gctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--accent-color");
+  gctx.textAlign = "center";
+  gctx.font = "14px Poppins";
+
+  week.forEach((v, i) => {
+    const x = 40 + i * (barWidth + gap);
+    const y = 200 - v * heightScale;
+    gctx.fillRect(x, y, barWidth, v * heightScale);
+    gctx.fillText(days[i], x + barWidth / 2, 190 + 20);
   });
 
-  // close overlay on background click (but do not stop timer)
-  overlay.addEventListener("click", (e)=>{
-    if(e.target === overlay){
-      overlay.classList.remove("show");
-      overlay.setAttribute("aria-hidden","true");
-    }
+  document.getElementById("totalTime").textContent = (week.reduce((a, b) => a + b, 0) / 60).toFixed(1) + " hrs";
+  document.getElementById("totalSessions").textContent = sessions.length;
+}
+
+// =============== TAB SWITCHING ===============
+const tabs = document.querySelectorAll(".tab-btn");
+const panes = document.querySelectorAll(".tab-pane");
+
+tabs.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    tabs.forEach((b) => b.classList.remove("active"));
+    panes.forEach((p) => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById(btn.dataset.target).classList.add("active");
   });
+});
 
-  // drag floating
-  (function draggable(el){
-    let isDown=false, offset={x:0,y:0}, start={x:0,y:0};
-    el.addEventListener("mousedown", startDrag);
-    el.addEventListener("touchstart", startDrag,{passive:false});
-    function startDrag(e){
-      e.preventDefault();
-      isDown = true;
-      const rect = el.getBoundingClientRect();
-      start.x = (e.touches ? e.touches[0].clientX : e.clientX);
-      start.y = (e.touches ? e.touches[0].clientY : e.clientY);
-      offset.x = start.x - rect.left;
-      offset.y = start.y - rect.top;
-      document.addEventListener("mousemove", onMove);
-      document.addEventListener("touchmove", onMove,{passive:false});
-      document.addEventListener("mouseup", endDrag);
-      document.addEventListener("touchend", endDrag);
-    }
-    function onMove(e){
-      if(!isDown) return;
-      const clientX = (e.touches ? e.touches[0].clientX : e.clientX);
-      const clientY = (e.touches ? e.touches[0].clientY : e.clientY);
-      let left = clientX - offset.x;
-      let top = clientY - offset.y;
-      // clamp inside viewport
-      left = Math.max(8, Math.min(window.innerWidth - el.offsetWidth - 8, left));
-      top = Math.max(8, Math.min(window.innerHeight - el.offsetHeight - 8, top));
-      el.style.right = "auto";
-      el.style.left = left + "px";
-      el.style.top = top + "px";
-      el.style.bottom = "auto";
-    }
-    function endDrag(){
-      isDown = false;
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("touchmove", onMove);
-      document.removeEventListener("mouseup", endDrag);
-      document.removeEventListener("touchend", endDrag);
-    }
-  })(floating);
+// =============== FLOATING BUTTON BEHAVIOR ===============
+const floatingTimer = document.getElementById("floatingTimer");
+const modal = document.getElementById("timerModal");
+const closeModal = document.getElementById("closeModal");
 
-  // view toggle (timer/graph)
-  viewTimerBtn.addEventListener("click", ()=>{
-    timerBlock.style.display = "";
-    graphBlock.style.display = "none";
-    viewTimerBtn.classList.add("active");
-    viewGraphBtn.classList.remove("active");
-  });
-  viewGraphBtn.addEventListener("click", ()=>{
-    timerBlock.style.display = "none";
-    graphBlock.style.display = "";
-    viewGraphBtn.classList.add("active");
-    viewTimerBtn.classList.remove("active");
-  });
+let offsetX, offsetY, isDragging = false;
 
-  // graph range toggle
-  let currGraphRange = "week";
-  weekRange.addEventListener("click", ()=> { currGraphRange="week"; drawFocusChart("week"); graphRangeLabel.textContent="Week"; weekRange.classList.add("active"); monthRange.classList.remove("active");});
-  monthRange.addEventListener("click", ()=> { currGraphRange="month"; drawFocusChart("month"); graphRangeLabel.textContent="Month"; monthRange.classList.add("active"); weekRange.classList.remove("active");});
-  // init chips
-  weekRange.classList.add("active");
+floatingTimer.addEventListener("mousedown", startDrag);
+floatingTimer.addEventListener("touchstart", startDrag);
 
-  // notification toggle
-  notifyToggle.addEventListener("change", (e)=>{ state.notify = e.target.checked; save(); });
+function startDrag(e) {
+  isDragging = true;
+  offsetX = e.touches ? e.touches[0].clientX - floatingTimer.getBoundingClientRect().left : e.clientX - floatingTimer.getBoundingClientRect().left;
+  offsetY = e.touches ? e.touches[0].clientY - floatingTimer.getBoundingClientRect().top : e.clientY - floatingTimer.getBoundingClientRect().top;
+  document.addEventListener("mousemove", drag);
+  document.addEventListener("mouseup", stopDrag);
+  document.addEventListener("touchmove", drag);
+  document.addEventListener("touchend", stopDrag);
+}
 
-  // export / clear
-  exportBtn.addEventListener("click", ()=>{
-    const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'eduspark_timer_export.json'; document.body.appendChild(a); a.click(); a.remove();
-    URL.revokeObjectURL(url);
-  });
-  clearBtn.addEventListener("click", ()=>{
-    if(!confirm("Clear all local timer data? This removes sessions stored in this browser.")) return;
-    state.sessions = []; state.dailyProgress={}; state.weeklyTotals={}; state.monthlyTotals={}; state.totalSessions = 0;
-    save(); refreshUI();
-  });
+function drag(e) {
+  if (!isDragging) return;
+  const x = e.touches ? e.touches[0].clientX - offsetX : e.clientX - offsetX;
+  const y = e.touches ? e.touches[0].clientY - offsetY : e.clientY - offsetY;
+  floatingTimer.style.left = `${x}px`;
+  floatingTimer.style.top = `${y}px`;
+  floatingTimer.style.bottom = "auto";
+  floatingTimer.style.right = "auto";
+}
 
-  // daily goal change
-  dailyGoalInput.addEventListener("change", ()=>{ state.dailyGoal = parseInt(dailyGoalInput.value||60,10); save(); refreshUI(); });
+function stopDrag() {
+  isDragging = false;
+  document.removeEventListener("mousemove", drag);
+  document.removeEventListener("mouseup", stopDrag);
+  document.removeEventListener("touchmove", drag);
+  document.removeEventListener("touchend", stopDrag);
+}
 
-  // ---------- charts (canvas drawing) ----------
-  function drawMiniChart(){
-    const ctx = miniCanvas.getContext('2d');
-    miniCanvas.width = miniCanvas.clientWidth * devicePixelRatio;
-    miniCanvas.height = miniCanvas.clientHeight * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
+floatingTimer.addEventListener("click", (e) => {
+  if (!isDragging) modal.classList.remove("hidden");
+});
 
-    // prepare last 7 days data
-    const labels = [];
-    const data = [];
-    for(let i=6;i>=0;i--){
-      const d = new Date(); d.setDate(d.getDate() - i);
-      const key = d.toISOString().slice(0,10);
-      labels.push(d.toLocaleDateString([], {weekday:'short'}));
-      data.push(state.dailyProgress[key] || 0);
-    }
-    // draw
-    const w = miniCanvas.clientWidth;
-    const h = miniCanvas.clientHeight;
-    ctx.clearRect(0,0,w*devicePixelRatio,h*devicePixelRatio);
-    // background
-    ctx.fillStyle = "rgba(255,255,255,0.02)";
-    roundRect(ctx, 0,0, w, h, 8); ctx.fill();
+closeModal.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
 
-    // bars
-    const max = Math.max(1, ...data);
-    const barW = (w - 20) / data.length;
-    data.forEach((v,i)=>{
-      const x = 10 + i*barW;
-      const barH = (v/max) * (h - 36);
-      const y = h - 22 - barH;
-      // gradient
-      const g = ctx.createLinearGradient(x,y,x, y+barH);
-      g.addColorStop(0, 'rgba(124,77,255,0.95)');
-      g.addColorStop(1, 'rgba(255,107,107,0.9)');
-      ctx.fillStyle = g;
-      roundRect(ctx, x, y, barW*0.6, barH, 6); ctx.fill();
-      // label
-      ctx.fillStyle = 'rgba(255,255,255,0.8)';
-      ctx.font = '10px Inter';
-      ctx.fillText(labels[i], x, h - 6);
-    });
-  }
-
-  function drawFocusChart(range){
-    const ctx = focusCanvas.getContext('2d');
-    focusCanvas.width = focusCanvas.clientWidth * devicePixelRatio;
-    focusCanvas.height = focusCanvas.clientHeight * devicePixelRatio;
-    ctx.scale(devicePixelRatio, devicePixelRatio);
-    const w = focusCanvas.clientWidth; const h = focusCanvas.clientHeight;
-
-    ctx.clearRect(0,0,w*devicePixelRatio,h*devicePixelRatio);
-    ctx.fillStyle = "rgba(255,255,255,0.01)"; roundRect(ctx,0,0,w,h,10); ctx.fill();
-
-    if(range === "week"){
-      // last 7 days
-      const labels = []; const data = [];
-      for(let i=6;i>=0;i--){
-        const d = new Date(); d.setDate(d.getDate() - i);
-        const k = d.toISOString().slice(0,10);
-        labels.push(d.toLocaleDateString([], {weekday:'short'}));
-        data.push(state.dailyProgress[k] || 0);
-      }
-      drawLineBars(ctx, w, h, labels, data);
-    } else {
-      // last 6 months
-      const labels = []; const data = [];
-      const now = new Date();
-      for(let i=5;i>=0;i--){
-        const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
-        const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
-        labels.push(d.toLocaleString([], {month:'short'}));
-        data.push(state.monthlyTotals[k] || 0);
-      }
-      drawLineBars(ctx, w, h, labels, data, true);
-    }
-  }
-
-  function drawLineBars(ctx,w,h,labels,data,isMonth=false){
-    // compute max
-    const padding = 28;
-    const max = Math.max(1, ...data);
-    const step = (w - padding*2) / (data.length - 1 || 1);
-    // grid lines
-    ctx.strokeStyle = "rgba(255,255,255,0.03)"; ctx.lineWidth = 1;
-    for(let i=0;i<4;i++){
-      const y = padding + i*( (h - padding*2)/3 );
-      ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(w - padding, y); ctx.stroke();
-    }
-    // line
-    ctx.beginPath();
-    data.forEach((v,i)=>{
-      const x = padding + i*step;
-      const y = h - padding - (v/max) * (h - padding*2);
-      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
-    });
-    // stroke gradient
-    const g = ctx.createLinearGradient(0,0,w,0);
-    g.addColorStop(0, 'rgba(124,77,255,0.95)'); g.addColorStop(1, 'rgba(255,107,107,0.95)');
-    ctx.strokeStyle = g; ctx.lineWidth = 3; ctx.stroke();
-
-    // fill area
-    ctx.lineTo(w - padding, h-padding); ctx.lineTo(padding, h-padding); ctx.closePath();
-    const gf = ctx.createLinearGradient(0,0,0,h);
-    gf.addColorStop(0, 'rgba(124,77,255,0.12)'); gf.addColorStop(1, 'rgba(255,107,107,0.03)');
-    ctx.fillStyle = gf; ctx.fill();
-
-    // labels
-    ctx.fillStyle = 'rgba(230,240,255,0.95)'; ctx.font = '12px Inter';
-    data.forEach((v,i)=>{
-      const x = padding + i*step; const y = h - padding - (v/max) * (h - padding*2);
-      ctx.fillText(labels[i], x - 12, h - 8);
-      ctx.fillStyle = 'rgba(230,240,255,0.9)'; ctx.fillText(String(v)+'m', x - 14, y - 6);
-      ctx.fillStyle = 'rgba(230,240,255,0.95)';
-    });
-  }
-
-  // helper roundRect
-  function roundRect(ctx,x,y,w,h,r){
-    const min = Math.min(w,h);
-    if(typeof r === 'undefined') r = 6;
-    if(r > (min/2)) r = min/2;
-    ctx.beginPath();
-    ctx.moveTo(x+r,y);
-    ctx.arcTo(x+w,y,x+w,y+h,r);
-    ctx.arcTo(x+w,y+h,x,y+h,r);
-    ctx.arcTo(x,y+h,x,y,r);
-    ctx.arcTo(x,y,x+w,y,r);
-    ctx.closePath();
-  }
-
-  // ---------- storage helpers for adding minutes mid-session (e.g., pausing/resuming) ----------
-  function addMinutesToToday(min){
-    const key = getTodayKey();
-    state.dailyProgress[key] = (state.dailyProgress[key] || 0) + min;
-    const wk = String(getWeekStart());
-    state.weeklyTotals[wk] = (state.weeklyTotals[wk] || 0) + min;
-    const mk = getMonthKey();
-    state.monthlyTotals[mk] = (state.monthlyTotals[mk] || 0) + min;
-    save();
-  }
-
-  // ---------- simulate mid-session saving when paused manually (optional) ----------
-  // For simplicity, we only create a session when timer reaches 0. But we might also allow "finish early" to record partial sessions:
-  // We'll add a right-click on reset to store current partial time as session:
-  resetBtn.addEventListener("contextmenu", (e)=>{
-    e.preventDefault();
-    // record partial if > 1 minute
-    const elapsedMin = Math.round((DEFAULT_MIN*60 - state.secondsLeft)/60);
-    if(elapsedMin > 0){
-      state.sessions.push({duration: elapsedMin, timestamp: Date.now(), note:"partial"});
-      state.totalSessions = (state.totalSessions||0) + 1;
-      addMinutesToToday(elapsedMin);
-      save(); refreshUI();
-      alert("Partial session saved ("+elapsedMin+" min).");
-    }
-  });
-
-  // ---------- load/save init ----------
-  load(); ensureWeeklyRotation(); refreshUI();
-
-  // restore timer if it was running before reload
-  if(state.running && state.endTime){
-    const remain = Math.round((state.endTime - Date.now())/1000);
-    if(remain <= 0){
-      state.running = false; state.secondsLeft = DEFAULT_MIN*60; state.endTime = null;
-      save();
-    } else {
-      state.secondsLeft = remain;
-      tickInterval = setInterval(()=> tick(), 250);
-    }
-  }
-
-  // ---------- draw initial charts ----------
-  drawMiniChart(); drawFocusChart(currGraphRange="week");
-
-  // re-render when window focus changes to keep times accurate
-  window.addEventListener("focus", ()=> { if(state.running && state.endTime){ state.secondsLeft = Math.max(0, Math.round((state.endTime - Date.now())/1000)); } refreshUI(); });
-
-  // Resize handling for canvas
-  let resizeTimeout=null;
-  window.addEventListener("resize", ()=>{ clearTimeout(resizeTimeout); resizeTimeout = setTimeout(()=>{ drawMiniChart(); drawFocusChart(currGraphRange); }, 240); });
-
-  // ---------- auto save every 10s while running ----------
-  setInterval(()=>{ if(state.running) save(); }, 10000);
-
-  // expose tiny API on window to allow external controls if you want
-  window.ES_Timer = {
-    open: ()=> overlay.classList.add('show'),
-    close: ()=> overlay.classList.remove('show'),
-    start: ()=> startTimer(),
-    pause: ()=> pauseTimer(),
-    reset: ()=> resetTimer(),
-    export: ()=> exportBtn.click(),
-    getState: ()=> JSON.parse(JSON.stringify(state))
-  };
-
-})();
-// clock
+// =============== INIT ===============
+renderSessions();
+updateGraph();
+drawProgress();
+timeDisplay.textContent = formatTime(remaining);
