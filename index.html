@@ -129,6 +129,53 @@
   </div>
 </section>
 
+<iframe 
+  src="components/study-timer.html" 
+  class="study-timer-frame"
+  title="Study Timer"
+></iframe>
+<style>
+.study-timer-frame {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 380px;
+  height: 450px;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+  z-index: 9999;
+  overflow: hidden;
+}
+.study-timer-frame:focus {
+  outline: none;
+}
+</style>
+<script>
+  function saveTimerState() {
+  const timerState = {
+    remainingTime,
+    isRunning,
+    currentSession,
+    startTime: Date.now()
+  };
+  localStorage.setItem('timerState', JSON.stringify(timerState));
+}
+
+
+window.addEventListener('load', () => {
+  const saved = JSON.parse(localStorage.getItem('timerState'));
+  if (saved) {
+    remainingTime = saved.remainingTime;
+    currentSession = saved.currentSession;
+    isRunning = saved.isRunning;
+    if (isRunning) startTimer(); // continue timer
+    updateTimerDisplay();
+  }
+});
+
+</script>
+
 <!-- Electric Divider -->
 <div class="electric-divider"></div>
 
@@ -158,17 +205,6 @@
   </div>
 </section>
 
-<div id="study-timer"></div>
-<script>
-fetch("/components/study-timer.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("study-timer").innerHTML = html;
-    const script = document.createElement("script");
-    script.src = "/components/study-timer.js";
-    document.body.appendChild(script);
-  });
-</script>
 
 
 <style>
