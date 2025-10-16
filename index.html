@@ -158,6 +158,19 @@
   </div>
 </section>
 
+<div id="study-timer"></div>
+<script>
+fetch("/components/study-timer.html")
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("study-timer").innerHTML = html;
+    const script = document.createElement("script");
+    script.src = "/components/study-timer.js";
+    document.body.appendChild(script);
+  });
+</script>
+
+
 <style>
 /* ==== UNIQUE DISCOVER SECTION ==== */
 #discover-section-unique {
