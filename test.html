@@ -1,43 +1,908 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduSpark Books</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styleds.css" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>EduSpark — Smart Pomodoro Timer Widget</title>
+
+<!-- Google font & icons -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+  :root{
+    --bg: #0d1117;
+    --card: rgba(18,20,26,0.85);
+    --muted: #9aa4b2;
+    --accent: #7c4dff; /* change to match your site */
+    --accent-2: #ff6b6b;
+    --glass: rgba(255,255,255,0.03);
+    --glass-2: rgba(255,255,255,0.02);
+    --radius: 14px;
+    --smooth: 300ms cubic-bezier(.2,.9,.2,1);
+    --shadow: 0 8px 30px rgba(2,6,23,0.6);
+  }
+  /* page reset (so it's drop-in) */
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;color:#e6eef8;background:linear-gradient(180deg,#071019 0%, #08111a 100%);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+  /* small floating draggable clock button */
+  .floating-clock{
+    position:fixed;
+    right:28px;
+    bottom:28px;
+    width:66px;
+    height:66px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:white;
+    box-shadow: 0 10px 30px rgba(124,77,255,0.18);
+    cursor:grab;
+    z-index:99999;
+    transition: transform var(--smooth), box-shadow var(--smooth);
+    user-select:none;
+  }
+  .floating-clock:active{cursor:grabbing; transform:scale(.98)}
+  .floating-clock .time-mini{font-weight:700;font-size:13px;letter-spacing:0.6px}
+  .floating-clock .pulse{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    left:0;top:0;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%);
+    animation: floatPulse 2.8s ease-in-out infinite;
+    z-index:-1;
+    transform-origin:center;
+  }
+  @keyframes floatPulse{0%{transform:scale(.95);opacity:.95}50%{transform:scale(1.07);opacity:.7}100%{transform:scale(.95);opacity:.95}}
+  /* modal overlay */
+  .ts-overlay{
+    position:fixed;inset:0;background:rgba(2,6,12,0.6);display:none;align-items:center;justify-content:center;z-index:99990;padding:28px;
+    backdrop-filter: blur(6px);
+  }
+  .ts-overlay.show{display:flex}
+  /* modal */
+  .ts-modal{
+    width:920px;
+    max-width:calc(100% - 48px);
+    border-radius:18px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    display:grid;
+    grid-template-columns: 1fr 420px;
+    transition:transform var(--smooth),opacity var(--smooth);
+    transform-origin:center;
+  }
+  @media(max-width:920px){ .ts-modal{grid-template-columns:1fr;}}
+  /* left panel (timer+graph toggle) */
+  .panel-left{
+    padding:28px 28px 32px 28px;
+    border-right:1px solid rgba(255,255,255,0.03);
+    min-height:420px;
+    position:relative;
+  }
+  .panel-right{
+    padding:28px;
+    background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  }
+
+  /* header inside modal */
+  .modal-head{
+    display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px;
+  }
+  .modal-head .title{
+    display:flex;gap:12px;align-items:center;
+  }
+  .brand-badge{
+    width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 8px 24px rgba(124,77,255,0.16)
+  }
+  .modal-head .title h3{margin:0;font-size:1.1rem}
+  .modal-head .small-muted{color:var(--muted);font-size:13px}
+
+  /* timer big */
+  .timer-big{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 6px}
+  .timer-display{
+    font-size:56px;font-weight:800;color:#e9e9ff;letter-spacing:1px;
+    text-shadow: 0 12px 40px rgba(124,77,255,0.08);
+  }
+  .timer-controls{display:flex;gap:12px;margin-top:6px}
+  .btn{
+    border:none;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;display:inline-flex;gap:10px;align-items:center;
+    transition:transform var(--smooth),box-shadow var(--smooth);
+  }
+  .btn:active{transform:translateY(2px)}
+  .btn-start{background:linear-gradient(90deg,#2bd48d,#18b26a);color:#052811; box-shadow:0 14px 30px rgba(45,209,141,0.12)}
+  .btn-pause{background:transparent;border:1px solid rgba(255,255,255,0.07);color:#dfe7f6}
+  .btn-reset{background:transparent;border:1px dashed rgba(255,255,255,0.04);color:var(--muted)}
+  .control-small{font-size:13px;color:var(--muted)}
+
+  /* quick presets row */
+  .presets{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+  .preset-item{background:var(--glass-2);padding:8px 12px;border-radius:10px;color:#dbe8ff;font-weight:600;cursor:pointer;transition:all .22s}
+  .preset-item:hover{transform:translateY(-6px);box-shadow:0 10px 28px rgba(124,77,255,0.08)}
+
+  /* stat cards small */
+  .stats-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .stat-card{flex:1;min-width:120px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));padding:12px;border-radius:12px;text-align:center}
+  .stat-card .num{font-weight:800;font-size:22px;color:#fff}
+  .stat-card .label{font-size:13px;color:var(--muted);margin-top:6px}
+
+  /* progress bar */
+  .progress-wrap{margin-top:18px}
+  .progress-bar{height:10px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden}
+  .progress-bar > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2));width:0%;transition:width 600ms ease}
+
+  /* right panel (graph + history + controls) */
+  .panel-right h4{margin:0 0 12px 0;color:#dfe8ff}
+  .graph-wrap{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:14px}
+  canvas{width:100%!important;height:240px!important;display:block}
+
+  .history{
+    margin-top:14px;max-height:180px;overflow:auto;padding-right:6px;
+  }
+  .session-item{display:flex;justify-content:space-between;padding:8px 10px;border-radius:8px;margin-bottom:8px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);font-size:13px}
+  .session-item .left{color:#dbe8ff}
+  .session-item .right{color:var(--muted)}
+
+  /* footer inside modal */
+  .modal-foot{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:var(--muted);font-size:13px}
+  .goal-input{width:80px;padding:8px;border-radius:8px;border:none;background:transparent;color:#fff;text-align:center}
+
+  /* small view toggle top */
+  .view-toggle{display:flex;gap:8px;align-items:center}
+  .chip{padding:8px 10px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);cursor:pointer}
+  .chip.active{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;border:none;box-shadow:0 12px 30px rgba(124,77,255,0.12)}
+
+  /* micro animations */
+  .fade-in{animation:animFade .45s ease both}
+  @keyframes animFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+</style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo">📚 EduSpark</div>
-    <div class="search-box" id="searchBox">
-      <!-- <input type="text" placeholder="Search books, authors..." id="searchInput">
-      <button id="searchClose">×</button> -->
-    </div>
-    <button id="openSearch">🔍</button>
-  </header>
 
-  <main id="mainContent">
-    <div id="categoryContainer"></div>
-  </main>
+<!-- Floating draggable clock -->
+<div class="floating-clock" id="floatingClock" title="Open Study Timer">
+  <div class="pulse"></div>
+  <div class="time-mini" id="miniTime">25:00</div>
+</div>
 
-  <div id="searchOverlay" class="hidden">
-    <div class="search-overlay-box">
-      <input type="text" placeholder="Search books..." id="overlaySearchInput">
-      <button id="closeOverlay">×</button>
+<!-- Modal -->
+<div class="ts-overlay" id="overlay" aria-hidden="true">
+  <div class="ts-modal" role="dialog" aria-modal="true" aria-label="Study Timer Modal">
+    <!-- left: timer view & stats -->
+    <div class="panel-left">
+      <div class="modal-head">
+        <div class="title">
+          <div class="brand-badge">ES</div>
+          <div>
+            <h3>Study Timer</h3>
+            <div class="small-muted">Pomodoro • Focus Sessions</div>
+          </div>
+        </div>
+
+        <div class="view-toggle">
+          <div class="chip" id="viewTimerBtn"><i class="fa-solid fa-stopwatch"></i>&nbsp;Timer</div>
+          <div class="chip" id="viewGraphBtn"><i class="fa-solid fa-chart-column"></i>&nbsp;Graph</div>
+        </div>
+      </div>
+
+      <!-- Timer block -->
+      <div id="timerBlock" class="fade-in">
+        <div class="timer-big">
+          <div class="timer-display" id="timerDisplay">25:00</div>
+
+          <div style="display:flex;gap:12px;align-items:center;">
+            <div class="timer-controls">
+              <button class="btn btn-start" id="startBtn"><i class="fa-solid fa-play"></i> Start</button>
+              <button class="btn btn-pause" id="pauseBtn"><i class="fa-solid fa-pause"></i> Pause</button>
+              <button class="btn btn-reset" id="resetBtn"><i class="fa-solid fa-rotate"></i> Reset</button>
+            </div>
+          </div>
+
+          <div class="presets" aria-hidden="true">
+            <div class="preset-item" data-min="15">15m</div>
+            <div class="preset-item" data-min="25">25m</div>
+            <div class="preset-item" data-min="30">30m</div>
+            <div class="preset-item" data-min="45">45m</div>
+            <div class="preset-item" data-min="60">60m</div>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-card">
+              <div class="num" id="statSessions">0</div>
+              <div class="label">Sessions</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statThisWeek">0h</div>
+              <div class="label">This Week</div>
+            </div>
+            <div class="stat-card">
+              <div class="num" id="statGoalPerc">0%</div>
+              <div class="label">Goal</div>
+            </div>
+          </div>
+
+          <div class="progress-wrap">
+            <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:12px">
+              <div>Today's Progress</div>
+              <div id="progressLabel">0/60 min</div>
+            </div>
+            <div class="progress-bar" aria-hidden="true" style="margin-top:8px">
+              <div id="progressFill" style="width:0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph block hidden by default -->
+      <div id="graphBlock" style="display:none">
+        <div style="padding:8px 4px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div style="font-weight:700;color:#e9f0ff">Focus & Progress</div>
+            <div class="control-small">View: <span id="graphRange">Week</span></div>
+          </div>
+
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <div class="chip" id="weekRange">Week</div>
+            <div class="chip" id="monthRange">Month</div>
+          </div>
+
+          <div class="graph-wrap" style="margin-top:12px">
+            <canvas id="focusChart" width="600" height="240"></canvas>
+          </div>
+
+          <div class="history" id="historyList"></div>
+        </div>
+      </div>
+
+      <div class="modal-foot">
+        <div>
+          <div style="font-weight:700">Daily Goal (min)</div>
+          <div style="margin-top:8px"><input class="goal-input" id="dailyGoal" type="number" min="10" value="60"></div>
+        </div>
+        <div style="text-align:right">
+          <div class="control-small">Notifications</div>
+          <div style="margin-top:6px"><label style="display:inline-flex;align-items:center;gap:8px"><input type="checkbox" id="notifyToggle"> Enable</label></div>
+        </div>
+      </div>
     </div>
-    <div id="searchResults" class="grid-container"></div>
+
+    <!-- right: history, session list & settings -->
+    <div class="panel-right">
+      <h4>Session History</h4>
+      <div style="color:var(--muted);font-size:13px">All tracked sessions are stored locally on your device. Weekly data auto-rotates every 7 days.</div>
+
+      <div style="margin-top:12px" id="rightStats">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+          <div style="flex:1;min-width:120px">
+            <div style="font-size:12px;color:var(--muted)">Weekly Total</div>
+            <div style="font-weight:800;font-size:20px" id="rightWeekTotal">0 min</div>
+          </div>
+          <div style="flex:1;min-width:120px">
+            <div style="font-size:12px;color:var(--muted)">Monthly Total</div>
+            <div style="font-weight:800;font-size:20px" id="rightMonthTotal">0 min</div>
+          </div>
+          <div style="flex:1;min-width:120px">
+            <div style="font-size:12px;color:var(--muted)">Sessions</div>
+            <div style="font-weight:800;font-size:20px" id="rightSessions">0</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px"><div class="graph-wrap" style="padding:12px"><canvas id="miniChart" width="400" height="120"></canvas></div></div>
+
+      <h4 style="margin-top:16px">Recent Sessions</h4>
+      <div class="history" id="recentSessions"></div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <button class="btn btn-start" id="exportBtn"><i class="fa-solid fa-download"></i> Export JSON</button>
+        <button class="btn btn-pause" id="clearBtn"><i class="fa-solid fa-trash"></i> Clear Local Data</button>
+      </div>
+
+    </div>
   </div>
+</div>
 
-  <div id="bookModal" class="modal hidden">
-    <button id="closeModal">×</button>
-    <div class="modal-content">
-      <h2 id="modalTitle"></h2>
-      <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-      <button id="fullscreenBtn">Full Screen</button>
-    </div>
-  </div>
+<script>
+/* =========================
+   Smart Pomodoro Widget
+   - localStorage based
+   - floating draggable clock
+   - background timer continues when modal closed
+   - weekly reset, monthly tracking
+   - canvas graph (week/month)
+   ========================= */
 
-  <script src="scripst.js"></script>
+(function(){
+  // ---------- Config ----------
+  const DEFAULT_MIN = 25;
+  const STORAGE_KEY = "es_timer_v1";
+  const WEEK_KEY = "es_timer_week_start_v1";
+
+  // ---------- DOM ----------
+  const overlay = document.getElementById("overlay");
+  const floating = document.getElementById("floatingClock");
+  const miniTime = document.getElementById("miniTime");
+  const timerDisplay = document.getElementById("timerDisplay");
+  const startBtn = document.getElementById("startBtn");
+  const pauseBtn = document.getElementById("pauseBtn");
+  const resetBtn = document.getElementById("resetBtn");
+  const presetEls = document.querySelectorAll(".preset-item");
+  const statSessions = document.getElementById("statSessions");
+  const statThisWeek = document.getElementById("statThisWeek");
+  const statGoalPerc = document.getElementById("statGoalPerc");
+  const progressFill = document.getElementById("progressFill");
+  const progressLabel = document.getElementById("progressLabel");
+  const dailyGoalInput = document.getElementById("dailyGoal");
+  const notifyToggle = document.getElementById("notifyToggle");
+
+  const viewTimerBtn = document.getElementById("viewTimerBtn");
+  const viewGraphBtn = document.getElementById("viewGraphBtn");
+  const timerBlock = document.getElementById("timerBlock");
+  const graphBlock = document.getElementById("graphBlock");
+  const graphRangeLabel = document.getElementById("graphRange");
+  const weekRange = document.getElementById("weekRange");
+  const monthRange = document.getElementById("monthRange");
+  const focusCanvas = document.getElementById("focusChart");
+  const miniCanvas = document.getElementById("miniChart");
+  const historyList = document.getElementById("historyList");
+  const recentSessions = document.getElementById("recentSessions");
+  const rightWeekTotal = document.getElementById("rightWeekTotal");
+  const rightMonthTotal = document.getElementById("rightMonthTotal");
+  const rightSessions = document.getElementById("rightSessions");
+  const exportBtn = document.getElementById("exportBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const overlayModal = document.querySelector(".ts-modal");
+
+  // ---------- state ----------
+  let state = {
+    // runtime
+    secondsLeft: DEFAULT_MIN * 60,
+    running: false,
+    endTime: null,
+    // data
+    sessions: [], // {duration:min, timestamp:ms}
+    dailyProgress: {}, // 'YYYY-MM-DD' : minutes
+    weeklyTotals: {}, // weekStart(ms): totalMin
+    monthlyTotals: {}, // 'YYYY-MM' : totalMin
+    totalSessions: 0,
+    // settings
+    dailyGoal: parseInt(dailyGoalInput.value || 60, 10),
+    notify: false,
+  };
+
+  // ---------- helpers ----------
+  function save(){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+    catch(e){ console.warn("Storage failed",e); }
+  }
+  function load(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){ Object.assign(state, JSON.parse(raw)); }
+    }catch(e){ console.warn("Storage read failed", e); }
+    // migrate or ensure keys:
+    if(!state.sessions) state.sessions = [];
+    if(!state.dailyProgress) state.dailyProgress = {};
+    if(!state.weeklyTotals) state.weeklyTotals = {};
+    if(!state.monthlyTotals) state.monthlyTotals = {};
+    state.dailyGoal = parseInt(state.dailyGoal || dailyGoalInput.value || 60, 10);
+    state.notify = !!state.notify;
+  }
+  function formatTime(sec){
+    const m = Math.floor(sec/60).toString().padStart(2,'0');
+    const s = Math.floor(sec%60).toString().padStart(2,'0');
+    return `${m}:${s}`;
+  }
+  function getTodayKey(){ const d=new Date(); return d.toISOString().slice(0,10); }
+  function getWeekStart(ts){
+    const d = ts? new Date(ts) : new Date();
+    // compute Monday as week start for consistent rotate (or use user's preference)
+    const day = d.getDay(); // 0 Sun .. 6 Sat
+    const diff = (day + 6) % 7; // days since Monday
+    d.setDate(d.getDate() - diff);
+    d.setHours(0,0,0,0);
+    return d.getTime();
+  }
+  function getMonthKey(ts){
+    const d = ts? new Date(ts) : new Date();
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+  }
+
+  // ---------- persistence with weekly rotation ----------
+  function ensureWeeklyRotation(){
+    const storedWeek = localStorage.getItem(WEEK_KEY);
+    const currentWeek = getWeekStart();
+    if(!storedWeek){
+      localStorage.setItem(WEEK_KEY, String(currentWeek));
+      return;
+    }
+    const weekNum = parseInt(storedWeek,10);
+    if(weekNum !== currentWeek){
+      // rotate: remove data older than 8 weeks (keep history in sessions though), but keep monthly
+      localStorage.setItem(WEEK_KEY, String(currentWeek));
+      // Optionally remove weeklyTotals older than this week to keep small
+      Object.keys(state.weeklyTotals).forEach(k=>{
+        if(parseInt(k,10) < currentWeek - (1000*60*60*24*7*8)) delete state.weeklyTotals[k];
+      });
+      save();
+    }
+  }
+
+  // ---------- UI update ----------
+  function refreshUI(){
+    // timer display
+    timerDisplay.textContent = formatTime(state.secondsLeft);
+    miniTime.textContent = formatTime(state.secondsLeft);
+
+    // stats compute
+    const todayKey = getTodayKey();
+    const todayMin = (state.dailyProgress[todayKey] || 0);
+    const weekStart = getWeekStart();
+    const weekTotal = Object.keys(state.dailyProgress).reduce((acc,k)=>{
+      const d = new Date(k);
+      if(getWeekStart(d.getTime()) === weekStart) return acc + (state.dailyProgress[k]||0);
+      return acc;
+    },0);
+
+    const monthKey = getMonthKey();
+    const monthTotal = Object.keys(state.dailyProgress).reduce((acc,k)=>{
+      const mk = k.slice(0,7);
+      if(mk === monthKey) return acc + (state.dailyProgress[k]||0);
+      return acc;
+    },0);
+
+    statSessions.textContent = state.totalSessions || 0;
+    statThisWeek.textContent = `${Math.round(weekTotal/60)}h`;
+    rightWeekTotal.textContent = `${weekTotal} min`;
+    rightMonthTotal.textContent = `${monthTotal} min`;
+    rightSessions.textContent = `${state.totalSessions||0}`;
+
+    // progress
+    const goal = parseInt(state.dailyGoal,10) || 60;
+    const pct = Math.min(100, Math.round((todayMin/goal) * 100));
+    progressFill.style.width = pct + "%";
+    progressLabel.textContent = `${todayMin}/${goal} min`;
+    statGoalPerc.textContent = `${pct}%`;
+
+    // history lists
+    renderHistory();
+    drawMiniChart();
+    drawFocusChart(currGraphRange);
+  }
+
+  function renderHistory(){
+    // recent sessions (last 20)
+    const rec = state.sessions.slice().reverse().slice(0,20);
+    recentSessions.innerHTML = rec.map(s=>{
+      const dt = new Date(s.timestamp);
+      const t = dt.toLocaleString();
+      return `<div class="session-item"><div class="left">${s.duration} min • ${s.note || 'focus'}</div><div class="right">${t}</div></div>`;
+    }).join('') || '<div style="color:var(--muted);padding:12px;border-radius:8px">No sessions yet — start a focus session to track progress.</div>';
+
+    // history small (for graph detail)
+    historyList.innerHTML = state.sessions.slice().reverse().slice(0,40).map(s=>{
+      const dt=new Date(s.timestamp);
+      return `<div class="session-item"><div class="left">${s.duration} min</div><div class="right">${dt.toLocaleDateString()} ${dt.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}</div></div>`;
+    }).join('');
+  }
+
+  // ---------- timer runtime ----------
+  let tickInterval = null;
+  function startTimer(minutes){
+    if(typeof minutes === 'number' && minutes > 0) state.secondsLeft = minutes*60;
+    if(state.running) return;
+    state.running = true;
+    state.endTime = Date.now() + state.secondsLeft*1000;
+    save();
+
+    // set up tick
+    tickInterval = setInterval(()=> tick(), 250);
+    refreshUI();
+  }
+  function pauseTimer(){
+    if(!state.running) return;
+    state.running = false;
+    // recalc secondsLeft
+    if(state.endTime) state.secondsLeft = Math.max(0, Math.round((state.endTime - Date.now())/1000));
+    state.endTime = null;
+    clearInterval(tickInterval);
+    tickInterval = null;
+    save();
+    refreshUI();
+  }
+  function resetTimer(){
+    pauseTimer();
+    state.secondsLeft = DEFAULT_MIN*60;
+    state.endTime = null;
+    save();
+    refreshUI();
+  }
+
+  function tick(){
+    if(!state.running) return;
+    const remainMs = state.endTime - Date.now();
+    if(remainMs <= 0){
+      // session complete
+      state.secondsLeft = 0;
+      completeSession();
+    } else {
+      state.secondsLeft = Math.ceil(remainMs/1000);
+      // update UI frequently
+      refreshUI();
+    }
+  }
+
+  // when session finishes
+  function completeSession(){
+    // mark session length in minutes (round)
+    const durationMin = Math.max(1, Math.round(( (DEFAULT_MIN*60) - state.secondsLeft ) / 60 ) || DEFAULT_MIN);
+    const ts = Date.now();
+    state.sessions.push({duration: durationMin, timestamp: ts, note: 'session'});
+    state.totalSessions = (state.totalSessions||0) + 1;
+
+    // update daily progress
+    const today = getTodayKey();
+    state.dailyProgress[today] = (state.dailyProgress[today] || 0) + durationMin;
+
+    // update weekly & monthly
+    const weekKey = String(getWeekStart());
+    state.weeklyTotals[weekKey] = (state.weeklyTotals[weekKey]||0) + durationMin;
+    const monthKey = getMonthKey(ts);
+    state.monthlyTotals[monthKey] = (state.monthlyTotals[monthKey]||0) + durationMin;
+
+    // stop timer and notify
+    state.running = false;
+    state.endTime = null;
+    state.secondsLeft = DEFAULT_MIN*60;
+    save();
+
+    // popup like notification (browser notification if allowed), small confetti substitute via modal pulse
+    showSessionComplete();
+    refreshUI();
+  }
+
+  function showSessionComplete(){
+    // small visual: scale floating clock briefly
+    floating.style.transform = "scale(1.06)";
+    setTimeout(()=> floating.style.transform = "", 350);
+
+    if(state.notify && "Notification" in window){
+      if(Notification.permission === "granted"){
+        new Notification("Pomodoro Completed", {body:"Great work — session recorded to local stats."});
+      } else if(Notification.permission !== "denied"){
+        Notification.requestPermission().then(p=>{
+          if(p === "granted") new Notification("Pomodoro Completed",{body:"Nice! Notifications enabled."});
+        });
+      }
+    }
+    // also show ephemeral badge inside modal if open
+    const oldText = startBtn.innerHTML;
+    startBtn.innerHTML = '<i class="fa-solid fa-check"></i> Complete';
+    setTimeout(()=> startBtn.innerHTML = oldText, 1400);
+  }
+
+  // ---------- UI events ----------
+  startBtn.addEventListener("click",()=>{
+    if(!state.running){
+      // if secondsLeft is zero, reset to default
+      if(state.secondsLeft <= 0) state.secondsLeft = DEFAULT_MIN*60;
+      startTimer(Math.round(state.secondsLeft/60));
+    }
+  });
+  pauseBtn.addEventListener("click", ()=> pauseTimer());
+  resetBtn.addEventListener("click", ()=> { resetTimer(); });
+
+  // presets
+  presetEls.forEach(p=>{
+    p.addEventListener("click", ()=> {
+      const m = parseInt(p.dataset.min,10) || DEFAULT_MIN;
+      state.secondsLeft = m*60;
+      pauseTimer();
+      refreshUI();
+    });
+  });
+
+  // floating open modal
+  floating.addEventListener("click", (e)=>{
+    // open overlay
+    overlay.classList.add("show");
+    overlay.setAttribute("aria-hidden","false");
+    overlayModal.focus?.();
+  });
+
+  // close overlay on background click (but do not stop timer)
+  overlay.addEventListener("click", (e)=>{
+    if(e.target === overlay){
+      overlay.classList.remove("show");
+      overlay.setAttribute("aria-hidden","true");
+    }
+  });
+
+  // drag floating
+  (function draggable(el){
+    let isDown=false, offset={x:0,y:0}, start={x:0,y:0};
+    el.addEventListener("mousedown", startDrag);
+    el.addEventListener("touchstart", startDrag,{passive:false});
+    function startDrag(e){
+      e.preventDefault();
+      isDown = true;
+      const rect = el.getBoundingClientRect();
+      start.x = (e.touches ? e.touches[0].clientX : e.clientX);
+      start.y = (e.touches ? e.touches[0].clientY : e.clientY);
+      offset.x = start.x - rect.left;
+      offset.y = start.y - rect.top;
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("touchmove", onMove,{passive:false});
+      document.addEventListener("mouseup", endDrag);
+      document.addEventListener("touchend", endDrag);
+    }
+    function onMove(e){
+      if(!isDown) return;
+      const clientX = (e.touches ? e.touches[0].clientX : e.clientX);
+      const clientY = (e.touches ? e.touches[0].clientY : e.clientY);
+      let left = clientX - offset.x;
+      let top = clientY - offset.y;
+      // clamp inside viewport
+      left = Math.max(8, Math.min(window.innerWidth - el.offsetWidth - 8, left));
+      top = Math.max(8, Math.min(window.innerHeight - el.offsetHeight - 8, top));
+      el.style.right = "auto";
+      el.style.left = left + "px";
+      el.style.top = top + "px";
+      el.style.bottom = "auto";
+    }
+    function endDrag(){
+      isDown = false;
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("touchmove", onMove);
+      document.removeEventListener("mouseup", endDrag);
+      document.removeEventListener("touchend", endDrag);
+    }
+  })(floating);
+
+  // view toggle (timer/graph)
+  viewTimerBtn.addEventListener("click", ()=>{
+    timerBlock.style.display = "";
+    graphBlock.style.display = "none";
+    viewTimerBtn.classList.add("active");
+    viewGraphBtn.classList.remove("active");
+  });
+  viewGraphBtn.addEventListener("click", ()=>{
+    timerBlock.style.display = "none";
+    graphBlock.style.display = "";
+    viewGraphBtn.classList.add("active");
+    viewTimerBtn.classList.remove("active");
+  });
+
+  // graph range toggle
+  let currGraphRange = "week";
+  weekRange.addEventListener("click", ()=> { currGraphRange="week"; drawFocusChart("week"); graphRangeLabel.textContent="Week"; weekRange.classList.add("active"); monthRange.classList.remove("active");});
+  monthRange.addEventListener("click", ()=> { currGraphRange="month"; drawFocusChart("month"); graphRangeLabel.textContent="Month"; monthRange.classList.add("active"); weekRange.classList.remove("active");});
+  // init chips
+  weekRange.classList.add("active");
+
+  // notification toggle
+  notifyToggle.addEventListener("change", (e)=>{ state.notify = e.target.checked; save(); });
+
+  // export / clear
+  exportBtn.addEventListener("click", ()=>{
+    const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'eduspark_timer_export.json'; document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  });
+  clearBtn.addEventListener("click", ()=>{
+    if(!confirm("Clear all local timer data? This removes sessions stored in this browser.")) return;
+    state.sessions = []; state.dailyProgress={}; state.weeklyTotals={}; state.monthlyTotals={}; state.totalSessions = 0;
+    save(); refreshUI();
+  });
+
+  // daily goal change
+  dailyGoalInput.addEventListener("change", ()=>{ state.dailyGoal = parseInt(dailyGoalInput.value||60,10); save(); refreshUI(); });
+
+  // ---------- charts (canvas drawing) ----------
+  function drawMiniChart(){
+    const ctx = miniCanvas.getContext('2d');
+    miniCanvas.width = miniCanvas.clientWidth * devicePixelRatio;
+    miniCanvas.height = miniCanvas.clientHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+
+    // prepare last 7 days data
+    const labels = [];
+    const data = [];
+    for(let i=6;i>=0;i--){
+      const d = new Date(); d.setDate(d.getDate() - i);
+      const key = d.toISOString().slice(0,10);
+      labels.push(d.toLocaleDateString([], {weekday:'short'}));
+      data.push(state.dailyProgress[key] || 0);
+    }
+    // draw
+    const w = miniCanvas.clientWidth;
+    const h = miniCanvas.clientHeight;
+    ctx.clearRect(0,0,w*devicePixelRatio,h*devicePixelRatio);
+    // background
+    ctx.fillStyle = "rgba(255,255,255,0.02)";
+    roundRect(ctx, 0,0, w, h, 8); ctx.fill();
+
+    // bars
+    const max = Math.max(1, ...data);
+    const barW = (w - 20) / data.length;
+    data.forEach((v,i)=>{
+      const x = 10 + i*barW;
+      const barH = (v/max) * (h - 36);
+      const y = h - 22 - barH;
+      // gradient
+      const g = ctx.createLinearGradient(x,y,x, y+barH);
+      g.addColorStop(0, 'rgba(124,77,255,0.95)');
+      g.addColorStop(1, 'rgba(255,107,107,0.9)');
+      ctx.fillStyle = g;
+      roundRect(ctx, x, y, barW*0.6, barH, 6); ctx.fill();
+      // label
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      ctx.font = '10px Inter';
+      ctx.fillText(labels[i], x, h - 6);
+    });
+  }
+
+  function drawFocusChart(range){
+    const ctx = focusCanvas.getContext('2d');
+    focusCanvas.width = focusCanvas.clientWidth * devicePixelRatio;
+    focusCanvas.height = focusCanvas.clientHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+    const w = focusCanvas.clientWidth; const h = focusCanvas.clientHeight;
+
+    ctx.clearRect(0,0,w*devicePixelRatio,h*devicePixelRatio);
+    ctx.fillStyle = "rgba(255,255,255,0.01)"; roundRect(ctx,0,0,w,h,10); ctx.fill();
+
+    if(range === "week"){
+      // last 7 days
+      const labels = []; const data = [];
+      for(let i=6;i>=0;i--){
+        const d = new Date(); d.setDate(d.getDate() - i);
+        const k = d.toISOString().slice(0,10);
+        labels.push(d.toLocaleDateString([], {weekday:'short'}));
+        data.push(state.dailyProgress[k] || 0);
+      }
+      drawLineBars(ctx, w, h, labels, data);
+    } else {
+      // last 6 months
+      const labels = []; const data = [];
+      const now = new Date();
+      for(let i=5;i>=0;i--){
+        const d = new Date(now.getFullYear(), now.getMonth()-i, 1);
+        const k = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+        labels.push(d.toLocaleString([], {month:'short'}));
+        data.push(state.monthlyTotals[k] || 0);
+      }
+      drawLineBars(ctx, w, h, labels, data, true);
+    }
+  }
+
+  function drawLineBars(ctx,w,h,labels,data,isMonth=false){
+    // compute max
+    const padding = 28;
+    const max = Math.max(1, ...data);
+    const step = (w - padding*2) / (data.length - 1 || 1);
+    // grid lines
+    ctx.strokeStyle = "rgba(255,255,255,0.03)"; ctx.lineWidth = 1;
+    for(let i=0;i<4;i++){
+      const y = padding + i*( (h - padding*2)/3 );
+      ctx.beginPath(); ctx.moveTo(padding, y); ctx.lineTo(w - padding, y); ctx.stroke();
+    }
+    // line
+    ctx.beginPath();
+    data.forEach((v,i)=>{
+      const x = padding + i*step;
+      const y = h - padding - (v/max) * (h - padding*2);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    // stroke gradient
+    const g = ctx.createLinearGradient(0,0,w,0);
+    g.addColorStop(0, 'rgba(124,77,255,0.95)'); g.addColorStop(1, 'rgba(255,107,107,0.95)');
+    ctx.strokeStyle = g; ctx.lineWidth = 3; ctx.stroke();
+
+    // fill area
+    ctx.lineTo(w - padding, h-padding); ctx.lineTo(padding, h-padding); ctx.closePath();
+    const gf = ctx.createLinearGradient(0,0,0,h);
+    gf.addColorStop(0, 'rgba(124,77,255,0.12)'); gf.addColorStop(1, 'rgba(255,107,107,0.03)');
+    ctx.fillStyle = gf; ctx.fill();
+
+    // labels
+    ctx.fillStyle = 'rgba(230,240,255,0.95)'; ctx.font = '12px Inter';
+    data.forEach((v,i)=>{
+      const x = padding + i*step; const y = h - padding - (v/max) * (h - padding*2);
+      ctx.fillText(labels[i], x - 12, h - 8);
+      ctx.fillStyle = 'rgba(230,240,255,0.9)'; ctx.fillText(String(v)+'m', x - 14, y - 6);
+      ctx.fillStyle = 'rgba(230,240,255,0.95)';
+    });
+  }
+
+  // helper roundRect
+  function roundRect(ctx,x,y,w,h,r){
+    const min = Math.min(w,h);
+    if(typeof r === 'undefined') r = 6;
+    if(r > (min/2)) r = min/2;
+    ctx.beginPath();
+    ctx.moveTo(x+r,y);
+    ctx.arcTo(x+w,y,x+w,y+h,r);
+    ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r);
+    ctx.arcTo(x,y,x+w,y,r);
+    ctx.closePath();
+  }
+
+  // ---------- storage helpers for adding minutes mid-session (e.g., pausing/resuming) ----------
+  function addMinutesToToday(min){
+    const key = getTodayKey();
+    state.dailyProgress[key] = (state.dailyProgress[key] || 0) + min;
+    const wk = String(getWeekStart());
+    state.weeklyTotals[wk] = (state.weeklyTotals[wk] || 0) + min;
+    const mk = getMonthKey();
+    state.monthlyTotals[mk] = (state.monthlyTotals[mk] || 0) + min;
+    save();
+  }
+
+  // ---------- simulate mid-session saving when paused manually (optional) ----------
+  // For simplicity, we only create a session when timer reaches 0. But we might also allow "finish early" to record partial sessions:
+  // We'll add a right-click on reset to store current partial time as session:
+  resetBtn.addEventListener("contextmenu", (e)=>{
+    e.preventDefault();
+    // record partial if > 1 minute
+    const elapsedMin = Math.round((DEFAULT_MIN*60 - state.secondsLeft)/60);
+    if(elapsedMin > 0){
+      state.sessions.push({duration: elapsedMin, timestamp: Date.now(), note:"partial"});
+      state.totalSessions = (state.totalSessions||0) + 1;
+      addMinutesToToday(elapsedMin);
+      save(); refreshUI();
+      alert("Partial session saved ("+elapsedMin+" min).");
+    }
+  });
+
+  // ---------- load/save init ----------
+  load(); ensureWeeklyRotation(); refreshUI();
+
+  // restore timer if it was running before reload
+  if(state.running && state.endTime){
+    const remain = Math.round((state.endTime - Date.now())/1000);
+    if(remain <= 0){
+      state.running = false; state.secondsLeft = DEFAULT_MIN*60; state.endTime = null;
+      save();
+    } else {
+      state.secondsLeft = remain;
+      tickInterval = setInterval(()=> tick(), 250);
+    }
+  }
+
+  // ---------- draw initial charts ----------
+  drawMiniChart(); drawFocusChart(currGraphRange="week");
+
+  // re-render when window focus changes to keep times accurate
+  window.addEventListener("focus", ()=> { if(state.running && state.endTime){ state.secondsLeft = Math.max(0, Math.round((state.endTime - Date.now())/1000)); } refreshUI(); });
+
+  // Resize handling for canvas
+  let resizeTimeout=null;
+  window.addEventListener("resize", ()=>{ clearTimeout(resizeTimeout); resizeTimeout = setTimeout(()=>{ drawMiniChart(); drawFocusChart(currGraphRange); }, 240); });
+
+  // ---------- auto save every 10s while running ----------
+  setInterval(()=>{ if(state.running) save(); }, 10000);
+
+  // expose tiny API on window to allow external controls if you want
+  window.ES_Timer = {
+    open: ()=> overlay.classList.add('show'),
+    close: ()=> overlay.classList.remove('show'),
+    start: ()=> startTimer(),
+    pause: ()=> pauseTimer(),
+    reset: ()=> resetTimer(),
+    export: ()=> exportBtn.click(),
+    getState: ()=> JSON.parse(JSON.stringify(state))
+  };
+
+})();
+</script>
+
 </body>
 </html>

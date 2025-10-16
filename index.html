@@ -1,19 +1,11 @@
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <title>EduSpark Hero</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Notora</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -26,7 +18,7 @@
     <div class="hero-text">
       <h1>Unlock a World of Free Books & Knowledge</h1>
       <p>Explore thousands of educational books and resources — shared by learners, for learners.</p>
-      <a href="go.html" class="cta">Discover More</a>
+      <a href="home.html" class="cta">Discover More</a>
     </div>
   </div>
 
@@ -42,7 +34,7 @@
       <p>
         Access a massive collection of books across every genre — academic, non-academic, competitive, personal development, and more. Download or read online anytime, absolutely free.
       </p>
-      <a href="#" class="offer-btn">Explore Books</a>
+      <a href="test.html" class="offer-btn">Explore Books</a>
     </div>
     <div class="offer-card glow">
       <div class="offer-icon"><i class="fas fa-chalkboard-teacher"></i></div>
@@ -50,7 +42,7 @@
       <p>
         Your growth matters. As you read and explore books, your reading level increases — giving you insight into how much you've learned and accomplished.
       </p>
-      <a href="#" class="offer-btn">Find a Batch</a>
+      <a href="home.html" class="offer-btn">Find a Batch</a>
     </div>
     <div class="offer-card">
       <div class="offer-icon"><i class="fas fa-share-alt"></i></div>
@@ -58,7 +50,7 @@
       <p>
         Join hands with thousands of learners. Upload your favorite books, notes, or study material and empower others on their educational journey. Every contribution counts — be the reason someone learns better today.
       </p>
-      <a href="#" class="offer-btn">Start Sharing</a>
+      <a href="share.html" class="offer-btn">Start Sharing</a>
     </div>
   </div>
 </section>
@@ -117,6 +109,36 @@
     </div>
   </div>
 </section>
+
+
+<!-- ========== STATS SECTION ========== -->
+<section class="stats-section">
+  <div class="stats-overlay"></div>
+  <div class="stats-container">
+    <h2 class="stats-heading">Our Impact</h2>
+    <p class="stats-subtext">Empowering learners worldwide with free, quality resources.</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+        <h3 class="stat-number" data-target="50000">5k+</h3>
+        <p class="stat-label">Free Books</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <h3 class="stat-number" data-target="25000">15k+</h3>
+        <p class="stat-label">Happy Readers</p>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+        <h3 class="stat-number" data-target="24">24/7</h3>
+        <p class="stat-label"> Study Support</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- Glow Hover Effects -->
 <style>
@@ -560,6 +582,117 @@ footer small {
 }
 
 
+/* ========== STATS SECTION STYLING ========== */
+.stats-section {
+  position: relative;
+  background: radial-gradient(circle at top, #1a1a1a, #0d0d0d);
+  color: #fff;
+  text-align: center;
+  padding: 100px 20px;
+  overflow: hidden;
+}
+
+.stats-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255, 75, 75, 0.1), rgba(255, 50, 120, 0.1));
+  z-index: 1;
+}
+
+.stats-container {
+  position: relative;
+  z-index: 2;
+}
+
+.stats-heading {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: #ff6b81;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  animation: fadeInDown 1s ease forwards;
+}
+
+.stats-subtext {
+  color: #c9c9c9;
+  margin-bottom: 60px;
+  font-size: 1.1rem;
+  animation: fadeIn 1.5s ease forwards;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  justify-items: center;
+}
+
+.stat-card {
+  background: linear-gradient(145deg, #141414, #1e1e1e);
+  border-radius: 20px;
+  padding: 40px 20px;
+  box-shadow: 0 0 25px rgba(255, 90, 90, 0.15);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(255, 90, 90, 0.15) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.5s ease;
+}
+
+.stat-card:hover::before {
+  transform: scale(1);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 35px rgba(255, 75, 75, 0.3);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+  color: #ff6b81;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover .stat-icon {
+  transform: rotate(10deg) scale(1.2);
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 10px 0;
+}
+
+.stat-label {
+  color: #bbb;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+
 </style>
 <script>
     const canvas = document.getElementById("snowCanvas");
@@ -658,5 +791,41 @@ setInterval(() => {
 
 goToSlide(0); // Init
 
+// ===== STATS COUNTER ANIMATION =====
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll(".stat-number");
+  const speed = 200; // smaller = faster
+
+  const animateCounters = () => {
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute("data-target");
+        const count = +counter.innerText;
+        const increment = target / speed;
+
+        if (count < target) {
+          counter.innerText = Math.ceil(count + increment);
+          setTimeout(updateCount, 20);
+        } else {
+          counter.innerText = target.toLocaleString();
+        }
+      };
+      updateCount();
+    });
+  };
+
+  // Trigger when section is in view
+  const section = document.querySelector(".stats-section");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(section);
+});
 
 </script>
