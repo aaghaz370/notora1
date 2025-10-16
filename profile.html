@@ -270,17 +270,50 @@
       if(items.length > 50){ showMoreBtn.style.display = 'block'; } else { showMoreBtn.style.display = 'none'; }
     }
 
+    // function openBook(book){
+      
+    //   openOverlay();
+    //   pageContent.innerHTML = `<h2>${escapeHtml(book.name||'Untitled')}</h2>
+    //     <div style="display:flex;gap:18px;margin-top:14px">
+    //       <div style="width:220px"><img src="${book.thumbnail||DEFAULT_AVATAR}" style="width:100%;border-radius:8px"></div>
+    //       <div style="flex:1"><p><strong>Author:</strong> ${escapeHtml(book.author||'Unknown')}</p>
+    //       <p><strong>Category:</strong> ${escapeHtml(book.category||'Fiction')}</p>
+    //       <p style="margin-top:18px"><a href="book.html?name=${encodeURIComponent(book.name||'')}">Open book </a></p></div>
+    //     </div>`;
+    // }
+
     function openBook(book){
-      // navigate to book.html in this mock: we'll open a dynamic panel that links to book.html
-      openOverlay();
-      pageContent.innerHTML = `<h2>${escapeHtml(book.name||'Untitled')}</h2>
-        <div style="display:flex;gap:18px;margin-top:14px">
-          <div style="width:220px"><img src="${book.thumbnail||DEFAULT_AVATAR}" style="width:100%;border-radius:8px"></div>
-          <div style="flex:1"><p><strong>Author:</strong> ${escapeHtml(book.author||'Unknown')}</p>
-          <p><strong>Category:</strong> ${escapeHtml(book.category||'Fiction')}</p>
-          <p style="margin-top:18px"><a href="book.html?name=${encodeURIComponent(book.name||'')}">Open book page (mock)</a></p></div>
-        </div>`;
-    }
+  openOverlay();
+
+  // Check if book is in bookmarks
+  let bookmarks = state.bookmarks || [];
+  let isBookmarked = bookmarks.find(b => b.name === book.name);
+
+  pageContent.innerHTML = `<h2>${escapeHtml(book.name||'Untitled')}</h2>
+    <div style="display:flex;gap:18px;margin-top:14px">
+      <div style="width:220px"><img src="${book.thumbnail||DEFAULT_AVATAR}" style="width:100%;border-radius:8px"></div>
+      <div style="flex:1">
+        <p><strong>Author:</strong> ${escapeHtml(book.author||'Unknown')}</p>
+        <p><strong>Category:</strong> ${escapeHtml(book.category||'Fiction')}</p>
+        <p style="margin-top:18px"><a href="book.html?name=${encodeURIComponent(book.name||'')}">Open book </a></p>
+      </div>
+    </div>
+    ${isBookmarked ? `<button id="removeBookmarkBtn" style="margin-top:20px;padding:10px 16px;background:#e74c3c;color:#fff;border:none;border-radius:6px;cursor:pointer;">Remove from Bookmarks</button>` : ''}`;
+
+  // Add event listener for remove button
+  const removeBtn = document.getElementById('removeBookmarkBtn');
+  if(removeBtn){
+    removeBtn.addEventListener('click', ()=>{
+      // Remove book from state.bookmarks and localStorage
+      state.bookmarks = bookmarks.filter(b => b.name !== book.name);
+      setStorage('bookmarks', state.bookmarks);
+      alert(`${book.name} removed from bookmarks!`);
+      removeBtn.remove();  // Remove button from DOM
+      renderBookmarksPreview(); // Update bookmarks grid
+    });
+  }
+}
+
 
     showMoreBtn.addEventListener('click', ()=>{
       openOverlay();
