@@ -294,7 +294,8 @@
       <div style="width:220px"><img src="${book.thumbnail||DEFAULT_AVATAR}" style="width:100%;border-radius:8px"></div>
       <div style="flex:1">
         <p><strong>Author:</strong> ${escapeHtml(book.author||'Unknown')}</p>
-        <p><strong>Category:</strong> ${escapeHtml(book.category||'Fiction')}</p>
+        <p><strong>Category:</strong> ${escapeHtml(book.category||'Unknown')}</p>
+        <p><strong>Rating:</strong> ${escapeHtml(book.rating||'Unknown')}</p>
 
         ${/* Open book button styled like remove button */''}
         <a href="book.html?name=${encodeURIComponent(book.name||'')}" 
