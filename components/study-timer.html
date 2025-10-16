@@ -1,0 +1,294 @@
+<div class="study-timer-widget">
+  <div class="timer-toggle">
+    <i class="fas fa-clock"></i>
+  </div>
+
+  <div class="timer-card">
+    <div class="timer-header">
+      <h2>Study Timer</h2>
+      <span id="closeTimer">&times;</span>
+    </div>
+
+    <div class="timer-tabs">
+      <button class="tab-btn active" data-tab="timer">Timer</button>
+      <button class="tab-btn" data-tab="stats">Stats</button>
+      <button class="tab-btn" data-tab="graph">Graph</button>
+    </div>
+
+    <!-- Timer -->
+    <div class="tab-content active" id="timer">
+      <h1 id="timerDisplay">25:00</h1>
+      <input type="text" id="studyTopic" placeholder="What are you studying? (optional)">
+      <div class="timer-buttons">
+        <button id="startBtn" class="start">Start</button>
+        <button id="stopBtn" class="stop">Stop</button>
+      </div>
+      <p class="session-info">Today's Progress: <span id="progressText">0/60 min</span></p>
+      <div class="progress-bar"><div id="progressFill"></div></div>
+    </div>
+
+    <!-- Stats -->
+    <div class="tab-content" id="stats">
+      <div class="stats-grid">
+        <div class="stat-box"><h3 id="sessionCount">0</h3><p>Sessions</p></div>
+        <div class="stat-box"><h3 id="weekHours">0h</h3><p>This Week</p></div>
+        <div class="stat-box"><h3 id="monthHours">0h</h3><p>This Month</p></div>
+      </div>
+      <label>Daily Goal (min)</label>
+      <input type="number" id="dailyGoal" value="60" min="10" max="600">
+    </div>
+
+    <!-- Graph -->
+    <div class="tab-content" id="graph">
+      <canvas id="progressChart"></canvas>
+    </div>
+  </div>
+</div>
+<style>
+    .study-timer-widget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10000;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Floating button */
+.timer-toggle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #6a5acd, #7b68ee);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+}
+.timer-toggle:hover { transform: scale(1.1); }
+
+.timer-card {
+  display: none;
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  width: 340px;
+  background: #141414;
+  border-radius: 20px;
+  padding: 20px;
+  color: #fff;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+  animation: fadeIn 0.3s ease;
+}
+
+.timer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.timer-header h2 { font-size: 1.2rem; }
+#closeTimer { cursor: pointer; font-size: 1.4rem; color: #999; }
+
+.timer-tabs {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.tab-btn {
+  flex: 1;
+  background: #1e1e1e;
+  border: none;
+  color: #999;
+  border-radius: 10px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.tab-btn.active {
+  background: #6a5acd;
+  color: #fff;
+}
+
+.tab-content { display: none; margin-top: 20px; }
+.tab-content.active { display: block; }
+
+/* Timer display */
+#timerDisplay {
+  font-size: 3rem;
+  color: #b19fff;
+  margin-bottom: 10px;
+}
+.timer-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+.timer-buttons button {
+  border: none;
+  padding: 10px 25px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.start { background: #32cd32; color: #fff; }
+.stop { background: #ff4b4b; color: #fff; }
+
+.progress-bar {
+  height: 8px;
+  width: 100%;
+  background: #222;
+  border-radius: 5px;
+  margin-top: 10px;
+  overflow: hidden;
+}
+#progressFill {
+  height: 100%;
+  width: 0;
+  background: #6a5acd;
+  transition: width 0.3s ease;
+}
+
+/* Stats */
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.stat-box {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 15px;
+  width: 30%;
+}
+.stat-box h3 {
+  font-size: 1.4rem;
+  color: #b19fff;
+}
+
+/* Graph */
+#progressChart {
+  width: 100%;
+  height: 180px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .timer-card {
+    width: 90vw;
+    right: -5vw;
+  }
+}
+
+</style>
+<script>
+    // Load Chart.js
+const script = document.createElement("script");
+script.src = "https://cdn.jsdelivr.net/npm/chart.js";
+document.head.appendChild(script);
+
+let timerInterval;
+let timeLeft = 25 * 60;
+let running = false;
+let totalMinutes = parseInt(localStorage.getItem("totalMinutes")) || 0;
+let weeklyData = JSON.parse(localStorage.getItem("weeklyData")) || Array(7).fill(0);
+let currentDay = new Date().getDay();
+
+function updateTimerDisplay() {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  document.getElementById("timerDisplay").textContent = `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+function startTimer() {
+  if (running) return;
+  running = true;
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      running = false;
+      addSession();
+    }
+  }, 1000);
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  running = false;
+}
+
+function addSession() {
+  totalMinutes += 25;
+  weeklyData[currentDay] += 25;
+  saveData();
+  updateStats();
+}
+
+function saveData() {
+  localStorage.setItem("totalMinutes", totalMinutes);
+  localStorage.setItem("weeklyData", JSON.stringify(weeklyData));
+}
+
+function updateStats() {
+  document.getElementById("sessionCount").textContent = Math.floor(totalMinutes / 25);
+  document.getElementById("weekHours").textContent = `${Math.floor(totalMinutes / 60)}h`;
+  document.getElementById("monthHours").textContent = `${Math.floor(totalMinutes / 60)}h`;
+}
+
+function switchTab(tab) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add("active");
+  document.getElementById(tab).classList.add("active");
+}
+
+// UI controls
+document.addEventListener("click", e => {
+  if (e.target.matches(".timer-toggle, .timer-toggle *")) {
+    document.querySelector(".timer-card").style.display = "block";
+  }
+  if (e.target.id === "closeTimer") {
+    document.querySelector(".timer-card").style.display = "none";
+  }
+  if (e.target.matches("#startBtn")) startTimer();
+  if (e.target.matches("#stopBtn")) stopTimer();
+  if (e.target.matches(".tab-btn")) switchTab(e.target.dataset.tab);
+});
+
+// Initialize
+updateTimerDisplay();
+updateStats();
+
+// Graph after Chart.js loads
+script.onload = () => {
+  const ctx = document.getElementById("progressChart");
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],
+      datasets: [{
+        label: "Study Minutes",
+        data: weeklyData,
+        backgroundColor: "#6a5acd"
+      }]
+    },
+    options: {
+      scales: { y: { beginAtZero: true } },
+      plugins: { legend: { display: false } }
+    }
+  });
+};
+
+</script>

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ 
+
+  
   <title>Notora</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -54,6 +57,22 @@
     </div>
   </div>
 </section>
+
+<!-- Realistic Liquid Wave Divider -->
+<div class="liquid-wave-divider">
+  <svg class="wave-layer wave-layer1" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,40 C150,80 350,0 600,40 C850,80 1050,0 1200,40 L1200,120 L0,120 Z"></path>
+  </svg>
+  <svg class="wave-layer wave-layer2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,30 C200,70 400,10 600,30 C800,50 1000,10 1200,30 L1200,120 L0,120 Z"></path>
+  </svg>
+  <svg class="wave-layer wave-layer3" viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,50 C250,90 400,20 600,50 C800,80 1000,20 1200,50 L1200,120 L0,120 Z"></path>
+  </svg>
+</div>
+
+
+
 
 <section class="how-it-works">
   <h2 class="hiw-title">How It Works</h2>
@@ -110,6 +129,216 @@
   </div>
 </section>
 
+<!-- Electric Divider -->
+<div class="electric-divider"></div>
+
+
+<!-- ===== UNIQUE DISCOVER SECTION ===== -->
+<section id="discover-section-unique">
+  <div class="discover-bg"></div>
+  
+  <div class="discover-wrapper">
+    <h2 class="discover-heading">Discover Your Next Great Read</h2>
+    <p class="discover-tagline">Unlock stories, ideas, and worlds waiting just for you — curated, intelligent, and timeless.</p>
+    
+    <div class="discover-showcase">
+      <div class="discover-slide" style="--clr:#ff3c3c;">
+        <span>Genre Explorer</span>
+      </div>
+      <div class="discover-slide" style="--clr:#ff7b00;">
+        <span>Smart Search</span>
+      </div>
+      <div class="discover-slide" style="--clr:#00d8ff;">
+        <span>Top Rated</span>
+      </div>
+      <div class="discover-slide" style="--clr:#b400ff;">
+        <span>Community Picks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ==== UNIQUE DISCOVER SECTION ==== */
+#discover-section-unique {
+  position: relative;
+  background: radial-gradient(circle at center, #0d0d0d 0%, #111 100%);
+  overflow: hidden;
+  padding: 110px 20px;
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+}
+
+/* moving blurred gradient background */
+.discover-bg {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 0, 100, 0.15),
+    rgba(255, 100, 0, 0.1),
+    rgba(255, 255, 255, 0),
+    rgba(255, 0, 150, 0.1)
+  );
+  animation: rotateGradient 20s linear infinite;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+@keyframes rotateGradient {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.discover-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.discover-heading {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: transparent;
+  background: linear-gradient(90deg, #ff3c3c, #ff7b00, #ff3c3c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gradientMove 5s ease-in-out infinite;
+  background-size: 200%;
+  text-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+.discover-tagline {
+  color: #aaa;
+  font-size: 1rem;
+  margin: 15px 0 60px;
+  letter-spacing: 0.5px;
+}
+
+/* Showcase strip animation */
+.discover-showcase {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  perspective: 1000px;
+}
+
+.discover-slide {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  width: 220px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 0 0 0 rgba(255,255,255,0);
+}
+
+.discover-slide::before {
+  content: "";
+  position: absolute;
+  width: 180%;
+  height: 180%;
+  top: -40%;
+  left: -40%;
+  background: linear-gradient(120deg, transparent, var(--clr), transparent);
+  transform: rotate(45deg);
+  opacity: 0.2;
+  animation: slideLight 5s linear infinite;
+}
+
+@keyframes slideLight {
+  0% { transform: rotate(45deg) translateX(-200px); }
+  100% { transform: rotate(45deg) translateX(200px); }
+}
+
+.discover-slide:hover {
+  transform: rotateY(10deg) scale(1.1);
+  box-shadow: 0 10px 25px rgba(255, 60, 60, 0.3);
+}
+
+.discover-slide span {
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.5px;
+}
+
+/* Scroll reveal animation */
+.discover-slide {
+  opacity: 0;
+  transform: translateY(60px);
+}
+.discover-slide.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .discover-heading { font-size: 2rem; }
+  .discover-tagline { font-size: 0.9rem; }
+  .discover-slide {
+    width: 160px;
+    height: 100px;
+    font-size: 1rem;
+  }
+}
+
+.electric-divider {
+  position: relative;
+  height: 4px;
+  background: linear-gradient(90deg, #ff0000, #ffffff, #ff0000);
+  box-shadow: 0 0 15px #ff0000, 0 0 30px #ff0000;
+  animation: electricMove 2s linear infinite;
+}
+
+@keyframes electricMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+</style>
+
+<script>
+/* ===== Scroll Reveal for Unique Discover Section ===== */
+const slides = document.querySelectorAll("#discover-section-unique .discover-slide");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+slides.forEach(slide => observer.observe(slide));
+</script>
+
+<!-- Gradient Glow Divider -->
+<div class="glow-divider"></div>
+
 
 <!-- ========== STATS SECTION ========== -->
 <section class="stats-section">
@@ -139,7 +368,7 @@
   </div>
 </section>
 
-
+<script src="https://kit.fontawesome.com/a81368914c.js" crossorigin="anonymous"></script>
 <!-- Glow Hover Effects -->
 <style>
 @keyframes fadeInDown {
@@ -216,6 +445,21 @@
   z-index: 1;
   position: relative;
 }
+
+.glow-divider {
+  height: 5px;
+  background: linear-gradient(90deg, #ff0055, #ff8800, #ff0055);
+  background-size: 200% 200%;
+  animation: glowMove 3s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
+}
+
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+
 </style>
 
 <!-- Cursor Position Glow Script -->
@@ -498,7 +742,7 @@ header a:last-child {
   font-size: 36px;
   font-weight: 700;
   color: #fca7a7;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 
 .hiw-subtitle {
@@ -692,6 +936,90 @@ footer small {
   to { opacity: 1; }
 }
 
+.liquid-wave-divider {
+  position: relative;
+  height: 120px;
+  width: 100%;
+  overflow: hidden;
+  /* background: linear-gradient(to bottom, #000000, #0a0a0a, #121212); */
+  background:  #0b0b0b;
+}
+
+/* Common wave style */
+.liquid-wave-divider .wave-layer {
+  position: absolute;
+  bottom: 0;
+  width: 200%;
+  height: 100%;
+  animation: waveFlow 10s linear infinite;
+  opacity: 0.4;
+}
+
+/* Layer Colors + Depth Effects */
+.wave-layer1 path {
+  fill: rgba(20, 20, 20, 0.8);
+  
+}
+.wave-layer2 path {
+  fill: rgba(40, 40, 40, 0.6);
+  
+}
+.wave-layer3 path {
+  fill: rgba(70, 70, 70, 0.5);
+  
+}
+
+/* Layer Speeds (Different for realism) */
+.wave-layer1 {
+  animation-duration: 14s;
+  animation-direction: normal;
+}
+.wave-layer2 {
+  animation-duration: 10s;
+  animation-direction: reverse;
+}
+.wave-layer3 {
+  animation-duration: 18s;
+  animation-direction: normal;
+}
+
+/* Wave horizontal flowing motion */
+@keyframes waveFlow {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    transform: translateX(-25%) translateY(4px);
+  }
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Subtle glow + reflection */
+.liquid-wave-divider::after {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  /* background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06), transparent 70%); */
+  background: #0b0b0b;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Hover effect for luxury look */
+/* .liquid-wave-divider:hover .wave-layer {
+  opacity: 0.6;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.1));
+} */
+
+
+
+
+
 
 </style>
 <script>
@@ -827,5 +1155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   observer.observe(section);
 });
+
+ 
 
 </script>
