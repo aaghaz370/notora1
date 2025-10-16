@@ -108,6 +108,7 @@
     min-height:100vh; /* Mobile UI improvement: full-height on mobile */
     border-radius:0; /* Mobile UI improvement: no radius on mobile */
     background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    
     box-shadow:none; /* Mobile UI improvement: remove shadow on mobile */
     overflow:hidden;
     display:flex;
@@ -132,28 +133,7 @@
       box-shadow:var(--shadow);
     }
   }
-   /* --- TIMER ISOLATION FIX --- */
-/* .ts-overlay {
-  display: none !important;
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-.ts-overlay.show {
-  display: flex !important;
-  opacity: 1;
-  pointer-events: all;
-  visibility: visible;
-}
-
-.ts-modal {
-  z-index: 99999;
   
-  background: rgba(18, 20, 26, 0.95); /* solid dark for clarity */
-
-  /* backdrop-filter: blur(20px); */
 
   
   
