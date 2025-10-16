@@ -207,7 +207,7 @@
       // show up to 9 bookmarks in a horizontal single-line.
       bookGrid.innerHTML = '';
       const items = state.bookmarks || [];
-      const preview = items.slice(0,9);
+      const preview = items.slice(0,50);
       preview.forEach((b, idx)=>{
         const el = document.createElement('div'); el.className='book';
         el.innerHTML = `<div class="thumb"><img src="${b.thumbnail||DEFAULT_AVATAR}" alt="${escapeHtml(b.name||'book')}"></div>
@@ -218,7 +218,7 @@
       });
 
       // show more if there are more than shown or if wrapped to second row
-      if(items.length > 9){ showMoreBtn.style.display = 'block'; } else { showMoreBtn.style.display = 'none'; }
+      if(items.length > 50){ showMoreBtn.style.display = 'block'; } else { showMoreBtn.style.display = 'none'; }
     }
 
     function openBook(book){
