@@ -2039,10 +2039,28 @@ floating.addEventListener("touchstart", (e) => {
       }
     });
 
+    const genreMap = {
+  "Fictional": "Fictional",
+  "JEE": "jee",
+  "NEET": "neet",
+  "UPSC": "UPSC",
+  "Biography": "Biography",
+  "Romance": "Romance",
+  "Horror": "Horror",
+  "Fantasy": "Fantasy",
+  "Story Hindi": "Story hindi",
+  "Moral Stories": "moral stories",
+  "JEE/NEET Preparation": "jee", // extra handling
+};
+
+
    
     async function loadSuggestions() {
       try {
-        const res = await fetch(`data/${book.genre}.json`);
+        // const res = await fetch(`data/${book.genre}.json`);
+        const genreKey = genreMap[book.genre] || "all";
+const res = await fetch(`data/${genreKey}.json`);
+
         const data = await res.json();
         const suggestions = data.filter(b => b.name !== book.name).slice(0, 6);
 
