@@ -304,18 +304,61 @@
     ${isBookmarked ? `<button id="removeBookmarkBtn" style="margin-top:20px;padding:10px 16px;background:#e74c3c;color:#fff;border:none;border-radius:6px;cursor:pointer;">Remove from Bookmarks</button>` : ''}`;
 
   // Add event listener for remove button
-  const removeBtn = document.getElementById('removeBookmarkBtn');
-  if(removeBtn){
-    removeBtn.addEventListener('click', ()=>{
-      // Remove book from state.bookmarks and localStorage
-      state.bookmarks = bookmarks.filter(b => b.name !== book.name);
-      setStorage('bookmarks', state.bookmarks);
-      alert(`${book.name} removed from bookmarks!`);
-      removeBtn.remove();  // Remove button from DOM
-      renderBookmarksPreview(); // Update bookmarks grid
-    });
-  }
+//   const removeBtn = document.getElementById('removeBookmarkBtn');
+//   if(removeBtn){
+//     removeBtn.addEventListener('click', ()=>{
+      
+//       state.bookmarks = bookmarks.filter(b => b.name !== book.name);
+//       setStorage('bookmarks', state.bookmarks);
+//       alert(`${book.name} removed from bookmarks!`);
+//       removeBtn.remove(); 
+//       renderBookmarksPreview();
+//     });
+//   }
+// }
+// Add event listener for remove button
+const removeBtn = document.getElementById('removeBookmarkBtn');
+if(removeBtn){
+  removeBtn.addEventListener('click', ()=>{
+    // Remove book from state.bookmarks and localStorage
+    state.bookmarks = bookmarks.filter(b => b.name !== book.name);
+    setStorage('bookmarks', state.bookmarks);
+
+    // 🔹 Custom popup animation instead of alert
+    let toast = document.createElement('div');
+    toast.textContent = `${book.name} removed from bookmarks!`;
+    toast.style.position = 'fixed';
+    toast.style.top = '20px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.background = '#e74c3c';
+    toast.style.color = '#fff';
+    toast.style.padding = '12px 20px';
+    toast.style.borderRadius = '8px';
+    toast.style.opacity = '0';
+    toast.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    toast.style.zIndex = '9999';
+    toast.style.fontWeight = '500';
+    document.body.appendChild(toast);
+
+    // Fade-in animation
+    setTimeout(()=>{
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+    }, 10);
+
+    // Fade-out and remove after 2s
+    setTimeout(()=>{
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(-20px)';
+      setTimeout(()=>toast.remove(), 400);
+    }, 2000);
+
+    removeBtn.remove();  // Remove button from DOM
+    renderBookmarksPreview(); // Update bookmarks grid
+  });
 }
+    }
 
 
 
