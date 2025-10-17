@@ -191,7 +191,7 @@
     }
 
     /* 🔹 Bookmark Button */
-    .bookmark-btn {
+    /* .bookmark-btn {
       width: 100%;
       
       background: linear-gradient(90deg, #ff4b2b, #ff416c);
@@ -214,7 +214,40 @@
     .bookmark-btn i {
       margin-right: 8px;
      
-    }
+    } */
+.bookmark-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #ff4b2b, #ff416c);
+  color: #fff;
+  border: none;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Hover effect for desktop */
+.bookmark-btn:hover {
+  background: linear-gradient(90deg, #ff6347, #ff416c);
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 65, 108, 0.5);
+}
+
+.bookmark-btn i {
+  margin-right: 8px;
+}
+
+/* 🧠 Mobile-friendly width fix */
+@media (max-width: 768px) {
+  .bookmark-btn {
+    width: 90%;          /* thoda chhota width */
+    margin: 0.8rem auto; /* center align */
+    display: block;
+  }
+}
 
 
 
