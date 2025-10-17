@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Think and Grow Rich",
+    "author": "Napoleon Hill",
+    "thumbnail": "https://m.media-amazon.com/images/I/81gepf1eMqL._UF1000,1000_QL80_.jpg",
+    "genre": "Self Power",
+    "rating": 4.9,
+    "pdfUrl": "https://apex.oracle.com/pls/apex/lonestar/r/files/static/v13Y/Think-And-Grow-Rich_2011-06.pdf"
+  },
+  {
+    "name": "How to Win Friends and Influence People",
+    "author": "Dale Carnegie",
+    "thumbnail": "https://m.media-amazon.com/images/I/71wANojhEKL.jpg",
+    "genre": "Self Power",
+    "rating": 4.8,
+    "pdfUrl": "https://www.rfpmm.org/pdf/how-to-win-friends-and-influence-people.pdf"
+  },
+  {
+    "name": "Atomic Habits",
+    "author": "James Clear",
+    "thumbnail": "https://m.media-amazon.com/images/I/81bYq0p9d8L.jpg",
+    "genre": "Self Power",
+    "rating": 4.8,
+    "pdfUrl": "https://dn790007.ca.archive.org/0/items/atomic-habits-pdfdrive/Atomic%20habits%20%28%20PDFDrive%20%29.pdf"
+  },
+  {
+    "name": "You Are a Badass: How to Stop Doubting Your Greatness and Start Living an Awesome Life",
+    "author": "Jen Sincero",
+    "thumbnail": "https://m.media-amazon.com/images/I/81QK2n7eD7L.jpg",
+    "genre": "Self Power",
+    "rating": 4.7,
+    "pdfUrl": "https://booksnsstuff.wordpress.com/wp-content/uploads/2019/03/you-are-a-badass_-how-to-stop-doubting-your-greatness-and-start-living-an-awesome-life-pdfdrive.com-.pdf"
+  },
+  {
+    "name": "Ikigai: The Japanese Secret to a Long and Happy Life",
+    "author": "Héctor García & Francesc Miralles",
+    "thumbnail": "https://m.media-amazon.com/images/I/71z7V9z6JxL.jpg",
+    "genre": "Self Power",
+    "rating": 4.6,
+    "pdfUrl": "https://dn790007.ca.archive.org/0/items/ikigai-the-japanese-secret-to-a-long-and-happy-life-pdfdrive.com/Ikigai%20_%20the%20Japanese%20secret%20to%20a%20long%20and%20happy%20life%20%28%20PDFDrive.com%20%29.pdf"
+  },
+  {
+    "name": "The 5 AM Club: Own Your Morning, Elevate Your Life",
+    "author": "Robin Sharma",
+    "thumbnail": "https://m.media-amazon.com/images/I/71g2ednj0JL.jpg",
+    "genre": "Self Power",
+    "rating": 4.5,
+    "pdfUrl": "https://librarykvemebrd.files.wordpress.com/2019/04/the-5-am-club.pdf"
+  },
+  {
+    "name": "The Power of Your Subconscious Mind",
+    "author": "Joseph Murphy",
+    "thumbnail": "https://m.media-amazon.com/images/I/71W8c6qZ6uL.jpg",
+    "genre": "Self Power",
+    "rating": 4.7,
+    "pdfUrl": "https://archive.org/download/JosephMurphyThePowerOfYourSubconciousMind1988/Joseph%20Murphy%20-%20The%20Power%20of%20Your%20Subconcious%20Mind%20%281988%29.pdf"
+  },
+  {
+    "name": "The 7 Habits of Highly Effective People",
+    "author": "Stephen R. Covey",
+    "thumbnail": "https://m.media-amazon.com/images/I/71pV5h7+6JL.jpg",
+    "genre": "Self Power",
+    "rating": 4.8,
+    "pdfUrl": "https://icrrd.com/public/media/01-11-2020-212827The%207%20Habits%20of%20Highly%20Effective%20People.pdf"
+  },
+  {
+    "name": "Deep Work: Rules for Focused Success in a Distracted World",
+    "author": "Cal Newport",
+    "thumbnail": "https://m.media-amazon.com/images/I/71p+4r3s7wL.jpg",
+    "genre": "Self Power",
+    "rating": 4.6,
+    "pdfUrl": ""
+  },
+  {
+    "name": "The Power of Habit: Why We Do What We Do in Life and Business",
+    "author": "Charles Duhigg",
+    "thumbnail": "https://m.media-amazon.com/images/I/81XzZ5g0gWL.jpg",
+    "genre": "Self Power",
+    "rating": 4.7,
+    "pdfUrl": ""
+  }
+]
