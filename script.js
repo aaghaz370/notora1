@@ -487,65 +487,69 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     
-   
+   // ==== Redirect Badge Icon to Track Page ====
+document.querySelector(".badge-icon").addEventListener("click", () => {
+  window.location.href = "track.html";
+});
+
     
     // ===== Badge System =====
-    const badgeIcon = document.querySelector(".badge-icon");
-    const badgePanel = document.getElementById("badgePanel");
-    const closeBadge = document.getElementById("closeBadge");
-    const badgeReadCount = document.getElementById("badgeReadCount");
-    const badgeCircle = document.getElementById("badgeCircle");
-    const badgeFill = document.getElementById("badgeFill");
-    const badgeLevelText = document.getElementById("badgeLevelText");
+    // const badgeIcon = document.querySelector(".badge-icon");
+    // const badgePanel = document.getElementById("badgePanel");
+    // const closeBadge = document.getElementById("closeBadge");
+    // const badgeReadCount = document.getElementById("badgeReadCount");
+    // const badgeCircle = document.getElementById("badgeCircle");
+    // const badgeFill = document.getElementById("badgeFill");
+    // const badgeLevelText = document.getElementById("badgeLevelText");
 
-    const LEVELS = [
-        { level: 1, target: 10 }, { level: 2, target: 50 },
-        { level: 3, target: 100 }, { level: 4, target: 200 },
-        { level: 5, target: 700 }
-    ];
+    // const LEVELS = [
+    //     { level: 1, target: 10 }, { level: 2, target: 50 },
+    //     { level: 3, target: 100 }, { level: 4, target: 200 },
+    //     { level: 5, target: 700 }
+    // ];
 
-    function updateBadge() {
-        const read = parseInt(localStorage.getItem("readCount") || "0");
-        let currentLevel = 0;
-        let nextTarget = LEVELS[0].target;
+    // function updateBadge() {
+    //     const read = parseInt(localStorage.getItem("readCount") || "0");
+    //     let currentLevel = 0;
+    //     let nextTarget = LEVELS[0].target;
         
-        for (const levelInfo of LEVELS) {
-            if (read >= levelInfo.target) {
-                currentLevel = levelInfo.level;
-            }
-        }
+    //     for (const levelInfo of LEVELS) {
+    //         if (read >= levelInfo.target) {
+    //             currentLevel = levelInfo.level;
+    //         }
+    //     }
         
-        const nextLevelInfo = LEVELS.find(l => l.level === currentLevel + 1);
-        nextTarget = nextLevelInfo ? nextLevelInfo.target : LEVELS[LEVELS.length-1].target;
+    //     const nextLevelInfo = LEVELS.find(l => l.level === currentLevel + 1);
+    //     nextTarget = nextLevelInfo ? nextLevelInfo.target : LEVELS[LEVELS.length-1].target;
 
-        const prevTarget = LEVELS.find(l => l.level === currentLevel)?.target || 0;
-        const progressInLevel = read - prevTarget;
-        const levelRange = nextTarget - prevTarget;
-        const percent = Math.min((progressInLevel / levelRange) * 100, 100);
+    //     const prevTarget = LEVELS.find(l => l.level === currentLevel)?.target || 0;
+    //     const progressInLevel = read - prevTarget;
+    //     const levelRange = nextTarget - prevTarget;
+    //     const percent = Math.min((progressInLevel / levelRange) * 100, 100);
 
-        badgeReadCount.textContent = `${read} books read`;
-        badgeCircle.textContent = `Level ${currentLevel}`;
-        badgeFill.style.width = `${percent}%`;
+    //     badgeReadCount.textContent = `${read} books read`;
+    //     badgeCircle.textContent = `Level ${currentLevel}`;
+    //     badgeFill.style.width = `${percent}%`;
 
-        if (currentLevel >= 5) {
-            badgeLevelText.textContent = "🔥 Max Level Reached! You're a Master Reader!";
-        } else {
-            badgeLevelText.textContent = `Read ${nextTarget - read} more books for Level ${currentLevel + 1}`;
-        }
-    }
+    //     if (currentLevel >= 5) {
+    //         badgeLevelText.textContent = "🔥 Max Level Reached! You're a Master Reader!";
+    //     } else {
+    //         badgeLevelText.textContent = `Read ${nextTarget - read} more books for Level ${currentLevel + 1}`;
+    //     }
+    // }
 
-    badgeIcon.addEventListener("click", () => {
-        badgePanel.classList.remove("hidden");
-        updateBadge();
-    });
+    // badgeIcon.addEventListener("click", () => {
+    //     badgePanel.classList.remove("hidden");
+    //     updateBadge();
+    // });
 
-    closeBadge.addEventListener("click", () => {
-        badgePanel.classList.add("hidden");
-    });
+    // closeBadge.addEventListener("click", () => {
+    //     badgePanel.classList.add("hidden");
+    // });
 
-    // Initial load
-    updateBadge();
-;
+    
+//     updateBadge();
+// ;
 
 
 window.addEventListener('load', () => {
