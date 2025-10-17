@@ -41,6 +41,57 @@
   Notora
 </div>
 
+<!-- profile.html -->
+<h2>Profile</h2>
+<div id="userBox">
+  <button id="googleLogin">Sign in with Google</button>
+  <button id="logoutBtn" style="display:none;">Logout</button>
+  <p id="userInfo"></p>
+</div>
+
+<script type="module">
+import { auth, provider, signInWithPopup, signOut } from './scripts/firebase.js';
+
+const loginBtn = document.getElementById('googleLogin');
+const logoutBtn = document.getElementById('logoutBtn');
+const userInfo = document.getElementById('userInfo');
+
+loginBtn.onclick = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+    localStorage.setItem('user', JSON.stringify(user));
+    showUser(user);
+  } catch (err) {
+    alert("Login failed: " + err.message);
+  }
+};
+
+logoutBtn.onclick = async () => {
+  await signOut(auth);
+  localStorage.removeItem('user');
+  showUser(null);
+};
+
+function showUser(user) {
+  if (user) {
+    loginBtn.style.display = 'none';
+    logoutBtn.style.display = 'inline';
+    userInfo.innerHTML = `
+      <img src="${user.photoURL}" width="40" style="border-radius:50%">
+      <b>${user.displayName}</b>
+    `;
+  } else {
+    loginBtn.style.display = 'inline';
+    logoutBtn.style.display = 'none';
+    userInfo.innerHTML = '';
+  }
+}
+
+// restore if logged in before
+const saved = localStorage.getItem('user');
+if (saved) showUser(JSON.parse(saved));
+</script>
 
   <div class="search-box" id="searchBox">
     <!-- Search input to be added dynamically -->
