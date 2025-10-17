@@ -167,7 +167,7 @@
 const categories = [
   "Fictional", "JEE", "NEET", "Story Hindi", "UPSC", "Biography", "Romance",
   "Horror", "Fantasy", "Coding", "Business", "CBSE", "ICSE",
-  "10th", "11th", "12th", "Spiritual", "Comics"
+  "10th", "11th", "12th", "Spiritual", "Comics", "Self Help"
 ];
 
 const categoryContainer = document.getElementById("categoryContainer");
