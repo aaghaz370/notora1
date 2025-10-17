@@ -954,7 +954,7 @@ footer small {
   backdrop-filter: blur(4px);
 }
 
-.show-all-btn {
+/* .show-all-btn {
   display: block;
   margin: 20px auto 40px;
   padding: 10px 25px;
@@ -971,6 +971,35 @@ footer small {
 .show-all-btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0, 200, 255, 0.3);
+} */
+.show-all-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #0078ff, #00c6ff);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 12px;
+}
+
+.show-all-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 200, 255, 0.3);
+}
+
+.book-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 20px;
+}
+
+.book-slider::-webkit-scrollbar {
+  display: none;
 }
 
 
