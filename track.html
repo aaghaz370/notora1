@@ -4,114 +4,174 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Track & Learn | Notora</title>
-  <link rel="stylesheet" href="track.css" />
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .track-container {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .track-card {
+      background: #1e1e1e;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+      transition: transform 0.3s;
+    }
+
+    .track-card:hover { transform: scale(1.02); }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #444;
+      border-radius: 10px;
+      margin-top: 0.8rem;
+      overflow: hidden;
+    }
+
+    #progressFill {
+      width: 0%;
+      height: 100%;
+      background: gold;
+      transition: width 0.5s ease;
+    }
+
+    .achievements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .badge {
+      background: #222;
+      border: 2px solid gold;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+    }
+
+    .chart {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 150px;
+      margin-top: 1rem;
+    }
+
+    .bar {
+      width: 10%;
+      background: linear-gradient(180deg, gold, orange);
+      border-radius: 5px;
+      transition: height 0.4s;
+    }
+  </style>
 </head>
 <body>
   <div class="track-container">
-    <h1>📚 Your Reading Journey</h1>
+    <h1>📚 Your Learning Journey</h1>
 
+    <!-- XP Progress -->
     <div class="track-card">
-      <h2>Reading Progress</h2>
-      <p><strong id="booksRead">0</strong> books read</p>
-      <p id="levelStatus">Level 0</p>
+      <h2>🌟 XP Progress</h2>
+      <p><strong id="xpPoints">0</strong> XP earned</p>
       <div class="progress-bar"><div id="progressFill"></div></div>
     </div>
 
+    <!-- Reading Stats -->
+    <div class="track-card">
+      <h2>⏱ Total Reading Time</h2>
+      <p><strong id="totalTime">0</strong> minutes read</p>
+    </div>
+
+    <!-- Streak -->
     <div class="track-card">
       <h2>🔥 Daily Streak</h2>
-      <p>You have a <strong id="streakCount">0</strong>-day streak!</p>
+      <p><strong id="streakCount">0</strong> days streak</p>
       <p id="lastVisitText">Last visit: --</p>
+    </div>
+
+    <!-- Achievements -->
+    <div class="track-card">
+      <h2>🏆 Achievements</h2>
+      <div class="achievements" id="achievementsList"></div>
+    </div>
+
+    <!-- Weekly XP Graph -->
+    <div class="track-card">
+      <h2>📅 Weekly XP</h2>
+      <div class="chart" id="weeklyChart"></div>
     </div>
   </div>
 
-  <script src="track.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // ===== Load data =====
+      let xp = parseInt(localStorage.getItem("xpPoints") || "0");
+      let totalTime = parseInt(localStorage.getItem("totalReadingTime") || "0");
+      let streak = parseInt(localStorage.getItem("streak") || "0");
+      let lastVisit = localStorage.getItem("lastVisit");
+      let achievements = JSON.parse(localStorage.getItem("achievements") || "[]");
+      let weeklyXP = JSON.parse(localStorage.getItem("weeklyXP") || "{}");
+
+      // ===== XP Progress =====
+      document.getElementById("xpPoints").textContent = xp;
+      const progress = Math.min((xp / 1000) * 100, 100);
+      document.getElementById("progressFill").style.width = progress + "%";
+
+      // ===== Reading Time =====
+      document.getElementById("totalTime").textContent = totalTime;
+
+      // ===== Streak Update =====
+      const today = new Date().toDateString();
+      const yesterday = new Date(Date.now() - 86400000).toDateString();
+      if (lastVisit !== today) {
+        if (lastVisit === yesterday) streak++;
+        else streak = 1;
+        localStorage.setItem("streak", streak);
+        localStorage.setItem("lastVisit", today);
+      }
+      document.getElementById("streakCount").textContent = streak;
+      document.getElementById("lastVisitText").textContent = `Last visit: ${lastVisit || "First visit!"}`;
+
+      // ===== Achievements =====
+      const checkAndUnlock = (name, condition) => {
+        if (condition && !achievements.includes(name)) achievements.push(name);
+      };
+      checkAndUnlock("🏁 First Book Read", localStorage.getItem("readCount") >= 1);
+      checkAndUnlock("📚 10 Books Club", localStorage.getItem("readCount") >= 10);
+      checkAndUnlock("💪 50 Books Master", localStorage.getItem("readCount") >= 50);
+      checkAndUnlock("🔥 5 Days Streak", streak >= 5);
+      checkAndUnlock("🕒 10 Hours Reading", totalTime >= 600);
+      localStorage.setItem("achievements", JSON.stringify(achievements));
+
+      const list = document.getElementById("achievementsList");
+      list.innerHTML = achievements.length
+        ? achievements.map(a => `<div class='badge'>${a}</div>`).join("")
+        : "<p>No achievements yet!</p>";
+
+      // ===== Weekly XP Chart =====
+      const weekday = new Date().getDay(); // 0-6
+      const weekNames = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+      if (!weeklyXP[weekday]) weeklyXP[weekday] = 0;
+      localStorage.setItem("weeklyXP", JSON.stringify(weeklyXP));
+
+      const chart = document.getElementById("weeklyChart");
+      chart.innerHTML = weekNames.map((d,i) => {
+        const h = (weeklyXP[i] || 0) / 10;
+        return `<div class="bar" style="height:${h}px" title="${weeklyXP[i]||0} XP"></div>`;
+      }).join("");
+    });
+  </script>
 </body>
 </html>
-<style>
-    body {
-  background: #0a0a0a;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 2rem;
-}
-
-.track-container {
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-}
-
-.track-card {
-  background: #1e1e1e;
-  border-radius: 15px;
-  padding: 1.5rem;
-  margin: 1.5rem 0;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-  transition: transform 0.3s;
-}
-
-.track-card:hover {
-  transform: scale(1.02);
-}
-
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #444;
-  border-radius: 10px;
-  margin-top: 0.8rem;
-  overflow: hidden;
-}
-
-#progressFill {
-  width: 0%;
-  height: 100%;
-  background: gold;
-  transition: width 0.5s ease;
-}
-
-</style>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-  const booksReadEl = document.getElementById("booksRead");
-  const progressFill = document.getElementById("progressFill");
-  const levelStatus = document.getElementById("levelStatus");
-  const streakCountEl = document.getElementById("streakCount");
-  const lastVisitText = document.getElementById("lastVisitText");
-
-  // ======== Load Data ========
-  const readCount = parseInt(localStorage.getItem("readCount") || "0");
-  const LEVELS = [10, 50, 100, 200, 700];
-  let level = LEVELS.findIndex(t => readCount < t);
-  if (level === -1) level = LEVELS.length;
-  const nextTarget = LEVELS[level] || LEVELS[LEVELS.length - 1];
-  const prevTarget = LEVELS[level - 1] || 0;
-
-  const percent = Math.min(((readCount - prevTarget) / (nextTarget - prevTarget)) * 100, 100);
-
-  booksReadEl.textContent = readCount;
-  progressFill.style.width = `${percent}%`;
-  levelStatus.textContent = `Level ${level}`;
-
-  // ======== Streak System ========
-  const today = new Date().toDateString();
-  const lastVisit = localStorage.getItem("lastVisit");
-  let streak = parseInt(localStorage.getItem("streak") || "0");
-
-  if (lastVisit !== today) {
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    if (lastVisit === yesterday) {
-      streak++;
-    } else {
-      streak = 1;
-    }
-    localStorage.setItem("streak", streak);
-    localStorage.setItem("lastVisit", today);
-  }
-
-  streakCountEl.textContent = streak;
-  lastVisitText.textContent = `Last visit: ${lastVisit || "First visit!"}`;
-});
-
-</script>
