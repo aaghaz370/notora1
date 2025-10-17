@@ -88,14 +88,6 @@
     "pdfUrl": "https://drive.google.com/file/d/11raagdarbari-id/preview"
   },
   {
-    "name": "Maila Anchal",
-    "author": "Phanishwar Nath Renu",
-    "thumbnail": "https://m.media-amazon.com/images/I/71VlU8PZ36L.jpg",
-    "genre": "Hindi Story Book",
-    "rating": 4.7,
-    "pdfUrl": "https://drive.google.com/file/d/12mailaanchal-id/preview"
-  },
-  {
     "name": "Gunahon Ka Devta",
     "author": "Dharamvir Bharati",
     "thumbnail": "https://m.media-amazon.com/images/I/813GkVYIXcL.jpg",
@@ -112,7 +104,7 @@
     "pdfUrl": "https://drive.google.com/file/d/14tamas-id/preview"
   },
   {
-    "name": "Jhootha Sach",
+    "name": "Jhoota Sach",
     "author": "Yashpal",
     "thumbnail": "https://m.media-amazon.com/images/I/81q4hYScjZL._UF1000,1000_QL80_.jpg",
     "genre": "Hindi Story Book",
@@ -168,14 +160,6 @@
     "pdfUrl": "https://drive.google.com/file/d/21madhushala-id/preview"
   },
   {
-    "name": "Vyavharik Hindi Vyakaran",
-    "author": "Dr. Vasudevnandan Prasad",
-    "thumbnail": "https://m.media-amazon.com/images/I/918su8PZAcL._UF1000,1000_QL80_.jpg",
-    "genre": "Hindi Story Book",
-    "rating": 4.5,
-    "pdfUrl": "https://drive.google.com/file/d/22vyakaran-id/preview"
-  },
-  {
     "name": "Bade Bhai Sahab",
     "author": "Munshi Premchand",
     "thumbnail": "https://m.media-amazon.com/images/I/41C5vCg2gRL._UF1000,1000_QL80_.jpg",
@@ -206,22 +190,6 @@
     "genre": "Hindi Story Book",
     "rating": 4.5,
     "pdfUrl": "https://drive.google.com/file/d/26parinde-id/preview"
-  },
-  {
-    "name": "Dilli Ki Galiyaan",
-    "author": "Krishna Sobti",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZphCK9REbGcQV0HNpgglN-_7-llC_314Hyg&s",
-    "genre": "Hindi Story Book",
-    "rating": 4.3,
-    "pdfUrl": "https://drive.google.com/file/d/27dilligali-id/preview"
-  },
-  {
-    "name": "Andhere Band Kamre",
-    "author": "Bhisham Sahni",
-    "thumbnail": "https://m.media-amazon.com/images/I/81LwRmx6zsL._UF1000,1000_QL80_.jpg",
-    "genre": "Hindi Story Book",
-    "rating": 4.6,
-    "pdfUrl": "https://drive.google.com/file/d/28andherekamre-id/preview"
   },
   {
     "name": "Aadha Gaon",

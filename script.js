@@ -348,6 +348,123 @@ categories.forEach(loadCategory);
 //   }
 // });
 // ===== Search Logic =====
+// const openSearch = document.getElementById("openSearch");
+// const searchOverlay = document.getElementById("searchOverlay");
+// const closeOverlay = document.getElementById("closeOverlay");
+// const overlaySearchInput = document.getElementById("overlaySearchInput");
+// const searchResults = document.getElementById("searchResults");
+
+// let allBooks = [];
+// let searchTimeout = null; 
+// let activeFetch = 0; 
+
+
+// const loader = document.createElement("div");
+// loader.className = "loader";
+// loader.innerHTML = `<div class="spinner"></div>`;
+// searchResults.parentElement.appendChild(loader);
+// loader.style.display = "none";
+
+// async function loadAllBooksOnce() {
+//   try {
+//     const res = await fetch("data/All.json");
+//     const extraBooks = await res.json();
+//     allBooks = extraBooks;
+//   } catch (e) {
+//     console.error("Failed to load All.json", e);
+//   }
+// }
+
+// openSearch.addEventListener("click", async () => {
+//   document.getElementById("mainContent").style.display = "none";
+//   searchOverlay.classList.remove("hidden");
+//   if (allBooks.length === 0) await loadAllBooksOnce();
+// });
+
+// closeOverlay.addEventListener("click", () => {
+//   searchOverlay.classList.add("hidden");
+//   document.getElementById("mainContent").style.display = "block";
+//   overlaySearchInput.value = "";
+//   searchResults.innerHTML = "";
+//   loader.style.display = "none";
+// });
+
+// overlaySearchInput.addEventListener("input", async (e) => {
+//   clearTimeout(searchTimeout);
+//   const query = e.target.value.toLowerCase().trim();
+
+  
+//   if (query === "") {
+//     searchResults.innerHTML = "";
+//     loader.style.display = "none";
+//     return;
+//   }
+
+//   loader.style.display = "flex"; 
+//   searchResults.innerHTML = "";
+
+  
+//   searchTimeout = setTimeout(async () => {
+//     const currentFetchId = ++activeFetch;
+//     let results = [];
+
+//     try {
+      
+//       for (const cat of categories) {
+//         const res = await fetch(`data/${cat}.json`);
+//         const books = await res.json();
+//         results = results.concat(books);
+//       }
+
+      
+//       results = results.concat(allBooks);
+//     } catch (err) {
+//       console.error("Error loading categories:", err);
+//     }
+
+    
+//     if (currentFetchId !== activeFetch) return;
+
+//     const filtered = results.filter(
+//       (book) =>
+//         book.name.toLowerCase().includes(query) ||
+//         book.author.toLowerCase().includes(query) ||
+//         book.genre.toLowerCase().includes(query)
+//     );
+
+//     loader.style.display = "none"; 
+
+    
+//     searchResults.innerHTML = "";
+
+//     if (filtered.length === 0) {
+//       const noResult = document.createElement("div");
+//       noResult.className = "no-result";
+//       noResult.textContent = "No results found";
+//       searchResults.appendChild(noResult);
+//     } else {
+//       const seen = new Set(); 
+//       filtered.forEach((book) => {
+//         const key = `${book.name}-${book.author}`;
+//         if (seen.has(key)) return;
+//         seen.add(key);
+
+//         const card = document.createElement("div");
+//         card.className = "book-card";
+//         card.innerHTML = `
+//           <img src="${book.thumbnail}" alt="${book.name}" />
+//           <div class="book-title">${book.name}</div>
+//           <div class="book-author">${book.author}</div>
+//           <div class="book-genre">${book.genre}</div>
+//           <div class="book-rating">⭐ ${book.rating}</div>
+//         `;
+//         card.addEventListener("click", () => openModal(book));
+//         searchResults.appendChild(card);
+//       });
+//     }
+//   }, 250);
+// });
+// ===== Search Logic (Final Stable) =====
 const openSearch = document.getElementById("openSearch");
 const searchOverlay = document.getElementById("searchOverlay");
 const closeOverlay = document.getElementById("closeOverlay");
@@ -355,30 +472,49 @@ const overlaySearchInput = document.getElementById("overlaySearchInput");
 const searchResults = document.getElementById("searchResults");
 
 let allBooks = [];
-let searchTimeout = null; // debounce ke liye
-let activeFetch = 0; // track karne ke liye ke latest search ka result hi dikhaye
+let allCategoryBooks = [];
+let dataLoaded = false;
+let searchTimeout = null;
 
-// Loader element create
+// ===== Loader =====
 const loader = document.createElement("div");
 loader.className = "loader";
-loader.innerHTML = `<div class="spinner"></div>`;
+// loader.innerHTML = `<div class="spinner"></div>`;
+loader.innerHTML = `<div class="spinner spinner-dots"><div></div><div></div><div></div></div>`; // 🔴 Dots
+
+
 searchResults.parentElement.appendChild(loader);
 loader.style.display = "none";
 
+// ===== Load All Data Once =====
 async function loadAllBooksOnce() {
+  if (dataLoaded) return;
   try {
     const res = await fetch("data/All.json");
-    const extraBooks = await res.json();
-    allBooks = extraBooks;
-  } catch (e) {
-    console.error("Failed to load All.json", e);
+    const all = await res.json();
+    allBooks = Array.isArray(all) ? all : [];
+
+    if (typeof categories !== "undefined" && Array.isArray(categories)) {
+      const promises = categories.map(cat =>
+        fetch(`data/${cat}.json`)
+          .then(r => (r.ok ? r.json() : []))
+          .catch(() => [])
+      );
+      const catResults = await Promise.all(promises);
+      allCategoryBooks = catResults.flat();
+    }
+
+    dataLoaded = true;
+  } catch (err) {
+    console.error("Book data load failed:", err);
   }
 }
 
+// ===== Open & Close Overlay =====
 openSearch.addEventListener("click", async () => {
   document.getElementById("mainContent").style.display = "none";
   searchOverlay.classList.remove("hidden");
-  if (allBooks.length === 0) await loadAllBooksOnce();
+  await loadAllBooksOnce();
 });
 
 closeOverlay.addEventListener("click", () => {
@@ -389,81 +525,78 @@ closeOverlay.addEventListener("click", () => {
   loader.style.display = "none";
 });
 
-overlaySearchInput.addEventListener("input", async (e) => {
+// ===== Debounced Search =====
+overlaySearchInput.addEventListener("input", (e) => {
   clearTimeout(searchTimeout);
   const query = e.target.value.toLowerCase().trim();
 
-  // Agar empty query h to clear kar do aur loader hide
   if (query === "") {
     searchResults.innerHTML = "";
     loader.style.display = "none";
     return;
   }
 
-  loader.style.display = "flex"; // loader show
+  // loader.style.display = "flex";
+  // searchResults.innerHTML = "";
+  searchResults.innerHTML = "";
+loader.style.display = "flex";
+
+// Force reflow restart animation
+const spinner = loader.querySelector(".spinner");
+if (spinner) {
+  spinner.style.animation = "none";
+  spinner.offsetHeight; // trigger reflow
+  spinner.style.animation = null;
+}
+
+
+  // Short debounce for smooth experience
+  searchTimeout = setTimeout(() => performSearch(query), 200);
+});
+
+// ===== Core Search =====
+function performSearch(query) {
+  const allData = [...allBooks, ...allCategoryBooks];
+  if (!allData.length) return;
+
+  const filtered = allData.filter(book => {
+    const name = (book.name || "").toLowerCase();
+    const author = (book.author || "").toLowerCase();
+    const genre = (book.genre || "").toLowerCase();
+    return name.includes(query) || author.includes(query) || genre.includes(query);
+  });
+
+  loader.style.display = "none";
   searchResults.innerHTML = "";
 
-  // Debounce lagao (250ms)
-  searchTimeout = setTimeout(async () => {
-    const currentFetchId = ++activeFetch;
-    let results = [];
+  if (filtered.length === 0) {
+    const noResult = document.createElement("div");
+    noResult.className = "no-result";
+    noResult.textContent = "No results found";
+    searchResults.appendChild(noResult);
+    return;
+  }
 
-    try {
-      // Load from categories
-      for (const cat of categories) {
-        const res = await fetch(`data/${cat}.json`);
-        const books = await res.json();
-        results = results.concat(books);
-      }
+  const seen = new Set();
+  filtered.forEach(book => {
+    const key = `${book.name}-${book.author}`;
+    if (seen.has(key)) return;
+    seen.add(key);
 
-      // Add from All.json
-      results = results.concat(allBooks);
-    } catch (err) {
-      console.error("Error loading categories:", err);
-    }
+    const card = document.createElement("div");
+    card.className = "book-card";
+    card.innerHTML = `
+      <img src="${book.thumbnail}" alt="${book.name}" />
+      <div class="book-title">${book.name}</div>
+      <div class="book-author">${book.author}</div>
+      <div class="book-genre">${book.genre}</div>
+      <div class="book-rating">⭐ ${book.rating}</div>
+    `;
+    card.addEventListener("click", () => openModal(book));
+    searchResults.appendChild(card);
+  });
+}
 
-    // Agar koi aur fetch start ho gaya to purana ignore
-    if (currentFetchId !== activeFetch) return;
-
-    const filtered = results.filter(
-      (book) =>
-        book.name.toLowerCase().includes(query) ||
-        book.author.toLowerCase().includes(query) ||
-        book.genre.toLowerCase().includes(query)
-    );
-
-    loader.style.display = "none"; // hide loader
-
-    // Clear old results
-    searchResults.innerHTML = "";
-
-    if (filtered.length === 0) {
-      const noResult = document.createElement("div");
-      noResult.className = "no-result";
-      noResult.textContent = "No results found";
-      searchResults.appendChild(noResult);
-    } else {
-      const seen = new Set(); // duplicate avoid karne ke liye
-      filtered.forEach((book) => {
-        const key = `${book.name}-${book.author}`;
-        if (seen.has(key)) return;
-        seen.add(key);
-
-        const card = document.createElement("div");
-        card.className = "book-card";
-        card.innerHTML = `
-          <img src="${book.thumbnail}" alt="${book.name}" />
-          <div class="book-title">${book.name}</div>
-          <div class="book-author">${book.author}</div>
-          <div class="book-genre">${book.genre}</div>
-          <div class="book-rating">⭐ ${book.rating}</div>
-        `;
-        card.addEventListener("click", () => openModal(book));
-        searchResults.appendChild(card);
-      });
-    }
-  }, 250);
-});
 
 
 
