@@ -203,7 +203,7 @@
 
   <input id="fileInput" type="file" accept="image/*" style="display:none">
 
-  <script>
+  <script type="module">
     // ---------- Utilities & initial defaults ----------
     const DEFAULT_AVATAR = 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png';
     const body = document.getElementById('body');
@@ -484,7 +484,7 @@ if(removeBtn){
     // sample debug: if you want to prefill bookmarks for testing, uncomment:
     // if(!state.bookmarks.length){ for(let i=1;i<=12;i++){ addBookmark({name:'Sample Book '+i,author:'Author '+i,thumbnail:DEFAULT_AVATAR,category:'Fiction'}); } }
 
-     type="module"
+     
      import { auth, provider, signInWithPopup, signOut } from './scripts/firebase.js';
 
 const loginBtn = document.getElementById('googleLogin');
