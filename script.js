@@ -221,19 +221,39 @@ async function loadCategory(category) {
     slider.appendChild(showAllCard);
 
     // ==== Arrows ====
-    const leftArrow = document.createElement("button");
-    leftArrow.className = "arrow-btn arrow-left";
-    leftArrow.innerHTML = "&#8249;";
-    leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: "smooth" });
+    // const leftArrow = document.createElement("button");
+    // leftArrow.className = "arrow-btn arrow-left";
+    // leftArrow.innerHTML = "&#8249;";
+    // leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: "smooth" });
 
-    const rightArrow = document.createElement("button");
-    rightArrow.className = "arrow-btn arrow-right";
-    rightArrow.innerHTML = "&#8250;";
-    rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: "smooth" });
+    // const rightArrow = document.createElement("button");
+    // rightArrow.className = "arrow-btn arrow-right";
+    // rightArrow.innerHTML = "&#8250;";
+    // rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: "smooth" });
 
-    wrapper.appendChild(leftArrow);
-    wrapper.appendChild(slider);
-    wrapper.appendChild(rightArrow);
+    // wrapper.appendChild(leftArrow);
+    // wrapper.appendChild(slider);
+    // wrapper.appendChild(rightArrow);
+    // ==== Arrows ====
+// Show arrows only on desktop screens
+if (window.innerWidth > 768) {
+  const leftArrow = document.createElement("button");
+  leftArrow.className = "arrow-btn arrow-left";
+  leftArrow.innerHTML = "&#8249;";
+  leftArrow.onclick = () => slider.scrollBy({ left: -300, behavior: "smooth" });
+
+  const rightArrow = document.createElement("button");
+  rightArrow.className = "arrow-btn arrow-right";
+  rightArrow.innerHTML = "&#8250;";
+  rightArrow.onclick = () => slider.scrollBy({ left: 300, behavior: "smooth" });
+
+  wrapper.appendChild(leftArrow);
+  wrapper.appendChild(slider);
+  wrapper.appendChild(rightArrow);
+} else {
+  wrapper.appendChild(slider);
+}
+
 
     section.appendChild(title);
     section.appendChild(wrapper);
