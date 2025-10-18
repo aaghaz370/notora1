@@ -597,6 +597,13 @@ function performSearch(query) {
   });
 }
 
+function openModal(book) {
+  // Book data ko localStorage me save karte hain
+  localStorage.setItem("selectedBook", JSON.stringify(book));
+  
+  // Redirect to book.html
+  window.location.href = "book.html";
+}
 
 
 
