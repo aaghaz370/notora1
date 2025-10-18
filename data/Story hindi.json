@@ -1,24 +1,24 @@
 [
     {
-    "name": "Panchatantra Ki Kahaniyan",
-    "author": "Vishnu Sharma",
-    "thumbnail": "https://m.media-amazon.com/images/I/81hgZhtW7pL._UF1000,1000_QL80_.jpg",
+    "name": "Satranj Ke Khiladi",
+    "author": "Munshi Premchand",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/satranj%20ke%20khiladi.jpeg",
     "genre": "Hindi Story Book",
-    "rating": 4.9,
-    "pdfUrl": "https://drive.google.com/file/d/40panchatantra-id/preview"
+    "rating": 4.7,
+    "pdfUrl": "https://drive.google.com/file/d/1Z2vk0B6OkbVy_w1LoeXNtANwHG0y_IQO/preview"
   },
   {
     "name": "Godaan",
     "author": "Munshi Premchand",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTHw9CgCuAQwrSN_wfi2DANv8Cf-trkYfqVA&s",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/godan.jpeg",
     "genre": "Hindi Story Book",
     "rating": 4.9,
-    "pdfUrl": "https://drive.google.com/file/d/1godaan-id/preview"
+    "pdfUrl": "https://drive.google.com/file/d/1sHgKE7_yrLU3k1fZO2dJguuUjLXd9ivL/preview"
   },
   {
     "name": "Nirmala",
     "author": "Munshi Premchand",
-    "thumbnail": "https://www.maplepress.co.in/cdn/shop/products/nirmalahindi.jpg?v=1678772714",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/nirmala.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.7,
     "pdfUrl": "https://drive.google.com/file/d/2nirmala-id/preview"
@@ -26,7 +26,7 @@
   {
     "name": "Karmabhoomi",
     "author": "Munshi Premchand",
-    "thumbnail": "https://m.media-amazon.com/images/I/61lgAJRUKgL.jpg",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/karmabhoomi.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.6,
     "pdfUrl": "https://drive.google.com/file/d/3karmabhoomi-id/preview"
@@ -34,7 +34,7 @@
   {
     "name": "Gaban",
     "author": "Munshi Premchand",
-    "thumbnail": "https://m.media-amazon.com/images/I/71cx7DCQblL._UF1000,1000_QL80_.jpg",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/gaban.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.8,
     "pdfUrl": "https://drive.google.com/file/d/4gaban-id/preview"
@@ -42,7 +42,7 @@
   {
     "name": "Mansarovar (Vol. 1)",
     "author": "Munshi Premchand",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSir7LowpC_Oq6bvk467_jP48jp61iviyaLoA&s",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/mansrover%20part%201.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.7,
     "pdfUrl": "https://drive.google.com/file/d/5mansarovar1-id/preview"
@@ -50,7 +50,7 @@
   {
     "name": "Sevasadan",
     "author": "Munshi Premchand",
-    "thumbnail": "https://m.media-amazon.com/images/I/71tQLG9uaaL._UF1000,1000_QL80_.jpg",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/sevasadan.jpeg",
     "genre": "Hindi Story Book",
     "rating": 4.5,
     "pdfUrl": "https://drive.google.com/file/d/6sevasadan-id/preview"
@@ -58,7 +58,7 @@
   {
     "name": "Premchand Ki Sarvashreshtha Kahaniyan",
     "author": "Munshi Premchand",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXgs3NMKXwxyiSts2NSNjrc5-Uihd7rWTBPw&s",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/premchand%20ki%20sarseresht%20kahaniyan.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.8,
     "pdfUrl": "https://drive.google.com/file/d/8sarvashreshtha-id/preview"
@@ -66,7 +66,7 @@
   {
     "name": "Idgah",
     "author": "Munshi Premchand",
-    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUkDA8Mrc3OMbdX3EqTa4rAx2kRSElqvblzg&s",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/idgah.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.9,
     "pdfUrl": "https://drive.google.com/file/d/9idgah-id/preview"
@@ -74,7 +74,7 @@
   {
     "name": "Do Bailon Ki Katha",
     "author": "Munshi Premchand",
-    "thumbnail": "https://m.media-amazon.com/images/I/818yFne0PmL._UF1000,1000_QL80_.jpg",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/do%20bailo%20ki%20katha.jpg",
     "genre": "Hindi Story Book",
     "rating": 4.7,
     "pdfUrl": "https://drive.google.com/file/d/10dobail-id/preview"
@@ -82,7 +82,7 @@
   {
     "name": "Raag Darbari",
     "author": "Shrilal Shukla",
-    "thumbnail": "https://m.media-amazon.com/images/I/91lTTaDHHAS.jpg",
+    "thumbnail": "https://archive.org/download/premchand-ki-sarseresht-kahaniyan/rag%20darbari.jpeg",
     "genre": "Hindi Story Book",
     "rating": 4.8,
     "pdfUrl": "https://drive.google.com/file/d/11raagdarbari-id/preview"
